@@ -1,0 +1,419 @@
+{% assign section_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .luxury-content-{{ section_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_mobile }}px 20px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .luxury-content-{{ section_id }} {
+      padding: {{ block.settings.section_padding_desktop }}px 40px;
+    }
+  }
+
+  .luxury-content__container-{{ section_id }} {
+    max-width: {{ block.settings.content_max_width }}px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: {{ block.settings.content_spacing_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .luxury-content__container-{{ section_id }} {
+      gap: {{ block.settings.content_spacing_desktop }}px;
+    }
+  }
+
+  .luxury-content__heading-{{ section_id }} {
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    font-weight: {{ block.settings.heading_font.weight }};
+    font-style: {{ block.settings.heading_font.style }};
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .luxury-content__heading-{{ section_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+    }
+  }
+
+  .luxury-content__description-{{ section_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-style: {{ block.settings.body_font.style }};
+    color: {{ block.settings.description_color }};
+    font-size: {{ block.settings.description_size_mobile }}px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: {{ block.settings.description_max_width }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .luxury-content__description-{{ section_id }} {
+      font-size: {{ block.settings.description_size_desktop }}px;
+    }
+  }
+
+  .luxury-content__button-{{ section_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+    font-weight: {{ block.settings.button_font.weight }};
+    font-style: {{ block.settings.button_font.style }};
+    font-size: {{ block.settings.button_font_size_mobile }}px;
+    letter-spacing: {{ block.settings.button_letter_spacing }}px;
+    text-transform: {{ block.settings.button_text_transform }};
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 750px) {
+    .luxury-content__button-{{ section_id }} {
+      font-size: {{ block.settings.button_font_size_desktop }}px;
+    }
+  }
+
+  .luxury-content__button-{{ section_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+{% endstyle %}
+
+<div class="luxury-content-{{ section_id }}" {{ block.shopify_attributes }}>
+  <div class="luxury-content__container-{{ section_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="luxury-content__heading-{{ section_id }}">
+        {{ block.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% if block.settings.description != blank %}
+      <div class="luxury-content__description-{{ section_id }}">
+        {{ block.settings.description }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.button_text != blank %}
+      <a
+        href="{{ block.settings.button_link }}"
+        class="luxury-content__button-{{ section_id }}"
+      >
+        {{ block.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Luxury content section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "content_spacing_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile content spacing",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "content_spacing_desktop",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop content spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Where Every Skincare Moment Counts.</p>"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "serif"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 32,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop size",
+      "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>At Beauty, we believe that skincare isn't just a routine; it's a journey of self-care and self-discovery. Our Beauty curated selection of premium skincare products is designed to elevate your beauty regimen, offering you a sanctuary of indulgence and transformation.</p>"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Description font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#717171"
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile size",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "description_size_desktop",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop size",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "description_max_width",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "label": "Max width",
+      "default": 700
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "ABOUT US"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "font_picker",
+      "id": "button_font",
+      "label": "Button font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background color",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_desktop",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop font size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "button_letter_spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "button_text_transform",
+      "label": "Text transform",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        },
+        {
+          "value": "lowercase",
+          "label": "Lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize"
+        }
+      ],
+      "default": "uppercase"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Luxury content section"
+    }
+  ]
+}
+{% endschema %}

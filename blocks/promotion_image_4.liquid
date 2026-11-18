@@ -1,0 +1,223 @@
+{% assign promo_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .centered-image-{{ promo_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
+  }
+
+  .centered-image-container-{{ promo_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .centered-image-wrapper-{{ promo_id }} {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .centered-image-wrapper-{{ promo_id }} img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+  
+  @media screen and (min-width: {{ block.settings.max_width | plus: 100 }}px) {
+    .centered-image-container-{{ promo_id }} {
+      width: {{ block.settings.max_width }}px;
+    }
+  }
+
+  .centered-image-placeholder-{{ promo_id }} {
+    background-color: #f4f4f4;
+    width: 100%;
+    aspect-ratio: {{ block.settings.aspect_ratio }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .centered-image-placeholder-{{ promo_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .centered-image-empty-state-{{ promo_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .centered-image-{{ promo_id }} {
+      padding: {{ block.settings.padding_top_mobile }}px 0 {{ block.settings.padding_bottom_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<centered-image-{{ promo_id }}
+  class="centered-image-{{ promo_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="centered-image-container-{{ promo_id }}">
+    <div class="centered-image-wrapper-{{ promo_id }}">
+      {% if block.settings.image %}
+        <img
+          src="{{ block.settings.image | image_url: width: 10000 }}"
+          alt="{{ block.settings.image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+        >
+      {% else %}
+        <div class="centered-image-placeholder-{{ promo_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="centered-image-empty-state-{{ promo_id }}">
+            Add a rectangular image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</centered-image-{{ promo_id }}>
+
+{% schema %}
+{
+  "name": "Centered image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "16/9",
+          "label": "16:9 (Landscape)"
+        },
+        {
+          "value": "4/3",
+          "label": "4:3 (Standard)"
+        },
+        {
+          "value": "3/2",
+          "label": "3:2 (Classic)"
+        },
+        {
+          "value": "21/9",
+          "label": "21:9 (Ultrawide)"
+        }
+      ],
+      "default": "16/9",
+      "info": "Applies when no image is selected"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1200,
+      "max": 9900,
+      "step": 100,
+      "unit": "px",
+      "default": 6000
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Centered image"
+    }
+  ]
+}
+{% endschema %}

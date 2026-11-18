@@ -1,0 +1,719 @@
+{% doc %}
+  @prompt
+    Create a responsive horizontal scrollable carousel section with service cards. Each card should include:
+    - An image on the left side
+    - A bold title (can include "NEW" or "20% OFF" styled in smaller text above the title)
+    - A short description
+    - A call-to-action link (e.g., SHOP NOW, DISCOVER NOW, LEARN MORE, FIND OUT MORE)
+    
+    The cards should be displayed in a row with horizontal scrolling enabled (like a slider). Users should be able to click-and-drag or swipe on mobile to scroll left and right. Make sure the layout is clean, with equal card sizes, rounded corners, light shadows, and spacing between cards. On desktop, show multiple cards at once, and on mobile, show one card at a time. Add smooth scrolling.
+    
+    Use Shopify's section schema so I can add/edit cards dynamically in the editor., Can you also add card details without json thing?
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-service-carousel-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 40px 0;
+    background-color: {{ block.settings.background_color }};}
+
+  .ai-service-carousel__container-{{ ai_gen_id }} {
+    width: 100%;
+    {% comment %} margin: 0 auto; {% endcomment %}
+    {% comment %} padding: 0 32px;  {% endcomment %}
+  }
+
+  .ai-service-carousel__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ai-service-carousel__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 10px;
+  }
+
+  .ai-service-carousel__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .ai-service-carousel__wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    margin: 0 -10px;
+  }
+
+  .ai-service-carousel__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: 20px;
+    padding: 0 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+  }
+
+  .ai-service-carousel__track-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-service-carousel__track-{{ ai_gen_id }}:active {
+    cursor: grabbing;
+  }
+
+  .ai-service-card-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: 350px;
+    background: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    height: 260px;
+  }
+
+  .ai-service-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-service-card__image-{{ ai_gen_id }} {
+    flex: 0 0 140px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-service-card__image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-service-card__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-service-card__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+  }
+
+  .ai-service-card__content-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 20px;display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .ai-service-card__badge-{{ ai_gen_id }} {
+    font-size: 11px;
+    font-weight: 600;
+    color: {{ block.settings.badge_color }};
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+  }
+
+  .ai-service-card__title-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 700;
+    color: {{ block.settings.card_title_color }};
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .ai-service-card__description-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.card_text_color }};
+    line-height: 1.4;
+    margin: 0 0 15px;
+    flex-grow: 1;
+  }
+
+  .ai-service-card__cta-{{ ai_gen_id }} {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: {{ block.settings.cta_color }};
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid {{ block.settings.cta_color }};
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .ai-service-card__cta-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.cta_hover_color }};
+    border-bottom-color: {{ block.settings.cta_hover_color }};
+  }
+
+  .ai-service-carousel__empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+  }
+
+  .ai-service-carousel__empty-state-{{ ai_gen_id }} h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+  }
+
+  .ai-service-carousel__empty-state-{{ ai_gen_id }} p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-service-card-{{ ai_gen_id }} {
+      width: 280px;
+      height: 180px;
+    }
+
+    .ai-service-card__image-{{ ai_gen_id }} {
+      flex: 0 0 120px;
+    }
+
+    .ai-service-card__content-{{ ai_gen_id }} {
+      padding: 15px;
+    }
+
+    .ai-service-card__title-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+
+    .ai-service-card__description-{{ ai_gen_id }} {
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .ai-service-card-{{ ai_gen_id }} {
+      width: 260px;
+      height: 160px;
+    }
+
+    .ai-service-card__image-{{ ai_gen_id }} {
+      flex: 0 0 100px;
+    }
+
+    .ai-service-card__content-{{ ai_gen_id }} {
+      padding: 12px;
+    }
+  }
+{% endstyle %}<service-carousel-{{ ai_gen_id }}
+  class="ai-service-carousel-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-service-carousel__container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank or block.settings.subtitle != blank %}
+      <div class="ai-service-carousel__header-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-service-carousel__title-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.subtitle != blank %}
+          <p class="ai-service-carousel__subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% assign has_cards = false %}
+    {% for i in (1..6) %}
+      {% assign card_title_key = 'card_' | append: i | append: '_title' %}
+      {% if block.settings[card_title_key] != blank %}
+        {% assign has_cards = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if has_cards %}
+      <div class="ai-service-carousel__wrapper-{{ ai_gen_id }}">
+        <div class="ai-service-carousel__track-{{ ai_gen_id }}" data-track>
+          {% for i in (1..6) %}
+            {% liquid
+              assign card_image_key = 'card_' | append: i | append: '_image'
+              assign card_badge_key = 'card_' | append: i | append: '_badge'
+              assign card_title_key = 'card_' | append: i | append: '_title'
+              assign card_description_key = 'card_' | append: i | append: '_description'
+              assign card_cta_text_key = 'card_' | append: i | append: '_cta_text'
+              assign card_cta_link_key = 'card_' | append: i | append: '_cta_link'
+
+              assign card_image = block.settings[card_image_key]
+              assign card_badge = block.settings[card_badge_key]
+              assign card_title = block.settings[card_title_key]
+              assign card_description = block.settings[card_description_key]
+              assign card_cta_text = block.settings[card_cta_text_key]
+              assign card_cta_link = block.settings[card_cta_link_key]
+            %}
+
+            {% if card_title != blank %}
+              <div class="ai-service-card-{{ ai_gen_id }}">
+                <div class="ai-service-card__image-{{ ai_gen_id }}">
+                  {% if card_image %}
+                    <img
+                      src="{{ card_image | image_url: width: 280 }}"
+                      alt="{{ card_image.alt | escape }}"
+                      loading="lazy"
+                      width="280"
+                      height="200"
+                    >
+                  {% else %}
+                    <div class="ai-service-card__image-placeholder-{{ ai_gen_id }}">
+                      {{ 'image' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="ai-service-card__content-{{ ai_gen_id }}">
+                  <div>
+                    {% if card_badge != blank %}
+                      <div class="ai-service-card__badge-{{ ai_gen_id }}">{{ card_badge }}</div>
+                    {% endif %}
+                    <h3 class="ai-service-card__title-{{ ai_gen_id }}">{{ card_title }}</h3>
+                    {% if card_description != blank %}
+                      <p class="ai-service-card__description-{{ ai_gen_id }}">{{ card_description }}</p>
+                    {% endif %}
+                  </div>
+                  {% if card_cta_text != blank and card_cta_link != blank %}
+                    <a href="{{ card_cta_link }}" class="ai-service-card__cta-{{ ai_gen_id }}">
+                      {{ card_cta_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="ai-service-carousel__empty-state-{{ ai_gen_id }}">
+        <h3>Add your first service card</h3>
+        <p>Configure your service cards in the block settings to get started.</p>
+      </div>
+    {% endif %}
+  </div>
+</service-carousel-{{ ai_gen_id }}><script>
+  (function() {
+    class ServiceCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.track = null;
+        this.isDragging = false;
+        this.startX = 0;
+        this.scrollLeft = 0;
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('[data-track]');
+        if (!this.track) return;
+
+        this.setupDragScroll();
+        this.setupTouchScroll();
+      }
+
+      setupDragScroll() {
+        this.track.addEventListener('mousedown', (e) => {
+          this.isDragging = true;
+          this.startX = e.pageX - this.track.offsetLeft;
+          this.scrollLeft = this.track.scrollLeft;
+          this.track.style.cursor = 'grabbing';e.preventDefault();
+        });
+
+        this.track.addEventListener('mouseleave', () => {
+          this.isDragging = false;
+          this.track.style.cursor = 'grab';
+        });
+
+        this.track.addEventListener('mouseup', () => {
+          this.isDragging = false;
+          this.track.style.cursor = 'grab';
+        });
+
+        this.track.addEventListener('mousemove', (e) => {
+          if (!this.isDragging) return;
+          e.preventDefault();
+          const x = e.pageX - this.track.offsetLeft;
+          const walk = (x - this.startX) * 2;
+          this.track.scrollLeft = this.scrollLeft - walk;});
+      }
+
+      setupTouchScroll() {
+        let startX = 0;
+        let scrollLeft = 0;
+
+        this.track.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].pageX - this.track.offsetLeft;
+          scrollLeft = this.track.scrollLeft;
+        });
+
+        this.track.addEventListener('touchmove', (e) => {
+          if (!startX) return;
+          const x = e.touches[0].pageX - this.track.offsetLeft;
+          const walk = (x - startX) * 2;
+          this.track.scrollLeft = scrollLeft - walk;
+        });
+
+        this.track.addEventListener('touchend', () => {
+          startX = 0;
+        });
+      }
+    }
+
+    customElements.define('service-carousel-{{ ai_gen_id }}', ServiceCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Service carousel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Services"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover what we have to offer"
+    },
+    {
+      "type": "header",
+      "content": "Card 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_1_badge",
+      "label": "Badge",
+      "default": "NEW"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Title",
+      "default": "Premium Service"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_description",
+      "label": "Description",
+      "default": "Experience our top-tier service with exceptional quality and attention to detail."
+    },
+    {
+      "type": "text",
+      "id": "card_1_cta_text",
+      "label": "CTA text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "card_1_cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Card 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_2_badge",
+      "label": "Badge",
+      "default": "20% OFF"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Title",
+      "default": "Express Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_description",
+      "label": "Description",
+      "default": "Get your orders delivered faster with our express delivery service."
+    },
+    {
+      "type": "text",
+      "id": "card_2_cta_text",
+      "label": "CTA text",
+      "default": "DISCOVER NOW"
+    },
+    {
+      "type": "url",
+      "id": "card_2_cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Card 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_3_badge",
+      "label": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Title",
+      "default": "Customer Support"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_description",
+      "label": "Description",
+      "default": "24/7 customer support to help you with any questions or concerns."
+    },
+    {
+      "type": "text",
+      "id": "card_3_cta_text",
+      "label": "CTA text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "card_3_cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Card 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_4_badge",
+      "label": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "card_4_description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "card_4_cta_text",
+      "label": "CTA text"
+    },
+    {
+      "type": "url",
+      "id": "card_4_cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Card 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_5_badge",
+      "label": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "card_5_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "card_5_description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "card_5_cta_text",
+      "label": "CTA text"
+    },
+    {
+      "type": "url",
+      "id": "card_5_cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Card 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_6_badge",
+      "label": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "card_6_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "card_6_description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "card_6_cta_text",
+      "label": "CTA text"
+    },
+    {
+      "type": "url",
+      "id": "card_6_cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge color",
+      "default": "#ff6b6b"
+    },
+    {
+      "type": "color",
+      "id": "cta_color",
+      "label": "CTA color",
+      "default": "#007bff"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_color",
+      "label": "CTA hover color",
+      "default": "#0056b3"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service carousel"
+    }
+  ]
+}
+{% endschema %}

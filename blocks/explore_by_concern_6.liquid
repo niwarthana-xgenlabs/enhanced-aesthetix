@@ -1,0 +1,595 @@
+{% assign section_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .concern-section-{{ section_id }} {
+    display: block;
+    width: 100%;
+    padding: 80px 40px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .concern-container-{{ section_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .concern-header-{{ section_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 50px;
+  }
+
+  .concern-heading-{{ section_id }} {
+    text-align: left;
+    margin: 0;
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    font-weight: {{ block.settings.heading_font.weight }};
+  }
+
+  .concern-explore-all-{{ section_id }} {
+    font-size: {{ block.settings.explore_all_size }}px;
+    color: {{ block.settings.explore_all_color }};
+    text-decoration: none;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: 400;
+    transition: color 0.3s ease;
+  }
+
+  .concern-explore-all-{{ section_id }}:hover {
+    color: {{ block.settings.explore_all_hover_color }};
+  }
+
+  .concern-grid-{{ section_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+  }
+
+  .concern-card-{{ section_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .concern-card-{{ section_id }}:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .concern-image-wrapper-{{ section_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+  }
+
+  .concern-image-{{ section_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .concern-placeholder-{{ section_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .concern-placeholder-{{ section_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .concern-content-{{ section_id }} {
+    padding: {{ block.settings.card_padding }}px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .concern-label-{{ section_id }} {
+    font-size: {{ block.settings.label_size }}px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: {{ block.settings.label_color }};
+    margin: 0 0 12px;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: 500;
+  }
+
+  .concern-title-{{ section_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 12px;
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    line-height: 1.3;
+  }
+
+  .concern-description-{{ section_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.description_color }};
+    margin: 0;
+    line-height: 1.6;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+
+  .concern-link-wrapper-{{ section_id }} {
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .concern-link-{{ section_id }} {
+    display: inline-block;
+    font-size: {{ block.settings.link_size }}px;
+    color: #724C29;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+  }
+
+  .concern-link-{{ section_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+    text-decoration-color: {{ block.settings.link_hover_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .concern-section-{{ section_id }} {
+      padding: 60px 30px;
+    }
+
+    .concern-heading-{{ section_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .concern-header-{{ section_id }} {
+      margin-bottom: 40px;
+    }
+
+    .concern-grid-{{ section_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: {{ block.settings.card_gap | times: 0.8 }}px;
+    }
+
+    .concern-title-{{ section_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.9);
+    }
+
+    .concern-content-{{ section_id }} {
+      padding: {{ block.settings.card_padding | times: 0.8 }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .concern-section-{{ section_id }} {
+      padding: 50px 20px;
+    }
+
+    .concern-header-{{ section_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .concern-heading-{{ section_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.7);
+    }
+
+    .concern-explore-all-{{ section_id }} {
+      font-size: calc({{ block.settings.explore_all_size }}px * 0.9);
+    }
+
+    .concern-grid-{{ section_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.card_gap | times: 0.7 }}px;
+    }
+
+    .concern-title-{{ section_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.85);
+    }
+
+    .concern-description-{{ section_id }} {
+      font-size: calc({{ block.settings.description_size }}px * 0.95);
+    }
+
+    .concern-content-{{ section_id }} {
+      padding: {{ block.settings.card_padding | times: 0.7 }}px;
+    }
+  }
+{% endstyle %}
+
+<concern-section-{{ section_id }} class="concern-section-{{ section_id }}" {{ block.shopify_attributes }}>
+  <div class="concern-container-{{ section_id }}">
+    <div class="concern-header-{{ section_id }}">
+      {% if block.settings.section_heading != blank %}
+        <h2 class="concern-heading-{{ section_id }}">{{ block.settings.section_heading }}</h2>
+      {% endif %}
+      
+      {% if block.settings.explore_all_text != blank and block.settings.explore_all_link != blank %}
+        <a href="{{ block.settings.explore_all_link }}" class="concern-explore-all-{{ section_id }}">
+          {{ block.settings.explore_all_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="concern-grid-{{ section_id }}">
+      {% for i in (1..4) %}
+        {% liquid
+          assign collection_key = 'card_' | append: i | append: '_collection'
+          assign card_collection = block.settings[collection_key]
+
+          assign card_image = nil
+          assign card_title = ''
+          assign card_description = ''
+          assign card_link = '#'
+
+          if card_collection != blank
+            assign card_image = card_collection.image | default: card_collection.products.first.featured_image
+            assign card_title = card_collection.title
+            assign card_description = card_collection.description | strip_html | truncate: 120
+            assign card_link = card_collection.url
+          endif
+        %}
+
+        <div class="concern-card-{{ section_id }}">
+          <div class="concern-image-wrapper-{{ section_id }}">
+            {% if card_image %}
+              <img
+                src="{{ card_image | image_url: width: 800 }}"
+                alt="{{ card_image.alt | default: card_title | escape }}"
+                loading="lazy"
+                width="{{ card_image.width }}"
+                height="{{ card_image.height }}"
+                class="concern-image-{{ section_id }}"
+              >
+            {% else %}
+              <div class="concern-placeholder-{{ section_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="concern-content-{{ section_id }}">
+            <p class="concern-label-{{ section_id }}">{{ block.settings.card_label }}</p>
+
+            {% if card_title != blank %}
+              <h3 class="concern-title-{{ section_id }}">{{ card_title }}</h3>
+            {% endif %}
+
+            {% if card_description != blank %}
+              <p class="concern-description-{{ section_id }}">{{ card_description }}</p>
+            {% endif %}
+
+            <div class="concern-link-wrapper-{{ section_id }}">
+              <a href="{{ card_link | default: '#' }}" class="concern-link-{{ section_id }}">
+                {{ block.settings.link_text }}
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</concern-section-{{ section_id }}>
+
+<script>
+  (function() {
+    class ConcernSection{{ section_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.cards = this.querySelectorAll('.concern-card-{{ section_id }}');
+        this.setupAccessibility();
+      }
+
+      setupAccessibility() {
+        this.cards.forEach((card) => {
+          const link = card.querySelector('.concern-link-{{ section_id }}');
+          if (link) {
+            card.setAttribute('role', 'article');
+          }
+        });
+      }
+    }
+
+    customElements.define('concern-section-{{ section_id }}', ConcernSection{{ section_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Explore by concern",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "EXPLORE BY CONCERN"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#151515"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "serif"
+    },
+    {
+      "type": "header",
+      "content": "Explore all link"
+    },
+    {
+      "type": "text",
+      "id": "explore_all_text",
+      "label": "Explore all text",
+      "default": "Explore all concerns"
+    },
+    {
+      "type": "url",
+      "id": "explore_all_link",
+      "label": "Explore all link"
+    },
+    {
+      "type": "range",
+      "id": "explore_all_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Explore all text size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "explore_all_color",
+      "label": "Explore all text color",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "explore_all_hover_color",
+      "label": "Explore all hover color",
+      "default": "#724C29"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#faf9f7"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Card spacing",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 15,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Card padding",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Card label"
+    },
+    {
+      "type": "text",
+      "id": "card_label",
+      "label": "Label text",
+      "default": "SKIN CONCERNS"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Label size",
+      "default": 11
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#717171"
+    },
+    {
+      "type": "header",
+      "content": "Card title"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 22
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#151515"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title font",
+      "default": "serif"
+    },
+    {
+      "type": "header",
+      "content": "Card description"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#717171"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "header",
+      "content": "Card link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Link size",
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#724C29"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#5a3a1f"
+    },
+    {
+      "type": "header",
+      "content": "Card 1"
+    },
+    {
+      "type": "collection",
+      "id": "card_1_collection",
+      "label": "Collection (optional – used if no product selected)"
+    },
+    {
+      "type": "header",
+      "content": "Card 2"
+    },
+    {
+      "type": "collection",
+      "id": "card_2_collection",
+      "label": "Collection (optional – used if no product selected)"
+    },
+    {
+      "type": "header",
+      "content": "Card 3"
+    },
+    {
+      "type": "collection",
+      "id": "card_3_collection",
+      "label": "Collection (optional – used if no product selected)"
+    },
+    {
+      "type": "header",
+      "content": "Card 4"
+    },
+    {
+      "type": "collection",
+      "id": "card_4_collection",
+      "label": "Collection (optional – used if no product selected)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Explore by concern"
+    }
+  ]
+}
+{% endschema %}

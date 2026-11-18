@@ -1,0 +1,134 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_DKVb4L": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free Shipping Over $50! Returns are always on us.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_DKVb4L"
+      ],
+      "disabled": true,
+      "settings": {
+        "marquee": true,
+        "animation_speed": "100",
+        "checkbox_close_announcement": true,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "#cecece"
+      }
+    },
+    "page_header_image_banner_HGfYXq": {
+      "type": "page-header-image-banner",
+      "name": "Image banner for transparent header",
+      "settings": {
+        "logo": "shopify://shop_images/enhanced_gold_logo_transparent.png",
+        "logo_height_mobile": 40,
+        "logo_height_desktop": 95,
+        "header_padding_mobile": 20,
+        "header_padding_desktop": 30,
+        "header_bg_color_scrolled": "#00000040",
+        "header_text_color": "#151515",
+        "nav_logo_gap": 40,
+        "nav_link_1_text": "HOME",
+        "nav_link_1_url": "",
+        "nav_link_2_text": "CATALOG",
+        "nav_link_2_url": "",
+        "nav_link_3_text": "CONTACT US",
+        "nav_link_3_url": "",
+        "nav_link_4_text": "SKINCARE",
+        "nav_link_4_url": "shopify://pages/skincare",
+        "nav_link_5_text": "About us",
+        "nav_link_5_url": "shopify://pages/about-us",
+        "nav_font_size": 15,
+        "nav_font_weight": 500,
+        "nav_letter_spacing": 0.5,
+        "nav_text_transform": "uppercase",
+        "nav_spacing": 40,
+        "icon_size_mobile": 20,
+        "icon_size_desktop": 24,
+        "icon_spacing": 25
+      }
+    },
+    "header": {
+      "type": "page-header",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "layout": "option_1",
+        "sticky_header": false,
+        "sticky_header_always": true,
+        "header_bg_opacity": 100,
+        "header_bg_blur": 0,
+        "header_always_blurred": false,
+        "show_line_separator": true,
+        "show_shadow": false,
+        "logo": "shopify://shop_images/watermark-full-gold.png",
+        "large_screen_logo_width": 170,
+        "mobile_screen_logo_width": 100,
+        "menu": "main-menu",
+        "teaser_menu": "main-menu",
+        "mobile_footer_menu": "",
+        "transparent_logo": "shopify://shop_images/watermark-full-gold.png",
+        "transparent_header_color": "#717171",
+        "show_country_selector": true,
+        "show_country_selector_label": false,
+        "show_country_selector_flag": true,
+        "show_language_selector": false,
+        "drawer_title": "Shop by",
+        "typing_search": "Search...",
+        "suggestions_title": "Suggestions",
+        "suggestions_menu": "main-menu"
+      }
+    },
+    "1768449661c9846a16": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d91e963_nYJkTw": {
+          "type": "hero_section_1",
+          "settings": {
+            "background_image": "shopify://shop_images/freepik_assistant_1752567898538_1_48a21fe4-6e01-4410-9325-c55d77b53798.png",
+            "caption_text": "WHERE SKIN TREATMENTS BEGINS",
+            "caption_color": "#ffffff",
+            "caption_size_mobile": 10,
+            "caption_size_desktop": 12,
+            "caption_weight": 300,
+            "caption_letter_spacing": 2,
+            "caption_bottom_mobile": 40,
+            "caption_bottom_desktop": 60,
+            "caption_arrow_spacing": 10,
+            "arrow_size": 20
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d91e963_nYJkTw"
+      ],
+      "name": "Hero Section",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "page_header_image_banner_HGfYXq",
+    "header",
+    "1768449661c9846a16"
+  ]
+}

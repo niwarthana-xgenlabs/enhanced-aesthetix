@@ -1,0 +1,146 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "176838061164a38a30": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_c5e0a56_RTXHj4": {
+          "type": "footer_15",
+          "settings": {
+            "container_width": 1050,
+            "footer_background": "#f9f7f4",
+            "heading_color": "#151515",
+            "text_color": "#717171",
+            "link_color": "#717171",
+            "link_hover_color": "#c9a86a",
+            "divider_color": "#e7e7e7",
+            "copyright_color": "#999999",
+            "heading_size": 13,
+            "heading_letter_spacing": 1.5,
+            "body_text_size": 14,
+            "copyright_size": 12,
+            "logo": "shopify://shop_images/EnhancedAesthetix_FINALLOGOFILES-02_1.png",
+            "logo_width": 120,
+            "brand_description": "At Enhanced Aesthetix, we provide a wide variety of treatments to highlight your natural beauty and elevate your confidence.",
+            "facebook_url": "https://www.facebook.com/p/Enhanced-Aesthetix-100083238966729/",
+            "instagram_url": "https://www.instagram.com/enhanced.aesthetix/?hl=en",
+            "tiktok_url": "https://www.tiktok.com/@enhanced.aesthetix",
+            "social_icon_size": 40,
+            "social_icon_bg": "#c9a86a",
+            "social_icon_hover_bg": "#b89555",
+            "social_icon_color": "#ffffff",
+            "quick_links_heading": "QUICK LINKS",
+            "link_1_text": "Home",
+            "link_1_url": "",
+            "link_2_text": "About",
+            "link_2_url": "shopify://pages/about-us",
+            "link_3_text": "Services",
+            "link_3_url": "shopify://collections",
+            "link_4_text": "",
+            "link_4_url": "",
+            "services_heading": "SERVICES",
+            "service_1_text": "Consultation",
+            "service_1_url": "shopify://products/the-consultation",
+            "service_2_text": "Wrinkle Management",
+            "service_2_url": "shopify://products/wrinkle-reduction",
+            "service_3_text": "Scar Reduction",
+            "service_3_url": "shopify://products/scar-reduction-consultation-1",
+            "service_4_text": "",
+            "service_4_url": "",
+            "newsletter_heading": "STAY IN THE LOOP",
+            "newsletter_description": "Sign up with your email address to receive news and updates.",
+            "name_placeholder": "Name",
+            "email_placeholder": "Email",
+            "submit_button_text": "SUBMIT",
+            "submit_button_color": "#c9a86a",
+            "submit_button_hover_color": "#b89555",
+            "success_message": "Thank you for subscribing!",
+            "success_message_color": "#4caf50",
+            "error_message_color": "#cf4a4a",
+            "input_bg_color": "#ffffff",
+            "input_text_color": "#151515",
+            "input_border_color": "#d6d6d6",
+            "input_focus_border_color": "#c9a86a",
+            "input_placeholder_color": "#999999",
+            "input_border_radius": 4,
+            "copyright_text": "© 2026 Enhanced Aesthetix – Website by XGENLABS"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c5e0a56_RTXHj4"
+      ],
+      "name": "Footer",
+      "settings": {}
+    },
+    "footer": {
+      "type": "page-footer",
+      "blocks": {
+        "menu_g8gLjt": {
+          "type": "menu",
+          "settings": {
+            "heading_links": "Links",
+            "links": "footer"
+          }
+        },
+        "menu_GzMLqf": {
+          "type": "menu",
+          "settings": {
+            "heading_links": "Links",
+            "links": "footer"
+          }
+        },
+        "menu_bB7XxG": {
+          "type": "menu",
+          "settings": {
+            "heading_links": "Links",
+            "links": "footer"
+          }
+        },
+        "text_JtUjig": {
+          "type": "text",
+          "settings": {
+            "heading_text": "Heading",
+            "text": "<p>Text</p>"
+          }
+        }
+      },
+      "block_order": [
+        "menu_g8gLjt",
+        "menu_GzMLqf",
+        "menu_bB7XxG",
+        "text_JtUjig"
+      ],
+      "disabled": true,
+      "settings": {
+        "show-social-media-icons": true,
+        "show_country_selector": true,
+        "show_country_selector_label": false,
+        "show_country_selector_flag": true,
+        "show_language_selector": true,
+        "enable_follow_on_shop": true,
+        "show-payments-icons": true,
+        "show-copyright": true,
+        "text": "© 2025 Enhanced Aesthetix.",
+        "big-logo-width": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    }
+  },
+  "order": [
+    "176838061164a38a30",
+    "footer"
+  ]
+}

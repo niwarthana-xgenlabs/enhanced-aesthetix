@@ -1,0 +1,557 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "main-breadcrumbs",
+      "settings": {
+        "full-width-enabled": true,
+        "text_color": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 8,
+        "margin-bottom": 8
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "brand": "{{ product.vendor }}",
+            "size_text": 210,
+            "size_text_mobile": 200
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {}
+        },
+        "90ea3cd3-aa22-44f6-b6de-365eb7f85b9c": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": false,
+            "color-background": "#ffffff",
+            "margin-top": 8,
+            "margin-bottom": 8
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_tax_included": true,
+            "show_shipping_policy": true,
+            "size_text": 130,
+            "size_text_mobile": 120
+          }
+        },
+        "separator_RrKQ4A": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": false,
+            "color-background": "#ffffff",
+            "margin-top": 8,
+            "margin-bottom": 8
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "color_swatch_names": "",
+            "variant_picture_swatch_names": "",
+            "thumb_size": 60,
+            "radius": "default",
+            "border_radius": 0,
+            "dropdown_swatch_names": "",
+            "margin-top": 8,
+            "margin-bottom": 8
+          }
+        },
+        "c1ba8695-94d2-40ad-ac06-93ec3b8cf38e": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": false,
+            "color-background": "#ffffff",
+            "margin-top": 8,
+            "margin-bottom": 16
+          }
+        },
+        "inventory_JWQnXt": {
+          "type": "inventory",
+          "settings": {
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true,
+            "show_qty_selector": true,
+            "text_color": "rgba(0,0,0,0)",
+            "background_color": "#b4975a"
+          }
+        },
+        "bulletpoints_iWtDxJ": {
+          "type": "bulletpoints",
+          "settings": {
+            "metafield": "",
+            "default_text": "Perfect for natural skin tightening\nNatural plant oils\nDelays the skin aging processes\nImproves skin elasticity"
+          }
+        },
+        "separator_HcYGiH": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": true,
+            "color-background": "#dedede",
+            "margin-top": 0,
+            "margin-bottom": 0
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "is_open": false,
+            "icon": "none"
+          }
+        },
+        "a05fcf3e-8e1a-4f1f-8d97-2055eb17138d": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": true,
+            "color-background": "#dedede",
+            "margin-top": 0,
+            "margin-bottom": 0
+          }
+        },
+        "collapsible_tab_Q7UFgL": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping and Delivery",
+            "content": "<p>Experience the convenience of swift order fulfillment with our top-notch Shipping services.</p>",
+            "metafield_variables": "",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "separator_gDwzxi": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": true,
+            "color-background": "#dedede",
+            "margin-top": 0,
+            "margin-bottom": 0
+          }
+        },
+        "share_buttons_Ct9CXx": {
+          "type": "share_buttons",
+          "settings": {
+            "heading": "Share",
+            "social_facebook_link": true,
+            "social_twitter_link": true,
+            "social_pinterest_link": true,
+            "social_whatsapp_link": true,
+            "mail_link": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating",
+        "90ea3cd3-aa22-44f6-b6de-365eb7f85b9c",
+        "price",
+        "separator_RrKQ4A",
+        "variant_picker",
+        "c1ba8695-94d2-40ad-ac06-93ec3b8cf38e",
+        "inventory_JWQnXt",
+        "buy_buttons",
+        "bulletpoints_iWtDxJ",
+        "separator_HcYGiH",
+        "description",
+        "a05fcf3e-8e1a-4f1f-8d97-2055eb17138d",
+        "collapsible_tab_Q7UFgL",
+        "separator_gDwzxi",
+        "share_buttons_Ct9CXx"
+      ],
+      "settings": {
+        "enable_sticky_buy_button": true,
+        "full-width-enabled": false,
+        "desktop-media-size": "normal",
+        "desktop-layout": "carousel-vertical",
+        "desktop-image-ratio": "original",
+        "enable_video_looping": true,
+        "enable-preselected-variant": true,
+        "enable-image-zoom": true,
+        "mobile-image": "small",
+        "text_color": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 12,
+        "margin-bottom": 0
+      }
+    },
+    "ec5a6457-3cb6-4605-94df-ac6400f950f1": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "Featured collection",
+        "disable_on_mobile": false,
+        "hide_empty_section": false,
+        "collection": "instruments",
+        "product_list": [],
+        "products_to_show": 4,
+        "enable_stack_products": false,
+        "show_view_all": true,
+        "button_select": "primary",
+        "number_of_column_desktop": 4,
+        "spacing_desktop": "8",
+        "make_products_full_width": false,
+        "number_of_column_mobile": 2.1,
+        "spacing_mobile": "16",
+        "text_alignment": "left",
+        "image_ratio": "square",
+        "show_video": false,
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_product_rating": false,
+        "enable_quick_add_button": true,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_6eHa6t": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_pcbKAV": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_D3AMnB": {
+          "type": "heading",
+          "settings": {
+            "heading": "We know you are unique",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_m4Jtpa": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Take care of your complexion to make it healthy and radiant. In the range of facial care products you will find creams, scrubs, masks, toners, gels and much more.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_Mcp9Rh": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_pcbKAV",
+        "heading_D3AMnB",
+        "text_m4Jtpa",
+        "button_Mcp9Rh"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/image-paralax-1_1c4bb8f6-2379-477a-844a-c205a34a1108.webp",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 40
+      }
+    },
+    "benefits_video_wybLKE": {
+      "type": "benefits-video",
+      "blocks": {
+        "video_Mf6bbL": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/be85ff6dd7374d148021cc59efaba46d.HD-1080p-3.3Mbps-25428588.mp4",
+            "text": "<p>New look to your skin</p>"
+          }
+        },
+        "video_DzEYDn": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/ca87e6ef6c494a4181a81ba36d9d2c7b.HD-1080p-2.5Mbps-25428822.mp4",
+            "text": "<p>Your text here</p>"
+          }
+        },
+        "video_LA4tdJ": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/8de005ccc0de48af93bdb207cff33d51.HD-1080p-3.3Mbps-25428504.mp4",
+            "text": "<p>Your text here</p>"
+          }
+        },
+        "video_kFaM7T": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/10eab6df9461465cb9bb7357a9d8ab19.HD-1080p-2.5Mbps-25428359.mp4",
+            "text": "<p>Your text here</p>"
+          }
+        },
+        "video_4YwRcz": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/c90d76a595684ce789cbb1d8c56c23ac.HD-1080p-2.5Mbps-25428270.mp4",
+            "text": "<p>Your text here</p>"
+          }
+        },
+        "video_cpxigk": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/4d305e188b5b4865a3ec837303069d9e.HD-1080p-2.5Mbps-25428248.mp4",
+            "text": "<p>Your text here</p>"
+          }
+        }
+      },
+      "block_order": [
+        "video_Mf6bbL",
+        "video_DzEYDn",
+        "video_LA4tdJ",
+        "video_kFaM7T",
+        "video_4YwRcz",
+        "video_cpxigk"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Benefits video reels",
+        "video_button": false,
+        "text_alignment": "center",
+        "text_style": "body",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "testimonial_images_rLWajG": {
+      "type": "testimonial-images",
+      "blocks": {
+        "testimonial_m9feXM": {
+          "type": "testimonial",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>\"Your feedback goes here. Share your experience with our product or service.\"</p>",
+            "author": "Author name",
+            "desktop_image": "shopify://shop_images/Ellipse_78_7d0b8b9d-b39e-4718-97d5-e46fe8bb1d28.webp",
+            "image_link": ""
+          }
+        },
+        "testimonial_ANagRW": {
+          "type": "testimonial",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>\"Your feedback goes here. Share your experience with our product or service.\"</p>",
+            "author": "Author name",
+            "desktop_image": "shopify://shop_images/Ellipse_79_85ddabd1-ce95-44cd-b504-6ed73dc41887.webp",
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_m9feXM",
+        "testimonial_ANagRW"
+      ],
+      "disabled": true,
+      "name": "t:sections.testimonial_images.name",
+      "settings": {
+        "title": "Testimonial images",
+        "text_style": "body",
+        "testimonial_text_size_desktop": 160,
+        "testimonial_text_size": 100,
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "auto-rotate": false,
+        "change_slider_time": 5,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 480,
+        "mobile_fixed_height": 300,
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "features_banner_wiKkaQ": {
+      "type": "features-banner",
+      "blocks": {
+        "image_P4yL64": {
+          "type": "image",
+          "settings": {
+            "select_icon": "bag",
+            "heading": "Banner title",
+            "text": "<p>Items you love at prices that fit your budget.</p>",
+            "link": ""
+          }
+        },
+        "image_m7jjzm": {
+          "type": "image",
+          "settings": {
+            "select_icon": "user",
+            "heading": "Banner title",
+            "text": "<p>Items you love at prices that fit your budget.</p>",
+            "link": ""
+          }
+        },
+        "image_AkKWrq": {
+          "type": "image",
+          "settings": {
+            "select_icon": "search",
+            "heading": "Banner title",
+            "text": "<p>Items you love at prices that fit your budget.</p>",
+            "link": ""
+          }
+        },
+        "image_XPgaAR": {
+          "type": "image",
+          "settings": {
+            "select_icon": "star",
+            "heading": "Banner title",
+            "text": "<p>Items you love at prices that fit your budget.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_P4yL64",
+        "image_m7jjzm",
+        "image_AkKWrq",
+        "image_XPgaAR"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "size_heading_mobile": 80,
+        "size_heading": 80,
+        "icon_width_mobile": 36,
+        "icon_width_desktop": 48,
+        "icon_layout": "center",
+        "columns_desktop": "4",
+        "icon_layout_mobile": "grid",
+        "color_body_icon": "rgba(0,0,0,0)",
+        "color_background_icon": "rgba(0,0,0,0)",
+        "color_body_text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 40,
+        "margin-bottom": 40
+      }
+    },
+    "newsletter_pEcrBa": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_mLFMeW": {
+          "type": "heading",
+          "settings": {
+            "heading": "Subscribe to our emails",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "paragraph_d8VNPK": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "<p>Be the first to know about new collections and exclusive offers.</p>",
+            "text_disable_on_mobile": false
+          }
+        },
+        "email_form_gTPAyG": {
+          "type": "email_form",
+          "settings": {
+            "button_select": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_mLFMeW",
+        "paragraph_d8VNPK",
+        "email_form_gTPAyG"
+      ],
+      "disabled": true,
+      "settings": {
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 60,
+        "margin-bottom": 60
+      }
+    },
+    "17525767273e19e87e": {
+      "type": "apps",
+      "blocks": {
+        "tipo_appointment_booking_widget_gLfxiJ": {
+          "type": "shopify://apps/tipo-appointment/blocks/booking-widget/efe4d483-fa62-4509-a0a7-3f363fbc9920",
+          "settings": {
+            "background_color": "#ffffff",
+            "layout": "list",
+            "service_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "tipo_appointment_booking_widget_gLfxiJ"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "main",
+    "ec5a6457-3cb6-4605-94df-ac6400f950f1",
+    "image_with_text_6eHa6t",
+    "benefits_video_wybLKE",
+    "testimonial_images_rLWajG",
+    "features_banner_wiKkaQ",
+    "newsletter_pEcrBa",
+    "17525767273e19e87e"
+  ]
+}

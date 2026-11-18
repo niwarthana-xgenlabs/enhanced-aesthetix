@@ -1,0 +1,267 @@
+{% assign block_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .logo-marquee-{{ block_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .logo-marquee__container-{{ block_id }} {
+    width: 100%;
+    margin: 0;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .logo-marquee__track-{{ block_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.logo_spacing }}px;
+    animation: logo-marquee-scroll-{{ block_id }} {{ block.settings.scroll_speed }}s linear infinite;
+    will-change: transform;
+  }
+
+  .logo-marquee__item-{{ block_id }} {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+  }
+
+  .logo-marquee__item-{{ block_id }} img {
+    max-height: 50px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .logo-marquee__placeholder-{{ block_id }} {
+    width: 120px;
+    height: 50px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+
+  .logo-marquee__placeholder-{{ block_id }} svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+  }
+
+  .logo-marquee__empty-state-{{ block_id }} {
+    text-align: center;
+    padding: 40px 20px;
+    color: #717171;
+    font-size: 14px;
+  }
+
+  @keyframes logo-marquee-scroll-{{ block_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .logo-marquee__container-{{ block_id }} {
+      height: 70px;
+    }
+
+    .logo-marquee__item-{{ block_id }} {
+      height: 40px;
+    }
+
+    .logo-marquee__item-{{ block_id }} img {
+      max-height: 40px;
+    }
+
+    .logo-marquee__placeholder-{{ block_id }} {
+      width: 100px;
+      height: 40px;
+    }
+
+    .logo-marquee__placeholder-{{ block_id }} svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
+{% endstyle %}
+
+<logo-marquee-{{ block_id }} class="logo-marquee-{{ block_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.logo_1 != blank or block.settings.logo_2 != blank or block.settings.logo_3 != blank or block.settings.logo_4 != blank or block.settings.logo_5 != blank or block.settings.logo_6 != blank or block.settings.logo_7 != blank or block.settings.logo_8 != blank %}
+    <div class="logo-marquee__container-{{ block_id }}">
+      <div class="logo-marquee__track-{{ block_id }}">
+        {% for repeat in (1..4) %}
+          {% for i in (1..8) %}
+            {% assign logo_key = 'logo_' | append: i %}
+            {% assign logo = block.settings[logo_key] %}
+            {% if logo != blank %}
+              <div class="logo-marquee__item-{{ block_id }}">
+                <img
+                  src="{{ logo | image_url: width: 300 }}"
+                  alt="{{ logo.alt | escape }}"
+                  loading="lazy"
+                  width="{{ logo.width }}"
+                  height="{{ logo.height }}"
+                >
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <div class="logo-marquee__empty-state-{{ block_id }}">
+      Add logos to display in the marquee
+    </div>
+  {% endif %}
+</logo-marquee-{{ block_id }}>
+
+<script>
+  (function() {
+    class LogoMarquee{{ block_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.logo-marquee__track-{{ block_id }}');
+        this.adjustAnimation();
+      }
+
+      adjustAnimation() {
+        if (!this.track) return;
+
+        const trackWidth = this.track.scrollWidth / 2;
+        this.style.setProperty('--track-width', `${trackWidth}px`);
+      }
+    }
+
+    customElements.define('logo-marquee-{{ block_id }}', LogoMarquee{{ block_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Brands",
+  "tag": null,
+  "class": "logo-marquee-block",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logos"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_1",
+      "label": "Logo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_2",
+      "label": "Logo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_3",
+      "label": "Logo 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_4",
+      "label": "Logo 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_5",
+      "label": "Logo 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_6",
+      "label": "Logo 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_7",
+      "label": "Logo 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_8",
+      "label": "Logo 8"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo spacing",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brands"
+    }
+  ]
+}
+{% endschema %}

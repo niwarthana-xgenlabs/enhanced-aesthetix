@@ -1,0 +1,860 @@
+{% assign hero_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+  .beauty-hero-{{ hero_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: 60px 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .beauty-hero__container-{{ hero_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .beauty-hero-{{ hero_id }} {
+      padding: 80px 40px;
+    }
+
+    .beauty-hero__container-{{ hero_id }} {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+  }
+
+  .beauty-hero__content-{{ hero_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+  }
+
+  .beauty-hero__content-wrapper-{{ hero_id }} {
+    position: relative;
+    min-height: 300px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .beauty-hero__content-wrapper-{{ hero_id }} {
+      min-height: 400px;
+    }
+  }
+
+  .beauty-hero__tabs-{{ hero_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .beauty-hero__tab-{{ hero_id }} {
+    padding: 8px 16px;
+    background-color: transparent;
+    color: {{ block.settings.primary_color }};
+    border: 1px solid {{ block.settings.primary_color }};
+    border-radius: 20px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .beauty-hero__tab-{{ hero_id }}:hover,
+  .beauty-hero__tab-{{ hero_id }}.active {
+    background-color: {{ block.settings.primary_color }};
+    color: {{ block.settings.background_color }};
+  }
+
+  .beauty-hero__category-{{ hero_id }} {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ block.settings.primary_color }};
+    font-weight: 500;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  [data-content="tab1"] .beauty-hero__category-{{ hero_id }},
+  [data-content="tab2"] .beauty-hero__category-{{ hero_id }},
+  [data-content="tab3"] .beauty-hero__category-{{ hero_id }},
+  [data-content="tab4"] .beauty-hero__category-{{ hero_id }},
+  [data-content="tab5"] .beauty-hero__category-{{ hero_id }} {
+    color: #000000;
+  }
+
+  .beauty-hero__heading-{{ hero_id }} {
+    font-size: 36px;
+    line-height: 1.2;
+    color: {{ block.settings.primary_color }};
+    margin: 0;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  [data-content="tab1"] .beauty-hero__heading-{{ hero_id }},
+  [data-content="tab2"] .beauty-hero__heading-{{ hero_id }},
+  [data-content="tab3"] .beauty-hero__heading-{{ hero_id }},
+  [data-content="tab4"] .beauty-hero__heading-{{ hero_id }},
+  [data-content="tab5"] .beauty-hero__heading-{{ hero_id }} {
+    font-weight: 400;
+  }
+
+  @media screen and (min-width: 990px) {
+    .beauty-hero__heading-{{ hero_id }} {
+      font-size: {{ block.settings.heading_size }}px;
+    }
+  }
+
+  .beauty-hero__description-{{ hero_id }} {
+    font-size: 16px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  @media screen and (min-width: 990px) {
+    .beauty-hero__description-{{ hero_id }} {
+      font-size: 18px;
+    }
+  }
+
+  [data-content="tab1"] .beauty-hero__description-{{ hero_id }},
+  [data-content="tab2"] .beauty-hero__description-{{ hero_id }},
+  [data-content="tab3"] .beauty-hero__description-{{ hero_id }},
+  [data-content="tab4"] .beauty-hero__description-{{ hero_id }},
+  [data-content="tab5"] .beauty-hero__description-{{ hero_id }} {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: 990px) {
+    [data-content="tab1"] .beauty-hero__description-{{ hero_id }},
+    [data-content="tab2"] .beauty-hero__description-{{ hero_id }},
+    [data-content="tab3"] .beauty-hero__description-{{ hero_id }},
+    [data-content="tab4"] .beauty-hero__description-{{ hero_id }},
+    [data-content="tab5"] .beauty-hero__description-{{ hero_id }} {
+      font-size: 16px;
+    }
+  }
+
+  .beauty-hero__button-{{ hero_id }} {
+    display: inline-block;
+    padding: 0;
+    background-color: transparent;
+    color: {{ block.settings.primary_color }};
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    align-self: flex-start;
+    border-bottom: 2px solid {{ block.settings.primary_color }};
+    padding-bottom: 4px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .beauty-hero__button-{{ hero_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .beauty-hero__image-wrapper-{{ hero_id }} {
+    position: relative;
+    width: 50%;
+    max-width: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 200px 200px 200px 0;
+    min-height: 400px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .beauty-hero__image-wrapper-{{ hero_id }} {
+      width: 45%;
+      max-width: 350px;
+    }
+  }
+
+  .beauty-hero__image-{{ hero_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .beauty-hero__image-{{ hero_id }}.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .beauty-hero__image-placeholder-{{ hero_id }} {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background-color: #f5f0e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .beauty-hero__image-placeholder-{{ hero_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+
+  .beauty-hero__empty-state-{{ hero_id }} {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: {{ block.settings.primary_color }};
+    font-size: 14px;
+    border-radius: 4px;
+    pointer-events: none;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .beauty-hero__tab-content-{{ hero_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .beauty-hero__tab-content-{{ hero_id }}.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  @media screen and (max-width: 989px) {
+    .beauty-hero__container-{{ hero_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .beauty-hero__image-wrapper-{{ hero_id }} {
+      order: 2;
+    }
+
+    .beauty-hero__content-{{ hero_id }} {
+      order: 1;
+    }
+  }
+{% endstyle %}
+
+<beauty-hero-{{ hero_id }} class="beauty-hero-{{ hero_id }}" {{ block.shopify_attributes }}>
+  <div class="beauty-hero__container-{{ hero_id }}">
+    <div class="beauty-hero__content-{{ hero_id }}">
+      <div class="beauty-hero__tabs-{{ hero_id }}">
+        {% if block.settings.tab_1 != blank %}
+          <button class="beauty-hero__tab-{{ hero_id }} active" data-tab="tab1">{{ block.settings.tab_1 }}</button>
+        {% endif %}
+        {% if block.settings.tab_2 != blank %}
+          <button class="beauty-hero__tab-{{ hero_id }}" data-tab="tab2">{{ block.settings.tab_2 }}</button>
+        {% endif %}
+        {% if block.settings.tab_3 != blank %}
+          <button class="beauty-hero__tab-{{ hero_id }}" data-tab="tab3">{{ block.settings.tab_3 }}</button>
+        {% endif %}
+        {% if block.settings.tab_4 != blank %}
+          <button class="beauty-hero__tab-{{ hero_id }}" data-tab="tab4">{{ block.settings.tab_4 }}</button>
+        {% endif %}
+        {% if block.settings.tab_5 != blank %}
+          <button class="beauty-hero__tab-{{ hero_id }}" data-tab="tab5">{{ block.settings.tab_5 }}</button>
+        {% endif %}
+      </div>
+
+      <div class="beauty-hero__content-wrapper-{{ hero_id }}">
+        <!-- Tab 1 Content (Laser - Default) -->
+        <div class="beauty-hero__tab-content-{{ hero_id }} active" data-content="tab1">
+        {% if block.settings.category_label != blank %}
+          <p class="beauty-hero__category-{{ hero_id }}">{{ block.settings.category_label }}</p>
+        {% endif %}
+
+        {% if block.settings.heading != blank %}
+          <h1 class="beauty-hero__heading-{{ hero_id }}">{{ block.settings.heading }}</h1>
+        {% endif %}
+
+        {% if block.settings.description != blank %}
+          <div class="beauty-hero__description-{{ hero_id }}">
+            {{ block.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.button_label != blank %}
+          <a href="{{ block.settings.button_link }}" class="beauty-hero__button-{{ hero_id }}">
+            {{ block.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+
+        <!-- Tab 2 Content -->
+        <div class="beauty-hero__tab-content-{{ hero_id }}" data-content="tab2">
+        {% if block.settings.tab2_category != blank %}
+          <p class="beauty-hero__category-{{ hero_id }}">{{ block.settings.tab2_category }}</p>
+        {% endif %}
+
+        {% if block.settings.tab2_heading != blank %}
+          <h1 class="beauty-hero__heading-{{ hero_id }}">{{ block.settings.tab2_heading }}</h1>
+        {% endif %}
+
+        {% if block.settings.tab2_description != blank %}
+          <div class="beauty-hero__description-{{ hero_id }}">
+            {{ block.settings.tab2_description }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.tab2_button_label != blank %}
+          <a href="{{ block.settings.tab2_button_link }}" class="beauty-hero__button-{{ hero_id }}">
+            {{ block.settings.tab2_button_label }}
+          </a>
+        {% endif %}
+      </div>
+
+        <!-- Tab 3 Content -->
+        <div class="beauty-hero__tab-content-{{ hero_id }}" data-content="tab3">
+        {% if block.settings.tab3_category != blank %}
+          <p class="beauty-hero__category-{{ hero_id }}">{{ block.settings.tab3_category }}</p>
+        {% endif %}
+
+        {% if block.settings.tab3_heading != blank %}
+          <h1 class="beauty-hero__heading-{{ hero_id }}">{{ block.settings.tab3_heading }}</h1>
+        {% endif %}
+
+        {% if block.settings.tab3_description != blank %}
+          <div class="beauty-hero__description-{{ hero_id }}">
+            {{ block.settings.tab3_description }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.tab3_button_label != blank %}
+          <a href="{{ block.settings.tab3_button_link }}" class="beauty-hero__button-{{ hero_id }}">
+            {{ block.settings.tab3_button_label }}
+          </a>
+        {% endif %}
+      </div>
+
+        <!-- Tab 4 Content -->
+        <div class="beauty-hero__tab-content-{{ hero_id }}" data-content="tab4">
+        {% if block.settings.tab4_category != blank %}
+          <p class="beauty-hero__category-{{ hero_id }}">{{ block.settings.tab4_category }}</p>
+        {% endif %}
+
+        {% if block.settings.tab4_heading != blank %}
+          <h1 class="beauty-hero__heading-{{ hero_id }}">{{ block.settings.tab4_heading }}</h1>
+        {% endif %}
+
+        {% if block.settings.tab4_description != blank %}
+          <div class="beauty-hero__description-{{ hero_id }}">
+            {{ block.settings.tab4_description }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.tab4_button_label != blank %}
+          <a href="{{ block.settings.tab4_button_link }}" class="beauty-hero__button-{{ hero_id }}">
+            {{ block.settings.tab4_button_label }}
+          </a>
+        {% endif %}
+      </div>
+
+        <!-- Tab 5 Content -->
+        <div class="beauty-hero__tab-content-{{ hero_id }}" data-content="tab5">
+        {% if block.settings.tab5_category != blank %}
+          <p class="beauty-hero__category-{{ hero_id }}">{{ block.settings.tab5_category }}</p>
+        {% endif %}
+
+        {% if block.settings.tab5_heading != blank %}
+          <h1 class="beauty-hero__heading-{{ hero_id }}">{{ block.settings.tab5_heading }}</h1>
+        {% endif %}
+
+        {% if block.settings.tab5_description != blank %}
+          <div class="beauty-hero__description-{{ hero_id }}">
+            {{ block.settings.tab5_description }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.tab5_button_label != blank %}
+          <a href="{{ block.settings.tab5_button_link }}" class="beauty-hero__button-{{ hero_id }}">
+            {{ block.settings.tab5_button_label }}
+          </a>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="beauty-hero__image-wrapper-{{ hero_id }}">
+      {% if block.settings.image %}
+        <img
+          src="{{ block.settings.image | image_url: width: 1200 }}"
+          alt="{{ block.settings.image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+          class="beauty-hero__image-{{ hero_id }}"
+          data-tab-image="tab1"
+        >
+      {% endif %}
+      {% if block.settings.tab2_image %}
+        <img
+          src="{{ block.settings.tab2_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.tab2_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.tab2_image.width }}"
+          height="{{ block.settings.tab2_image.height }}"
+          class="beauty-hero__image-{{ hero_id }} hidden"
+          data-tab-image="tab2"
+        >
+      {% endif %}
+      {% if block.settings.tab3_image %}
+        <img
+          src="{{ block.settings.tab3_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.tab3_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.tab3_image.width }}"
+          height="{{ block.settings.tab3_image.height }}"
+          class="beauty-hero__image-{{ hero_id }} hidden"
+          data-tab-image="tab3"
+        >
+      {% endif %}
+      {% if block.settings.tab4_image %}
+        <img
+          src="{{ block.settings.tab4_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.tab4_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.tab4_image.width }}"
+          height="{{ block.settings.tab4_image.height }}"
+          class="beauty-hero__image-{{ hero_id }} hidden"
+          data-tab-image="tab4"
+        >
+      {% endif %}
+      {% if block.settings.tab5_image %}
+        <img
+          src="{{ block.settings.tab5_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.tab5_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.tab5_image.width }}"
+          height="{{ block.settings.tab5_image.height }}"
+          class="beauty-hero__image-{{ hero_id }} hidden"
+          data-tab-image="tab5"
+        >
+      {% endif %}
+      {% unless block.settings.image or block.settings.tab2_image or block.settings.tab3_image or block.settings.tab4_image or block.settings.tab5_image %}
+        <div class="beauty-hero__image-placeholder-{{ hero_id }}">
+          {{ 'hero-apparel-1' | placeholder_svg_tag }}
+          <div class="beauty-hero__empty-state-{{ hero_id }}">
+            Add your hero image
+          </div>
+        </div>
+      {% endunless %}
+    </div>
+  </div>
+</beauty-hero-{{ hero_id }}>
+
+<script>
+  (function() {
+    class BeautyHero{{ hero_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.tabs = this.querySelectorAll('.beauty-hero__tab-{{ hero_id }}');
+        this.contents = this.querySelectorAll('.beauty-hero__tab-content-{{ hero_id }}');
+        this.images = this.querySelectorAll('.beauty-hero__image-{{ hero_id }}');
+        this.contentWrapper = this.querySelector('.beauty-hero__content-wrapper-{{ hero_id }}');
+      }
+
+      connectedCallback() {
+        this.tabs.forEach(tab => {
+          tab.addEventListener('click', (e) => this.handleTabClick(e));
+        });
+        
+        // Set fixed height based on tallest content to prevent layout shift
+        this.setContentHeight();
+      }
+
+      setContentHeight() {
+        if (!this.contentWrapper) return;
+        
+        let maxHeight = 0;
+        const originalStyles = [];
+        
+        // Temporarily show all content to measure
+        this.contents.forEach((content, index) => {
+          originalStyles[index] = {
+            position: content.style.position,
+            opacity: content.style.opacity,
+            visibility: content.style.visibility,
+            display: content.style.display
+          };
+          
+          content.style.position = 'static';
+          content.style.opacity = '1';
+          content.style.visibility = 'visible';
+          content.style.display = 'flex';
+          
+          const height = content.offsetHeight;
+          if (height > maxHeight) {
+            maxHeight = height;
+          }
+        });
+        
+        // Reset to original state
+        this.contents.forEach((content, index) => {
+          if (originalStyles[index]) {
+            content.style.position = originalStyles[index].position;
+            content.style.opacity = originalStyles[index].opacity;
+            content.style.visibility = originalStyles[index].visibility;
+            content.style.display = originalStyles[index].display;
+          }
+        });
+        
+        // Set the wrapper height with some padding
+        if (maxHeight > 0) {
+          this.contentWrapper.style.height = (maxHeight + 20) + 'px';
+        }
+      }
+
+      handleTabClick(e) {
+        e.preventDefault();
+        const clickedTab = e.target;
+        const tabName = clickedTab.getAttribute('data-tab');
+
+        // Remove active class from all tabs
+        this.tabs.forEach(tab => tab.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        clickedTab.classList.add('active');
+
+        // Hide all content
+        this.contents.forEach(content => content.classList.remove('active'));
+
+        // Show selected content
+        const activeContent = this.querySelector(`[data-content="${tabName}"]`);
+        if (activeContent) {
+          activeContent.classList.add('active');
+        }
+
+        // Hide all images
+        this.images.forEach(img => img.classList.add('hidden'));
+
+        // Show selected image
+        const activeImage = this.querySelector(`[data-tab-image="${tabName}"]`);
+        if (activeImage) {
+          activeImage.classList.remove('hidden');
+        } else {
+          // Fallback to tab1 image if no specific image for this tab
+          const fallbackImage = this.querySelector(`[data-tab-image="tab1"]`);
+          if (fallbackImage) {
+            fallbackImage.classList.remove('hidden');
+          }
+        }
+      }
+    }
+
+    customElements.define('beauty-hero-{{ hero_id }}', BeautyHero{{ hero_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Beauty hero section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tabs"
+    },
+    {
+      "type": "text",
+      "id": "tab_1",
+      "label": "Tab 1",
+      "default": "Laser"
+    },
+    {
+      "type": "text",
+      "id": "tab_2",
+      "label": "Tab 2",
+      "default": "Body"
+    },
+    {
+      "type": "text",
+      "id": "tab_3",
+      "label": "Tab 3",
+      "default": "Skin"
+    },
+    {
+      "type": "text",
+      "id": "tab_4",
+      "label": "Tab 4",
+      "default": "Hair"
+    },
+    {
+      "type": "text",
+      "id": "tab_5",
+      "label": "Tab 5",
+      "default": "Wellness"
+    },
+    {
+      "type": "header",
+      "content": "Tab 1 (Laser) Content"
+    },
+    {
+      "type": "text",
+      "id": "category_label",
+      "label": "Category label",
+      "default": "LASER HAIR REMOVAL"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Experience Premium Beauty Treatments"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover our range of advanced laser treatments designed to enhance your natural beauty with precision and care.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2 Content"
+    },
+    {
+      "type": "text",
+      "id": "tab2_category",
+      "label": "Category label",
+      "default": "SKIN TREATMENTS"
+    },
+    {
+      "type": "textarea",
+      "id": "tab2_heading",
+      "label": "Heading",
+      "default": "Your skin, your rules."
+    },
+    {
+      "type": "richtext",
+      "id": "tab2_description",
+      "label": "Description",
+      "default": "<p>From first concerns to long-term skin goals, our treatments are tailored to you. We’re here to understand your skin and help you feel confident in it. Every step of the way.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab2_button_label",
+      "label": "Button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "tab2_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab2_image",
+      "label": "Tab 2 Image"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3 Content"
+    },
+    {
+      "type": "text",
+      "id": "tab3_category",
+      "label": "Category label",
+      "default": "COSMETIC AESTHETICS"
+    },
+    {
+      "type": "textarea",
+      "id": "tab3_heading",
+      "label": "Heading",
+      "default": "Consultations, personalised care."
+    },
+    {
+      "type": "richtext",
+      "id": "tab3_description",
+      "label": "Description",
+      "default": "<p>Cosmetic Nurses supporting your individual aesthetic goals. Every consultation focuses on informed choices, comfort, and results that reflect your preferences.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab3_button_label",
+      "label": "Button label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "tab3_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab3_image",
+      "label": "Tab 3 Image"
+    },
+    {
+      "type": "header",
+      "content": "Tab 4 Content"
+    },
+    {
+      "type": "text",
+      "id": "tab4_category",
+      "label": "Category label",
+      "default": "BODY SCULPTING"
+    },
+    {
+      "type": "textarea",
+      "id": "tab4_heading",
+      "label": "Heading",
+      "default": "Shape, your way."
+    },
+    {
+      "type": "richtext",
+      "id": "tab4_description",
+      "label": "Description",
+      "default": "<p>Feel more confident in your skin with our non-invasive body treatments. No pressure, no extremes, just smart solutions that fit your lifestyle.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab4_button_label",
+      "label": "Button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "tab4_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab4_image",
+      "label": "Tab 4 Image"
+    },
+    {
+      "type": "header",
+      "content": "Tab 5 Content"
+    },
+    {
+      "type": "text",
+      "id": "tab5_category",
+      "label": "Category label",
+      "default": "SKINCARE"
+    },
+    {
+      "type": "textarea",
+      "id": "tab5_heading",
+      "label": "Heading",
+      "default": "Clinical skincare, that gets you."
+    },
+    {
+      "type": "richtext",
+      "id": "tab5_description",
+      "label": "Description",
+      "default": "<p>We’re obsessed with products that actually work. From everyday essentials to targeted serums, our skincare ranges are formulated by experts and loved by real skin.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab5_button_label",
+      "label": "Button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "tab5_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab5_image",
+      "label": "Tab 5 Image"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Tab 1 (Laser) Image"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#E8E0CE"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary color",
+      "default": "#724C29"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description text color",
+      "default": "#8B6F47"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 32,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading size (desktop)",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beauty hero section"
+    }
+  ]
+}
+{% endschema %}

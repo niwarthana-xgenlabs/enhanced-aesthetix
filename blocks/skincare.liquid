@@ -1,0 +1,777 @@
+{% assign section_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .skincare-catalog-display-{{ section_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px 32px;
+  }
+
+  .skincare-catalog-header-{{ section_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .skincare-catalog-title-{{ section_id }} {
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    font-weight: {{ block.settings.heading_font.weight }};
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 0 40px;
+  }
+
+  .skincare-catalog-filter-{{ section_id }} {
+    position: relative;
+  }
+
+  .skincare-catalog-filter-select-{{ section_id }} {
+    padding: 12px 40px 12px 16px;
+    font-size: 16px;
+    border: 1px solid {{ block.settings.filter_border_color }};
+    border-radius: {{ block.settings.filter_border_radius }}px;
+    background-color: {{ block.settings.filter_background }};
+    color: {{ block.settings.filter_text_color }};
+    cursor: pointer;
+    appearance: none;
+    min-width: 200px;
+  }
+
+  .skincare-catalog-filter-icon-{{ section_id }} {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: {{ block.settings.filter_text_color }};
+  }
+
+  .skincare-catalog-grid-{{ section_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .skincare-catalog-grid-{{ section_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    }
+  }
+
+  .skincare-catalog-item-{{ section_id }} {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 12px;
+  }
+
+  .skincare-catalog-item-{{ section_id }}.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .skincare-catalog-card-{{ section_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .skincare-catalog-card-{{ section_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .skincare-catalog-image-wrapper-{{ section_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    background-color: #f4f4f4;
+  }
+
+  .skincare-catalog-image-{{ section_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .skincare-catalog-image-placeholder-{{ section_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .skincare-catalog-image-placeholder-{{ section_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .skincare-catalog-badge-{{ section_id }} {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    background-color: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .skincare-catalog-content-{{ section_id }} {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skincare-catalog-item-title-{{ section_id }} {
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .skincare-catalog-item-title-link-{{ section_id }} {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .skincare-catalog-item-title-link-{{ section_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .skincare-catalog-vendor-{{ section_id }} {
+    font-size: 13px;
+    color: {{ block.settings.vendor_color }};
+    margin-bottom: 12px;
+  }
+
+  .skincare-catalog-description-{{ section_id }} {
+    font-size: 14px;
+    color: {{ block.settings.description_color }};
+    line-height: 1.5;
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+
+  .skincare-catalog-price-{{ section_id }} {
+    font-family: {{ block.settings.price_font.family }}, {{ block.settings.price_font.fallback_families }};
+    font-weight: {{ block.settings.price_font.weight }};
+    font-size: {{ block.settings.price_size }}px;
+    color: {{ block.settings.price_color }};
+    margin-top: auto;
+  }
+
+  .skincare-catalog-price-compare-{{ section_id }} {
+    text-decoration: line-through;
+    opacity: 0.6;
+    margin-right: 8px;
+  }
+
+  .skincare-catalog-price-sale-{{ section_id }} {
+    color: {{ block.settings.sale_price_color }};
+  }
+
+  .skincare-catalog-empty-{{ section_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: {{ block.settings.description_color }};
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .skincare-catalog-header-{{ section_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .skincare-catalog-filter-select-{{ section_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<skincare-catalog-{{ section_id }} class="skincare-catalog-display-{{ section_id }}" {{ block.shopify_attributes }}>
+  <div class="skincare-catalog-header-{{ section_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="skincare-catalog-title-{{ section_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="skincare-catalog-filter-{{ section_id }}">
+      <select class="skincare-catalog-filter-select-{{ section_id }}" data-filter>
+        <option value="all">{{ block.settings.filter_all_label }}</option>
+        <option value="products">{{ block.settings.filter_products_label }}</option>
+        <option value="services">{{ block.settings.filter_services_label }}</option>
+      </select>
+      <span class="skincare-catalog-filter-icon-{{ section_id }}">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <div class="skincare-catalog-grid-{{ section_id }}" data-grid>
+    {% liquid
+      assign products_collection = collections[block.settings.products_collection]
+      assign services_collection = collections[block.settings.services_collection]
+      assign all_items = ''
+      assign items_array = ''
+    %}
+
+    {% if products_collection != blank %}
+      {% for product in products_collection.products limit: block.settings.products_limit %}
+        <div class="skincare-catalog-item-{{ section_id }} active" data-type="products" data-item>
+          <div class="skincare-catalog-card-{{ section_id }}">
+            <div class="skincare-catalog-image-wrapper-{{ section_id }}">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  class="skincare-catalog-image-{{ section_id }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              {% else %}
+                <div class="skincare-catalog-image-placeholder-{{ section_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_badges %}
+                {% if product.available == false %}
+                  <span class="skincare-catalog-badge-{{ section_id }}">{{ block.settings.sold_out_text }}</span>
+                {% elsif product.compare_at_price > product.price %}
+                  <span class="skincare-catalog-badge-{{ section_id }}">{{ block.settings.sale_text }}</span>
+                {% endif %}
+              {% endif %}
+            </div>
+
+            <div class="skincare-catalog-content-{{ section_id }}">
+              {% if block.settings.show_vendor and product.vendor != blank %}
+                <div class="skincare-catalog-vendor-{{ section_id }}">{{ product.vendor }}</div>
+              {% endif %}
+
+              <h3 class="skincare-catalog-item-title-{{ section_id }}">
+                <a href="{{ product.url }}" class="skincare-catalog-item-title-link-{{ section_id }}">
+                  {{ product.title }}
+                </a>
+              </h3>
+
+              {% if block.settings.show_description and product.description != blank %}
+                <div class="skincare-catalog-description-{{ section_id }}">
+                  {{ product.description | strip_html | truncate: 120 }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_price %}
+                <div class="skincare-catalog-price-{{ section_id }}">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="skincare-catalog-price-compare-{{ section_id }}">
+                      {{ product.compare_at_price | money }}
+                    </span>
+                    <span class="skincare-catalog-price-sale-{{ section_id }}">
+                      {{ product.price | money }}
+                    </span>
+                  {% else %}
+                    {{ product.price | money }}
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% if services_collection != blank %}
+      {% for product in services_collection.products limit: block.settings.services_limit %}
+        <div class="skincare-catalog-item-{{ section_id }} active" data-type="services" data-item>
+          <div class="skincare-catalog-card-{{ section_id }}">
+            <div class="skincare-catalog-image-wrapper-{{ section_id }}">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  class="skincare-catalog-image-{{ section_id }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              {% else %}
+                <div class="skincare-catalog-image-placeholder-{{ section_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_badges %}
+                {% if product.available == false %}
+                  <span class="skincare-catalog-badge-{{ section_id }}">{{ block.settings.sold_out_text }}</span>
+                {% elsif product.compare_at_price > product.price %}
+                  <span class="skincare-catalog-badge-{{ section_id }}">{{ block.settings.sale_text }}</span>
+                {% endif %}
+              {% endif %}
+            </div>
+
+            <div class="skincare-catalog-content-{{ section_id }}">
+              {% if block.settings.show_vendor and product.vendor != blank %}
+                <div class="skincare-catalog-vendor-{{ section_id }}">{{ product.vendor }}</div>
+              {% endif %}
+
+              <h3 class="skincare-catalog-item-title-{{ section_id }}">
+                <a href="{{ product.url }}" class="skincare-catalog-item-title-link-{{ section_id }}">
+                  {{ product.title }}
+                </a>
+              </h3>
+
+              {% if block.settings.show_description and product.description != blank %}
+                <div class="skincare-catalog-description-{{ section_id }}">
+                  {{ product.description | strip_html | truncate: 120 }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_price %}
+                <div class="skincare-catalog-price-{{ section_id }}">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="skincare-catalog-price-compare-{{ section_id }}">
+                      {{ product.compare_at_price | money }}
+                    </span>
+                    <span class="skincare-catalog-price-sale-{{ section_id }}">
+                      {{ product.price | money }}
+                    </span>
+                  {% else %}
+                    {{ product.price | money }}
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="skincare-catalog-empty-{{ section_id }}" data-empty style="display: none;">
+    {{ block.settings.empty_message }}
+  </div>
+</skincare-catalog-{{ section_id }}>
+
+<script>
+  (function() {
+    class SkincareCatalog{{ section_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.filter = this.querySelector('[data-filter]');
+        this.items = this.querySelectorAll('[data-item]');
+        this.emptyMessage = this.querySelector('[data-empty]');
+        
+        if (this.filter) {
+          this.filter.addEventListener('change', this.handleFilterChange.bind(this));
+        }
+      }
+
+      handleFilterChange(event) {
+        const selectedValue = event.target.value;
+        let visibleCount = 0;
+
+        this.items.forEach((item) => {
+          const itemType = item.getAttribute('data-type');
+          
+          if (selectedValue === 'all') {
+            item.classList.add('active');
+            visibleCount++;
+          } else if (itemType === selectedValue) {
+            item.classList.add('active');
+            visibleCount++;
+          } else {
+            item.classList.remove('active');
+          }
+        });
+
+        if (visibleCount === 0) {
+          this.emptyMessage.style.display = 'block';
+        } else {
+          this.emptyMessage.style.display = 'none';
+        }
+      }
+    }
+
+    customElements.define('skincare-catalog-{{ section_id }}', SkincareCatalog{{ section_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Skincare",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Catalog"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Products collection"
+    },
+    {
+      "type": "collection",
+      "id": "products_collection",
+      "label": "Products collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Maximum products",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Services collection"
+    },
+    {
+      "type": "collection",
+      "id": "services_collection",
+      "label": "Services collection"
+    },
+    {
+      "type": "range",
+      "id": "services_limit",
+      "label": "Maximum services",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Filter"
+    },
+    {
+      "type": "text",
+      "id": "filter_all_label",
+      "label": "All items label",
+      "default": "All"
+    },
+    {
+      "type": "text",
+      "id": "filter_products_label",
+      "label": "Products label",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "filter_services_label",
+      "label": "Services label",
+      "default": "Services"
+    },
+    {
+      "type": "color",
+      "id": "filter_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "filter_text_color",
+      "label": "Text color",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "filter_border_color",
+      "label": "Border color",
+      "default": "#e7e7e7"
+    },
+    {
+      "type": "range",
+      "id": "filter_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Display options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sale_text",
+      "label": "Sale badge text",
+      "default": "Sale"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_text",
+      "label": "Sold out badge text",
+      "default": "Sold out"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "merriweather_n4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Item title font",
+      "default": "figtree_n4"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Item title size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "font_picker",
+      "id": "price_font",
+      "label": "Price font",
+      "default": "figtree_n5"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "label": "Price size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Item title",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover",
+      "default": "#715939"
+    },
+    {
+      "type": "color",
+      "id": "vendor_color",
+      "label": "Vendor",
+      "default": "#717171"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description",
+      "default": "#717171"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "label": "Sale price",
+      "default": "#cf4a4a"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#cf4a4a"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Empty state"
+    },
+    {
+      "type": "text",
+      "id": "empty_message",
+      "label": "Empty message",
+      "default": "No items found in this category."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare"
+    }
+  ]
+}
+{% endschema %}

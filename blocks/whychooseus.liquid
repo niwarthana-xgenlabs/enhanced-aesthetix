@@ -1,0 +1,736 @@
+{% assign section_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .why-choose-{{ section_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .why-choose-container-{{ section_id }} {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .why-choose-header-{{ section_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: {{ block.settings.spacing_below_heading }}px;
+  }
+
+  .why-choose-title-{{ section_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 {{ block.settings.spacing_below_title }}px;
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    font-weight: {{ block.settings.heading_font.weight }};
+    line-height: 1.2;
+  }
+
+  .why-choose-subtitle-{{ section_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .why-choose-grid-{{ section_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .why-choose-{{ section_id }} {
+      padding: {{ block.settings.padding_top_desktop }}px 40px {{ block.settings.padding_bottom_desktop }}px;
+    }
+
+    .why-choose-title-{{ section_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+    }
+
+    .why-choose-subtitle-{{ section_id }} {
+      font-size: {{ block.settings.subtitle_size_desktop }}px;
+    }
+
+    .why-choose-grid-{{ section_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+      gap: {{ block.settings.grid_gap_desktop }}px;
+    }
+  }
+
+  .why-choose-item-{{ section_id }} {
+    text-align: {{ block.settings.item_alignment }};
+    padding: {{ block.settings.item_padding }}px;
+    background-color: {{ block.settings.item_background_color }};
+    border-radius: {{ block.settings.item_border_radius }}px;
+    transition: transform 0.3s ease;
+  }
+
+  .why-choose-item-{{ section_id }}:hover {
+    transform: translateY(-2px);
+  }
+
+  .why-choose-icon-{{ section_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin: 0 auto {{ block.settings.spacing_below_icon }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .why-choose-icon-wrapper-{{ section_id }} {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: {{ block.settings.icon_placeholder_color }};
+    border: 2px solid {{ block.settings.icon_border_color }};
+  }
+
+  .why-choose-icon-placeholder-{{ section_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.icon_placeholder_color }};
+    border: 2px solid {{ block.settings.icon_border_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .why-choose-icon-wrapper-{{ section_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .why-choose-icon-placeholder-{{ section_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.5;
+  }
+
+  .why-choose-item-title-{{ section_id }} {
+    font-size: {{ block.settings.item_title_size }}px;
+    color: {{ block.settings.item_title_color }};
+    margin: 0 0 {{ block.settings.spacing_below_item_title }}px;
+    font-weight: 600;
+  }
+
+  .why-choose-item-text-{{ section_id }} {
+    font-size: {{ block.settings.item_text_size }}px;
+    color: {{ block.settings.item_text_color }};
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  @media screen and (min-width: 750px) {
+    .why-choose-icon-{{ section_id }} {
+      width: {{ block.settings.icon_size_desktop }}px;
+      height: {{ block.settings.icon_size_desktop }}px;
+    }
+
+    .why-choose-item-title-{{ section_id }} {
+      font-size: {{ block.settings.item_title_size_desktop }}px;
+    }
+
+    .why-choose-item-text-{{ section_id }} {
+      font-size: {{ block.settings.item_text_size_desktop }}px;
+    }
+  }
+{% endstyle %}
+
+<why-choose-{{ section_id }} class="why-choose-{{ section_id }}" {{ block.shopify_attributes }}>
+  <div class="why-choose-container-{{ section_id }}">
+    {% if block.settings.heading != blank or block.settings.subtitle != blank %}
+      <div class="why-choose-header-{{ section_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="why-choose-title-{{ section_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.subtitle != blank %}
+          <div class="why-choose-subtitle-{{ section_id }}">{{ block.settings.subtitle }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="why-choose-grid-{{ section_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign icon_key = 'item_' | append: i | append: '_icon'
+          assign title_key = 'item_' | append: i | append: '_title'
+          assign text_key = 'item_' | append: i | append: '_text'
+          assign enabled_key = 'item_' | append: i | append: '_enabled'
+
+          assign icon = block.settings[icon_key]
+          assign title = block.settings[title_key]
+          assign text = block.settings[text_key]
+          assign enabled = block.settings[enabled_key]
+        %}
+
+        {% if enabled %}
+          <div class="why-choose-item-{{ section_id }}">
+            <div class="why-choose-icon-{{ section_id }}">
+              {% if icon != blank %}
+                <div class="why-choose-icon-wrapper-{{ section_id }}">
+                  <img
+                    src="{{ icon | image_url: width: 200 }}"
+                    alt="{{ title | escape }}"
+                    loading="lazy"
+                    width="200"
+                    height="200"
+                  >
+                </div>
+              {% else %}
+                <div class="why-choose-icon-placeholder-{{ section_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+            {% if title != blank %}
+              <h3 class="why-choose-item-title-{{ section_id }}">{{ title }}</h3>
+            {% endif %}
+            {% if text != blank %}
+              <div class="why-choose-item-text-{{ section_id }}">{{ text }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</why-choose-{{ section_id }}>
+
+<script>
+  (function() {
+    class WhyChooseSection extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('why-choose-{{ section_id }}', WhyChooseSection);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Why choose us",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why choose Enhanced Aesthetix? Because we're obsessed with..."
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p></p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (mobile)",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size (mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_desktop",
+      "label": "Subtitle size (desktop)",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "spacing_below_title",
+      "label": "Space below title",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "spacing_below_heading",
+      "label": "Space below heading section",
+      "min": 12,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns (mobile)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap (mobile)",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_desktop",
+      "label": "Grid gap (desktop)",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (mobile)",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (mobile)",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding top (desktop)",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding bottom (desktop)",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f0e8"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#717171"
+    },
+    {
+      "type": "header",
+      "content": "Item style"
+    },
+    {
+      "type": "select",
+      "id": "item_alignment",
+      "label": "Item alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "item_padding",
+      "label": "Item padding",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "item_border_radius",
+      "label": "Item border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "item_background_color",
+      "label": "Item background",
+      "default": "#f5f0e8"
+    },
+    {
+      "type": "color",
+      "id": "item_title_color",
+      "label": "Item title",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "item_text_color",
+      "label": "Item text",
+      "default": "#717171"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size (mobile)",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "icon_size_desktop",
+      "label": "Icon size (desktop)",
+      "min": 50,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 65
+    },
+    {
+      "type": "color",
+      "id": "icon_placeholder_color",
+      "label": "Icon background",
+      "default": "#d4af37"
+    },
+    {
+      "type": "color",
+      "id": "icon_border_color",
+      "label": "Icon border",
+      "default": "#b8860b"
+    },
+    {
+      "type": "range",
+      "id": "spacing_below_icon",
+      "label": "Space below icon",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_title_size",
+      "label": "Item title size (mobile)",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "item_title_size_desktop",
+      "label": "Item title size (desktop)",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "spacing_below_item_title",
+      "label": "Space below item title",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "item_text_size",
+      "label": "Item text size (mobile)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "item_text_size_desktop",
+      "label": "Item text size (desktop)",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Item 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_1_enabled",
+      "label": "Enable item 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_1_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_1_title",
+      "label": "Title",
+      "default": "Delivering results"
+    },
+    {
+      "type": "textarea",
+      "id": "item_1_text",
+      "label": "Description",
+      "default": "Obsessing over the details and getting you results."
+    },
+    {
+      "type": "header",
+      "content": "Item 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_2_enabled",
+      "label": "Enable item 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_2_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_2_title",
+      "label": "Title",
+      "default": "Leading with innovation"
+    },
+    {
+      "type": "textarea",
+      "id": "item_2_text",
+      "label": "Description",
+      "default": "Being at the forefront of beauty and technology."
+    },
+    {
+      "type": "header",
+      "content": "Item 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_3_enabled",
+      "label": "Enable item 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_3_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_3_title",
+      "label": "Title",
+      "default": "Caring with expertise"
+    },
+    {
+      "type": "textarea",
+      "id": "item_3_text",
+      "label": "Description",
+      "default": "Looking great starts with feeling heard."
+    },
+    {
+      "type": "header",
+      "content": "Item 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_4_enabled",
+      "label": "Enable item 4",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "item_4_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_4_title",
+      "label": "Title",
+      "default": "Providing genuine value"
+    },
+    {
+      "type": "textarea",
+      "id": "item_4_text",
+      "label": "Description",
+      "default": "Ensuring you feel good about your choices."
+    },
+    {
+      "type": "header",
+      "content": "Item 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_5_enabled",
+      "label": "Enable item 5",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "item_5_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_5_title",
+      "label": "Title",
+      "default": "Safe & Hygienic"
+    },
+    {
+      "type": "textarea",
+      "id": "item_5_text",
+      "label": "Description",
+      "default": "Strict safety protocols and sterilization standards"
+    },
+    {
+      "type": "header",
+      "content": "Item 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_6_enabled",
+      "label": "Enable item 6",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "item_6_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_6_title",
+      "label": "Title",
+      "default": "Ongoing Support"
+    },
+    {
+      "type": "textarea",
+      "id": "item_6_text",
+      "label": "Description",
+      "default": "Comprehensive aftercare and follow-up consultations"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why choose us"
+    }
+  ]
+}
+{% endschema %}

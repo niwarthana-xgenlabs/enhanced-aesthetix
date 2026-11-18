@@ -1,0 +1,267 @@
+{% assign hero_id = block.id | replace: '_', '' | downcase %}
+
+{%- comment -%} Only load styles and show hero section on home page {%- endcomment -%}
+{% if template.name == 'index' or request.page_type == 'index' %}
+{% style %}
+  .luxury-hero-{{ hero_id }} {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #000000;
+    margin-top: 0;
+  }
+
+  .luxury-hero-bg-{{ hero_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .luxury-hero-bg-{{ hero_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    scale: 100%;
+  }
+
+  .luxury-hero-bg-placeholder-{{ hero_id }} {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .luxury-hero-bg-placeholder-{{ hero_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 600px;
+    opacity: 0.3;
+  }
+
+  .luxury-hero-empty-state-{{ hero_id }} {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 16px 32px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .luxury-hero-caption-{{ hero_id }} {
+    position: absolute;
+    bottom: {{ block.settings.caption_bottom_mobile }}px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    text-align: center;
+  }
+
+  .luxury-hero-caption-text-{{ hero_id }} {
+    font-size: {{ block.settings.caption_size_mobile }}px;
+    font-weight: {{ block.settings.caption_weight }};
+    color: {{ block.settings.caption_color }};
+    letter-spacing: {{ block.settings.caption_letter_spacing }}px;
+    text-transform: uppercase;
+    margin: 0 0 {{ block.settings.caption_arrow_spacing }}px 0;
+  }
+
+  .luxury-hero-arrow-{{ hero_id }} {
+    width: {{ block.settings.arrow_size }}px;
+    height: {{ block.settings.arrow_size }}px;
+    color: {{ block.settings.caption_color }};
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .luxury-hero-caption-{{ hero_id }} {
+      bottom: {{ block.settings.caption_bottom_desktop }}px;
+    }
+
+    .luxury-hero-caption-text-{{ hero_id }} {
+      font-size: {{ block.settings.caption_size_desktop }}px;
+    }
+  }
+{% endstyle %}
+  <luxury-hero-{{ hero_id }} class="luxury-hero-{{ hero_id }}" {{ block.shopify_attributes }}>
+    <div class="luxury-hero-bg-{{ hero_id }}">
+      {% if block.settings.background_image %}
+        <img
+          src="{{ block.settings.background_image | image_url: width: 2400 }}"
+          alt="{{ block.settings.background_image.alt | escape }}"
+          loading="eager"
+          width="{{ block.settings.background_image.width }}"
+          height="{{ block.settings.background_image.height }}"
+        >
+      {% else %}
+        <div class="luxury-hero-bg-placeholder-{{ hero_id }}">
+          {{ 'hero-apparel-1' | placeholder_svg_tag }}
+          <div class="luxury-hero-empty-state-{{ hero_id }}">
+            Add your hero background image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if block.settings.caption_text != blank %}
+      <div class="luxury-hero-caption-{{ hero_id }}">
+        <p class="luxury-hero-caption-text-{{ hero_id }}">
+          {{ block.settings.caption_text }}
+        </p>
+        <svg class="luxury-hero-arrow-{{ hero_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>
+    {% endif %}
+  </luxury-hero-{{ hero_id }}>
+
+  <script>
+    (function() {
+      class LuxuryHero{{ hero_id }} extends HTMLElement {
+        constructor() {
+          super();
+        }
+
+        connectedCallback() {
+          this.style.display = 'block';
+        }
+      }
+
+      customElements.define('luxury-hero-{{ hero_id }}', LuxuryHero{{ hero_id }});
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Luxury hero section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Bottom caption"
+    },
+    {
+      "type": "text",
+      "id": "caption_text",
+      "label": "Caption text",
+      "default": "WHERE SKIN TREATMENTS BEGINS"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "caption_size_mobile",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Caption size (mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "caption_size_desktop",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Caption size (desktop)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "caption_weight",
+      "min": 100,
+      "max": 500,
+      "step": 100,
+      "label": "Caption font weight",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "caption_letter_spacing",
+      "min": 1,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Caption letter spacing",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "caption_bottom_mobile",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Caption bottom position (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "caption_bottom_desktop",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Caption bottom position (desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "caption_arrow_spacing",
+      "min": 5,
+      "max": 20,
+      "step": 5,
+      "unit": "px",
+      "label": "Arrow spacing",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Arrow size",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury hero section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,515 @@
+{% assign exp_id = block.id | replace: '_', '' | downcase %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Protest+Riot&display=swap" rel="stylesheet">
+
+{% style %}
+  .experience-section-{{ exp_id }} {
+    display: block;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_mobile }}px 20px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .experience-section-{{ exp_id }} {
+      padding: {{ block.settings.padding_desktop }}px 40px;
+    }
+  }
+
+  .experience-container-{{ exp_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+  }
+
+  .experience-grid-{{ exp_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ block.settings.gap_mobile }}px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .experience-grid-{{ exp_id }} {
+      grid-template-columns: 1.3fr 1fr;
+      gap: {{ block.settings.gap_desktop }}px;
+    }
+  }
+
+  .experience-image-wrapper-{{ exp_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .experience-image-{{ exp_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .experience-image-placeholder-{{ exp_id }} {
+    background-color: #f4f4f4;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .experience-image-placeholder-{{ exp_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .experience-content-{{ exp_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.content_gap_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .experience-content-{{ exp_id }} {
+      gap: {{ block.settings.content_gap_desktop }}px;
+      padding-left: 10px;
+    }
+  }
+
+  .experience-accent-heading-{{ exp_id }} {
+    font-family: 'Protest Riot', sans-serif;
+    color: {{ block.settings.accent_color }};
+    font-size: {{ block.settings.accent_size_mobile }}px;
+    line-height: 1.2;
+    margin: 0;
+    font-weight: 400;
+    display: inline;
+  }
+
+  @media screen and (min-width: 750px) {
+    .experience-accent-heading-{{ exp_id }} {
+      font-size: {{ block.settings.accent_size_desktop }}px;
+    }
+  }
+
+  .experience-heading-wrapper-{{ exp_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .experience-main-heading-{{ exp_id }} {
+    font-family: 'Poppins', sans-serif;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    line-height: 1.2;
+    margin: 0;
+    font-weight: 400;
+    display: inline;
+  }
+
+  @media screen and (min-width: 750px) {
+    .experience-main-heading-{{ exp_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+    }
+  }
+
+  .experience-text-wrapper-{{ exp_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .experience-text-{{ exp_id }} {
+    font-family: 'Poppins', sans-serif;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size_mobile }}px;
+    line-height: {{ block.settings.line_height }};
+    margin: 0;
+    max-width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .experience-text-{{ exp_id }} {
+      font-size: {{ block.settings.text_size_desktop }}px;
+      max-width: none;
+    }
+  }
+
+  .experience-cta-{{ exp_id }} {
+    font-family: 'Poppins', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #B4975A;
+    font-size: {{ block.settings.cta_size_mobile }}px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .experience-cta-{{ exp_id }} {
+      font-size: {{ block.settings.cta_size_desktop }}px;
+    }
+  }
+
+  .experience-cta-{{ exp_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .experience-cta-{{ exp_id }}:hover .experience-cta-arrow-{{ exp_id }} {
+    transform: translateX(4px);
+  }
+
+  .experience-cta-arrow-{{ exp_id }} {
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+{% endstyle %}
+
+<experience-section-{{ exp_id }} class="experience-section-{{ exp_id }}" {{ block.shopify_attributes }}>
+  <div class="experience-container-{{ exp_id }}">
+    <div class="experience-grid-{{ exp_id }}">
+      <div class="experience-image-wrapper-{{ exp_id }}">
+        {% if block.settings.image %}
+          <img
+            src="{{ block.settings.image | image_url: width: 2000 }}"
+            alt="{{ block.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            class="experience-image-{{ exp_id }}"
+          >
+        {% else %}
+          <div class="experience-image-placeholder-{{ exp_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="experience-content-{{ exp_id }}">
+        <div class="experience-heading-wrapper-{{ exp_id }}">
+          {% if block.settings.accent_text != blank %}
+            <h3 class="experience-accent-heading-{{ exp_id }}">
+              {{ block.settings.accent_text }}
+            </h3>
+          {% endif %}
+
+          {% if block.settings.main_heading != blank %}
+            <h2 class="experience-main-heading-{{ exp_id }}">
+              {{ block.settings.main_heading }}
+            </h2>
+          {% endif %}
+        </div>
+
+        <div class="experience-text-wrapper-{{ exp_id }}">
+          {% if block.settings.paragraph_1 != blank %}
+            <p class="experience-text-{{ exp_id }}">
+              {{ block.settings.paragraph_1 }}
+            </p>
+          {% endif %}
+
+          {% if block.settings.paragraph_2 != blank %}
+            <p class="experience-text-{{ exp_id }}">
+              {{ block.settings.paragraph_2 }}
+            </p>
+          {% endif %}
+
+          {% if block.settings.cta_label != blank %}
+            {% if block.settings.cta_link != blank %}
+              <a href="{{ block.settings.cta_link }}" class="experience-cta-{{ exp_id }}">
+                {{ block.settings.cta_label }}
+                <span class="experience-cta-arrow-{{ exp_id }}">→</span>
+              </a>
+            {% else %}
+              <span class="experience-cta-{{ exp_id }}">
+                {{ block.settings.cta_label }}
+                <span class="experience-cta-arrow-{{ exp_id }}">→</span>
+              </span>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</experience-section-{{ exp_id }}>
+
+{% schema %}
+{
+  "name": "Experience section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "accent_text",
+      "label": "Accent heading",
+      "default": "Experience"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main heading",
+      "default": "the Celluderm Difference"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "Place your trust in our expert team of registered nurses and dermal therapists, and we will help you to become your most radiant, beautiful self."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "At Celluderm Clinic, we believe every face is unique and deserves a personalised treatment plan tailored to individual aesthetic needs. With our “less is more” approach to cosmetic enhancements, we ensure you’ll always look like yourself—just refreshed."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Link text",
+      "default": "Explore our philosophy"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#B4975A"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Main heading",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding (desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid gap (mobile)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "min": 40,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Grid gap (desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "min": 15,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Content gap (mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_gap_desktop",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Content gap (desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "accent_size_mobile",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Accent size (mobile)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "accent_size_desktop",
+      "min": 30,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Accent size (desktop)",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Main heading size (mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Main heading size (desktop)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Body text size (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "min": 15,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Body text size (desktop)",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "cta_size_mobile",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Link text size (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "cta_size_desktop",
+      "min": 15,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Link text size (desktop)",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "min": 1.4,
+      "max": 2,
+      "step": 0.1,
+      "label": "Body text line height",
+      "default": 1.7
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "min": 400,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "label": "Body text max width",
+      "default": 700
+    }
+  ],
+  "presets": [
+    {
+      "name": "Experience section"
+    }
+  ]
+}
+{% endschema %}

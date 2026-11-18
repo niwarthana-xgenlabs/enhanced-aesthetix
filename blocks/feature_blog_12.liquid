@@ -1,0 +1,511 @@
+{% assign block_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .featured-blog-wrapper-{{ block_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.outer_padding }}px;
+    background-color: transparent;
+  }
+
+  .featured-blog-{{ block_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.mobile_padding }}px;
+    margin: 0 auto;
+  }
+
+  .featured-blog__container-{{ block_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .featured-blog__image-wrapper-{{ block_id }} {
+    width: 100%;
+    flex-shrink: 0;
+    height: 100px;
+    overflow: visible;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    margin-bottom: calc(-1 * {{ block.settings.mobile_padding }}px);
+  }
+
+  .featured-blog__image-{{ block_id }} {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    object-position: bottom center;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: block;
+    align-self: flex-end;
+  }
+
+  .featured-blog__image-placeholder-{{ block_id }} {
+    width: 100%;
+    height: 100%;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .featured-blog__image-placeholder-{{ block_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+
+  .featured-blog__content-{{ block_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: {{ block.settings.text_color }};
+    justify-content: center;
+  }
+
+  .featured-blog__label-{{ block_id }} {
+    font-family: 'Poppins', sans-serif;
+    font-size: calc({{ block.settings.label_font_size }}px * 1.2);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .featured-blog__heading-{{ block_id }} {
+    font-family: 'Prata', serif;
+    font-weight: {{ block.settings.heading_font.weight }};
+    font-style: {{ block.settings.heading_font.style }};
+    font-size: calc({{ block.settings.mobile_heading_size }}px * 1.3);
+    line-height: 1.2;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .featured-blog__description-{{ block_id }} {
+    font-family: 'Poppins', sans-serif;
+    font-size: calc({{ block.settings.description_font_size }}px * 1.15);
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .featured-blog__buttons-{{ block_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+    margin-left: 36px;
+  }
+
+  .featured-blog__primary-btn-{{ block_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    background-color: {{ block.settings.primary_button_bg }};
+    color: {{ block.settings.primary_button_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: calc({{ block.settings.button_font_size }}px * 1.15);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .featured-blog__primary-btn-{{ block_id }}:hover {
+    background-color: {{ block.settings.primary_button_hover_bg }};
+    color: {{ block.settings.primary_button_hover_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  @media screen and (min-width: 750px) {
+    .featured-blog-{{ block_id }} {
+      padding: {{ block.settings.desktop_padding }}px;
+    }
+
+    .featured-blog__container-{{ block_id }} {
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .featured-blog__image-wrapper-{{ block_id }} {
+      width: 28%;
+      max-width: 220px;
+      height: auto;
+      min-height: 140px;
+      align-self: flex-end;
+      display: flex;
+      align-items: flex-end;
+      overflow: visible;
+      position: relative;
+      margin-bottom: calc(-1 * {{ block.settings.desktop_padding }}px);
+      padding-bottom: 0;
+    }
+
+    .featured-blog__image-{{ block_id }} {
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      object-position: bottom center;
+    }
+
+    .featured-blog__content-{{ block_id }} {
+      flex: 1;
+      gap: 10px;
+      justify-content: center;
+      align-self: center;
+    }
+
+    .featured-blog__heading-{{ block_id }} {
+      font-size: calc({{ block.settings.desktop_heading_size }}px * 1.3);
+    }
+
+    .featured-blog__buttons-{{ block_id }} {
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      margin-left: 44px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .featured-blog__container-{{ block_id }} {
+      gap: 30px;
+    }
+
+    .featured-blog__content-{{ block_id }} {
+      gap: 10px;
+    }
+  }
+{% endstyle %}
+
+<featured-blog-{{ block_id }} class="featured-blog-wrapper-{{ block_id }}" {{ block.shopify_attributes }}>
+  <div class="featured-blog-{{ block_id }}">
+    <div class="featured-blog__container-{{ block_id }}">
+      <div class="featured-blog__image-wrapper-{{ block_id }}">
+        {% if block.settings.image %}
+          <img
+            src="{{ block.settings.image | image_url: width: 400 }}"
+            alt="{{ block.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            class="featured-blog__image-{{ block_id }}"
+          >
+        {% else %}
+          <div class="featured-blog__image-placeholder-{{ block_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="featured-blog__content-{{ block_id }}">
+        {% if block.settings.label != blank %}
+          <p class="featured-blog__label-{{ block_id }}">{{ block.settings.label }}</p>
+        {% endif %}
+
+        {% if block.settings.heading != blank %}
+          <h2 class="featured-blog__heading-{{ block_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+
+        {% if block.settings.description != blank %}
+          <div class="featured-blog__description-{{ block_id }}">
+            {{ block.settings.description }}
+          </div>
+        {% endif %}
+
+        <div class="featured-blog__buttons-{{ block_id }}">
+          {% if block.settings.primary_button_text != blank %}
+            <a
+              href="{{ block.settings.primary_button_link }}"
+              class="featured-blog__primary-btn-{{ block_id }}"
+            >
+              {{ block.settings.primary_button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</featured-blog-{{ block_id }}>
+
+<script>
+  (function() {
+    class FeaturedBlog{{ block_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('featured-blog-{{ block_id }}', FeaturedBlog{{ block_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Featured blog banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "FEATURED BLOG"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Label font size",
+      "default": 10
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Skin Care All Year Round – Summer"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile heading size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_heading_size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop heading size",
+      "default": 28
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Taking good care of your skin during the summer is crucial, especially when the sun's rays are at their strongest.</p>"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Description font size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Primary button"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Button text",
+      "default": "Read More"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_color",
+      "label": "Text color",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_hover_bg",
+      "label": "Hover background color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_hover_color",
+      "label": "Hover text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Button font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Secondary link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_link_text",
+      "label": "Link text",
+      "default": "BROWSE ARTICLES"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "range",
+      "id": "secondary_link_font_size",
+      "min": 9,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Link font size",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#B4975A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Section border radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile padding",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop padding",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "outer_padding",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "White padding around section",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1400
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured blog banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1999 @@
+{% assign section_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  .values-section-{{ section_id }} {
+    display: block;
+    width: 100%;
+    padding: 60px 20px;
+    background-color: {{ block.settings.background_color }};
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .values-container-{{ section_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .values-header-{{ section_id }} {
+    margin-bottom: 50px;
+  }
+
+  .values-label-{{ section_id }} {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ block.settings.label_color }};
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .values-heading-{{ section_id }} {
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .values-grid-{{ section_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .values-card-{{ section_id }} {
+    background-color: {{ block.settings.card_background }};
+    border: 1px solid {{ block.settings.card_border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+
+  .values-card-{{ section_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .values-card-{{ section_id }}.hidden {
+    display: none;
+  }
+
+  .values-card-image-{{ section_id }} {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    pointer-events: none;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .values-card-image-{{ section_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .values-card-image-placeholder-{{ section_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+  }
+
+  .values-card-image-placeholder-{{ section_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .values-card-content-{{ section_id }} {
+    padding: 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+  }
+
+  .values-card-title-{{ section_id }} {
+    font-size: 18px;
+    font-weight: 700;
+    color: {{ block.settings.card_title_color }};
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .values-card-meta-{{ section_id }} {
+    font-size: 14px;
+    color: {{ block.settings.card_text_color }};
+    margin-bottom: 8px;
+  }
+
+  .values-card-price-{{ section_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ block.settings.card_price_color }};
+    margin-bottom: 20px;
+  }
+
+  .values-card-actions-{{ section_id }} {
+    margin-top: auto;
+    position: relative;
+    z-index: 100;
+    pointer-events: auto;
+  }
+
+  /* Hide any additional buttons added by theme/apps */
+  .values-card-{{ section_id }} button:not(.values-card-button-{{ section_id }}):not([data-product-trigger]),
+  .values-card-{{ section_id }} a[class*="button"]:not(.values-card-link-{{ section_id }}),
+  .values-card-{{ section_id }} .quick-add,
+  .values-card-{{ section_id }} .product-form:not(.product-form-{{ section_id }}),
+  .values-card-{{ section_id }} form:not([data-product-form]),
+  .values-card-{{ section_id }} [class*="add-to-cart"],
+  .values-card-{{ section_id }} [class*="product-card__button"] {
+    display: none !important;
+  }
+
+  /* Ensure all interactive elements are clickable */
+  .values-card-{{ section_id }} button[data-product-trigger],
+  .values-card-{{ section_id }} .values-card-button-{{ section_id }},
+  .values-card-{{ section_id }} .values-card-link-{{ section_id }},
+  .values-card-{{ section_id }} .values-card-link-wrapper-{{ section_id }} a {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+
+  /* Prevent any overlays or pseudo-elements from blocking clicks */
+  .values-card-{{ section_id }}::before,
+  .values-card-{{ section_id }}::after {
+    pointer-events: none !important;
+  }
+
+  /* Disable pointer events on images to prevent blocking */
+  .values-card-{{ section_id }} img {
+    pointer-events: none !important;
+  }
+
+  /* Ensure grid allows clicks */
+  .values-grid-{{ section_id }} {
+    pointer-events: auto;
+  }
+
+
+  /* Ensure all buttons and links are always clickable */
+  button.values-card-button-{{ section_id }}[data-product-trigger],
+  button.values-card-button-{{ section_id }},
+  a.values-card-link-{{ section_id }},
+  button.values-more-button-{{ section_id }} {
+    position: relative !important;
+    z-index: 999 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+
+  /* Ensure the card content area allows clicks through to buttons */
+  .values-card-content-{{ section_id }} {
+    pointer-events: none;
+  }
+
+  .values-card-content-{{ section_id }} * {
+    pointer-events: auto;
+  }
+
+  .values-card-button-{{ section_id }} {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-align: center;
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 150;
+    pointer-events: auto !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .values-card-button-{{ section_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  .values-card-button-{{ section_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .values-card-button-{{ section_id }}:active {
+    transform: scale(0.98);
+  }
+
+  .values-card-link-wrapper-{{ section_id }} {
+    text-align: center;
+    margin-top: 12px;
+    position: relative;
+    z-index: 150;
+    pointer-events: auto !important;
+  }
+
+  .values-card-link-{{ section_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 150;
+    pointer-events: auto !important;
+    cursor: pointer;
+  }
+
+  .values-card-link-{{ section_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .values-card-link-arrow-{{ section_id }} {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .values-card-link-{{ section_id }}:hover .values-card-link-arrow-{{ section_id }} {
+    transform: translateX(4px);
+  }
+
+  /* Booking Modal Styles */
+  .booking-modal-overlay-{{ section_id }}:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+  }
+
+  .booking-modal-overlay-{{ section_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .booking-modal-overlay-{{ section_id }}.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .booking-modal-{{ section_id }}:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+  }
+
+  .booking-modal-{{ section_id }} {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 1100px;
+    max-height: 90vh;
+    background-color: #ffffff;
+    border-radius: 16px;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    pointer-events: none;
+  }
+  
+  .booking-modal-{{ section_id }}.active {
+    display: flex;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .booking-modal-header-{{ section_id }} {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .booking-modal-title-{{ section_id }} {
+    font-size: 24px;
+    font-weight: 700;
+    color: #151515;
+    margin: 0;
+  }
+
+  .booking-modal-close-{{ section_id }} {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #717171;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .booking-modal-close-{{ section_id }}:hover {
+    background-color: #f5f5f5;
+    color: #151515;
+  }
+
+  .booking-modal-body-{{ section_id }} {
+    padding: 20px 24px;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .product-modal-content-{{ section_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .product-modal-loading-{{ section_id }} {
+    text-align: center;
+    padding: 40px;
+    color: #717171;
+  }
+
+  .product-modal-info-{{ section_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    pointer-events: auto;
+  }
+
+  .product-modal-image-{{ section_id }} {
+    width: 100%;
+    max-height: 400px;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+  }
+
+  .product-modal-image-{{ section_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-modal-details-{{ section_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: auto;
+  }
+
+  .booking-scheduler-{{ section_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .booking-scheduler-right-{{ section_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .booking-timezone-{{ section_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .booking-timezone-label-{{ section_id }} {
+    font-size: 14px;
+    font-weight: 600;
+    color: #151515;
+  }
+
+  .booking-timezone-name-{{ section_id }} {
+    font-size: 12px;
+    color: #717171;
+  }
+
+  .booking-times-grid-{{ section_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .booking-time-slot-{{ section_id }} {
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 8px 10px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .booking-time-slot-{{ section_id }}:hover {
+    border-color: #B4975A;
+    background-color: #B4975A;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  .booking-time-slot-{{ section_id }}.selected {
+    border-color: #B4975A;
+    background-color: #B4975A;
+  }
+
+  .booking-time-slot-time-{{ section_id }} {
+    font-size: 13px;
+    font-weight: 500;
+    color: #151515;
+  }
+
+  .booking-time-slot-availability-{{ section_id }} {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #B4975A;
+  }
+
+  .booking-time-slot-{{ section_id }}:hover .booking-time-slot-time-{{ section_id }},
+  .booking-time-slot-{{ section_id }}:hover .booking-time-slot-availability-{{ section_id }},
+  .booking-time-slot-{{ section_id }}.selected .booking-time-slot-time-{{ section_id }},
+  .booking-time-slot-{{ section_id }}.selected .booking-time-slot-availability-{{ section_id }} {
+    color: #ffffff;
+  }
+
+  .product-modal-name-{{ section_id }} {
+    font-size: 20px;
+    font-weight: 700;
+    color: #151515;
+    margin: 0;
+  }
+
+  .product-modal-price-{{ section_id }} {
+    font-size: 18px;
+    font-weight: 600;
+    color: #151515;
+  }
+
+  .booking-calendar-wrapper-{{ section_id }} {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 24px;
+  }
+
+  .booking-calendar-{{ section_id }} {
+    border: 1px solid #f0f0f0;
+    border-radius: 24px;
+    padding: 24px 32px 28px;
+    background-color: #fafafa;
+    width: 100%;
+    max-width: 420px;
+    min-height: 360px;
+  }
+
+  .booking-calendar-header-{{ section_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #151515;
+  }
+
+  .booking-calendar-nav-btn-{{ section_id }} {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    transition: all 0.2s ease;
+  }
+
+  .booking-calendar-nav-btn-{{ section_id }}:hover {
+    border-color: #B4975A;
+    background-color: #f9f5ec;
+  }
+
+  .booking-calendar-month-{{ section_id }} {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .booking-calendar-weekdays-{{ section_id }} {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #b0b0b0;
+  }
+
+  .booking-calendar-grid-{{ section_id }} {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    row-gap: 4px;
+    column-gap: 4px;
+  }
+
+  .booking-calendar-day-{{ section_id }} {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #151515;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .booking-calendar-day-{{ section_id }}.muted {
+    color: #d0d0d0;
+    cursor: default;
+    pointer-events: none;
+    border-color: transparent;
+  }
+
+  .booking-calendar-day-{{ section_id }}.today:not(.selected) {
+    border-color: #B4975A;
+  }
+
+  .booking-calendar-day-{{ section_id }}:hover:not(.selected) {
+    background-color: #f5f5f5;
+  }
+
+  .booking-calendar-day-{{ section_id }}.selected {
+    background-color: #151515;
+    color: #ffffff;
+    border-color: #151515;
+  }
+
+  .product-variants-{{ section_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .product-variant-group-{{ section_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .booking-form-label-{{ section_id }} {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #151515;
+    margin-bottom: 8px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .product-variant-select-{{ section_id }},
+  .booking-form-input-{{ section_id }} {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
+    background-color: #ffffff;
+    cursor: pointer !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23151515' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+  }
+  
+  select.product-variant-select-{{ section_id }} {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    z-index: 1000 !important;
+    position: relative;
+  }
+
+  /* Ensure modal content is fully interactive */
+  .booking-modal-{{ section_id }}.active select,
+  .booking-modal-{{ section_id }}.active input,
+  .booking-modal-{{ section_id }}.active button {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+
+  .booking-modal-{{ section_id }}.active {
+    pointer-events: auto !important;
+  }
+
+  .booking-modal-{{ section_id }}.active * {
+    pointer-events: auto;
+  }
+
+  .product-variant-select-{{ section_id }}:focus,
+  .booking-form-input-{{ section_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.button_background }};
+  }
+
+  .quantity-btn-{{ section_id }} {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quantity-btn-{{ section_id }}:hover {
+    border-color: {{ block.settings.button_background }};
+    background-color: #f9f9f9;
+  }
+
+  @media screen and (min-width: 750px) {
+    .product-modal-info-{{ section_id }} {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .booking-modal-footer-{{ section_id }} {
+    padding: 16px 24px 20px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+
+  .booking-modal-button-{{ section_id }} {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .booking-modal-button-cancel-{{ section_id }} {
+    background-color: #f5f5f5;
+    color: #151515;
+  }
+
+  .booking-modal-button-cancel-{{ section_id }}:hover {
+    background-color: #e0e0e0;
+  }
+
+  .booking-modal-button-submit-{{ section_id }} {
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+  }
+
+  .booking-modal-button-submit-{{ section_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  .values-footer-{{ section_id }} {
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    z-index: 100;
+  }
+
+  .values-more-button-{{ section_id }} {
+    display: inline-block;
+    padding: 14px 48px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 100;
+    pointer-events: auto !important;
+  }
+
+  .values-more-button-{{ section_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .values-section-{{ section_id }} {
+      padding: 80px 40px;
+    }
+
+    .values-grid-{{ section_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .values-heading-{{ section_id }} {
+      font-size: {{ block.settings.heading_size_tablet }}px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .values-section-{{ section_id }} {
+      padding: 100px 60px;
+    }
+
+    .values-grid-{{ section_id }} {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .values-heading-{{ section_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    .booking-modal-{{ section_id }} {
+      width: 95%;
+      max-height: 92vh;
+    }
+
+    .booking-modal-title-{{ section_id }} {
+      font-size: 20px;
+    }
+
+    .booking-modal-header-{{ section_id }},
+    .booking-modal-body-{{ section_id }},
+    .booking-modal-footer-{{ section_id }} {
+      padding: 20px;
+    }
+  }
+{% endstyle %}
+
+<our-values-{{ section_id }} class="values-section-{{ section_id }}" {{ block.shopify_attributes }}>
+  <div class="values-container-{{ section_id }}">
+    <div class="values-header-{{ section_id }}">
+      {% if block.settings.label_text != blank %}
+        <div class="values-label-{{ section_id }}">{{ block.settings.label_text }}</div>
+      {% endif %}
+      {% if block.settings.heading_text != blank %}
+        <h2 class="values-heading-{{ section_id }}">{{ block.settings.heading_text }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="values-grid-{{ section_id }}" data-values-grid-{{ section_id }}>
+      {% for i in (1..12) %}
+        {% liquid
+          assign product_key = 'card_product_' | append: i
+          assign duration_key = 'card_duration_' | append: i
+          
+          assign card_product = block.settings[product_key]
+          assign card_duration = block.settings[duration_key]
+        %}
+
+        {% if card_product != blank %}
+          <div class="values-card-{{ section_id }} {% if i > 8 %}hidden{% endif %}" data-service-card-{{ section_id }}>
+            <div class="values-card-image-{{ section_id }}">
+              {% if card_product.featured_image %}
+                <img
+                  src="{{ card_product.featured_image | image_url: width: 600 }}"
+                  alt="{{ card_product.featured_image.alt | default: card_product.title | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="800"
+                >
+              {% else %}
+                <div class="values-card-image-placeholder-{{ section_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="values-card-content-{{ section_id }}">
+              <h3 class="values-card-title-{{ section_id }}">{{ card_product.title }}</h3>
+
+              {% if card_product.vendor != blank or card_duration != blank %}
+                <div class="values-card-meta-{{ section_id }}">
+                  {% if card_product.vendor != blank %}{{ card_product.vendor }}{% endif %}
+                  {% if card_product.vendor != blank and card_duration != blank %} · {% endif %}
+                  {% if card_duration != blank %}{{ card_duration }}{% endif %}
+                </div>
+              {% endif %}
+
+              {% if card_product.price %}
+                <div class="values-card-price-{{ section_id }}">
+                  {{ card_product.price | money }}{% if card_product.compare_at_price > card_product.price %}+{% endif %}
+                </div>
+              {% endif %}
+
+              <div class="values-card-actions-{{ section_id }}">
+                <button 
+                  class="values-card-button-{{ section_id }}"
+                  data-product-trigger
+                  data-product-id="{{ card_product.id }}"
+                  data-product-handle="{{ card_product.handle }}"
+                  data-product-title="{{ card_product.title | escape }}"
+                  data-product-price="{{ card_product.price | money }}"
+                >
+                  {{ block.settings.button_text }}
+                </button>
+
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if block.settings.show_more_button %}
+      <div class="values-footer-{{ section_id }}">
+        <a 
+          href="/products"
+          class="values-more-button-{{ section_id }}"
+        >
+          {{ block.settings.more_button_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Product Selection Modal -->
+  <div class="booking-modal-overlay-{{ section_id }}" data-product-overlay></div>
+  <div class="booking-modal-{{ section_id }}" data-product-modal>
+    <div class="booking-modal-header-{{ section_id }}">
+      <h3 class="booking-modal-title-{{ section_id }}" data-product-title>Select Options</h3>
+      <button class="booking-modal-close-{{ section_id }}" data-product-close aria-label="Close modal">×</button>
+    </div>
+    <div class="booking-modal-body-{{ section_id }}">
+      <div class="product-modal-content-{{ section_id }}" data-product-content>
+        <div class="product-modal-loading-{{ section_id }}" data-product-loading>
+          <p>Loading product...</p>
+        </div>
+        <div class="product-modal-info-{{ section_id }}" data-product-info style="display: none;">
+          <div class="product-modal-image-{{ section_id }}" data-product-image></div>
+            <div class="product-modal-details-{{ section_id }}">
+              <h4 class="product-modal-name-{{ section_id }}" data-product-name></h4>
+              <div class="product-modal-price-{{ section_id }}" data-product-price></div>
+              <form class="product-form-{{ section_id }}" data-product-form>
+                <div class="product-variants-{{ section_id }}" data-product-variants></div>
+                <div class="product-quantity-{{ section_id }}" style="margin-top: 12px;">
+                  <label class="booking-form-label-{{ section_id }}">Quantity</label>
+                  <div style="display: flex; align-items: center; gap: 12px; margin-top: 6px;">
+                    <button type="button" class="quantity-btn-{{ section_id }}" data-quantity-decrease>-</button>
+                    <input 
+                      type="number" 
+                      class="booking-form-input-{{ section_id }}" 
+                      name="quantity" 
+                      value="1" 
+                      min="1" 
+                      data-product-quantity
+                      style="width: 80px; text-align: center;"
+                    >
+                    <button type="button" class="quantity-btn-{{ section_id }}" data-quantity-increase>+</button>
+                  </div>
+                </div>
+
+                <div class="booking-scheduler-{{ section_id }}">
+                  <div class="booking-scheduler-left-{{ section_id }}">
+                    <div class="booking-calendar-wrapper-{{ section_id }}">
+                      <div class="booking-calendar-{{ section_id }}">
+                        <div class="booking-calendar-header-{{ section_id }}">
+                          <button type="button" class="booking-calendar-nav-btn-{{ section_id }}" data-calendar-prev>
+                            ‹
+                          </button>
+                          <div class="booking-calendar-month-{{ section_id }}" data-calendar-month></div>
+                          <button type="button" class="booking-calendar-nav-btn-{{ section_id }}" data-calendar-next>
+                            ›
+                          </button>
+                        </div>
+                        <div class="booking-calendar-weekdays-{{ section_id }}">
+                          <span>MO</span>
+                          <span>TU</span>
+                          <span>WE</span>
+                          <span>TH</span>
+                          <span>FR</span>
+                          <span>SA</span>
+                          <span>SU</span>
+                        </div>
+                        <div class="booking-calendar-grid-{{ section_id }}" data-calendar-grid></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="booking-scheduler-right-{{ section_id }}">
+                    <div class="booking-timezone-{{ section_id }}">
+                      <span class="booking-timezone-label-{{ section_id }}">Choose your preferred time</span>
+                      <span class="booking-timezone-name-{{ section_id }}" data-timezone-label></span>
+                    </div>
+                    <div class="booking-times-grid-{{ section_id }}" data-time-slots></div>
+                  </div>
+                </div>
+
+                <input type="hidden" name="booking_date" data-product-date>
+                <input type="hidden" name="booking_time" data-product-time>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="booking-modal-footer-{{ section_id }}">
+      <button 
+        type="button" 
+        class="booking-modal-button-{{ section_id }} booking-modal-button-cancel-{{ section_id }}" 
+        data-product-close
+      >
+        Cancel
+      </button>
+      <button 
+        type="button" 
+        class="booking-modal-button-{{ section_id }} booking-modal-button-submit-{{ section_id }}" 
+        data-product-add-to-cart
+        disabled
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</our-values-{{ section_id }}>
+
+<script>
+  (function() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeComponent);
+    } else {
+      initializeComponent();
+    }
+
+    function initializeComponent() {
+      const sectionId = '{{ section_id }}';
+      const container = document.querySelector('our-values-{{ section_id }}');
+      
+      if (!container) return;
+      
+      const productTriggers = container.querySelectorAll('[data-product-trigger]');
+      const productOverlay = container.querySelector('[data-product-overlay]');
+      const productModal = container.querySelector('[data-product-modal]');
+      const productCloseButtons = container.querySelectorAll('[data-product-close]');
+      const productAddToCartBtn = container.querySelector('[data-product-add-to-cart]');
+      const productLoading = container.querySelector('[data-product-loading]');
+      const productInfo = container.querySelector('[data-product-info]');
+      const productVariantsContainer = container.querySelector('[data-product-variants]');
+      const productImageContainer = container.querySelector('[data-product-image]');
+      const productNameEl = container.querySelector('[data-product-name]');
+      const productPriceEl = container.querySelector('[data-product-price]');
+      const productQuantityInput = container.querySelector('[data-product-quantity]');
+      const productDateInput = container.querySelector('[data-product-date]');
+      const productTimeInput = container.querySelector('[data-product-time]');
+      const calendarMonthEl = container.querySelector('[data-calendar-month]');
+      const calendarGridEl = container.querySelector('[data-calendar-grid]');
+      const calendarPrevBtn = container.querySelector('[data-calendar-prev]');
+      const calendarNextBtn = container.querySelector('[data-calendar-next]');
+      const timeSlotsContainer = container.querySelector('[data-time-slots]');
+      const timezoneLabelEl = container.querySelector('[data-timezone-label]');
+      
+      let currentProduct = null;
+      let selectedVariant = null;
+      let selectedOptions = {};
+      let calendarCurrentMonth = new Date();
+      calendarCurrentMonth.setDate(1);
+      let selectedDate = null;
+      let selectedTimeSlot = null;
+
+      // Fetch product data
+      async function fetchProduct(handle) {
+        try {
+          const response = await fetch(`/products/${handle}.js`);
+          if (!response.ok) throw new Error('Product not found');
+          return await response.json();
+        } catch (error) {
+          console.error('Error fetching product:', error);
+          return null;
+        }
+      }
+
+      // Find variant by selected options
+      function findVariant(product, options) {
+        return product.variants.find(variant => {
+          return product.options.every((option, index) => {
+            return variant.options[index] === options[option.name];
+          });
+        });
+      }
+
+      // Update variant selection
+      function updateVariantSelection() {
+        if (!currentProduct) return;
+        
+        selectedVariant = findVariant(currentProduct, selectedOptions);
+        
+        if (selectedVariant) {
+          if (productPriceEl) {
+            const price = (selectedVariant.price / 100).toFixed(2);
+            productPriceEl.textContent = `$${price}`;
+          }
+          
+          if (productAddToCartBtn) {
+            productAddToCartBtn.disabled = !selectedVariant.available;
+          }
+        } else {
+          if (productAddToCartBtn) {
+            productAddToCartBtn.disabled = true;
+          }
+        }
+      }
+
+      // Render product variants
+      function renderVariants(product) {
+        if (!productVariantsContainer || !product.options || product.options.length === 0) {
+          productVariantsContainer.innerHTML = '';
+          return;
+        }
+
+        let html = '';
+        product.options.forEach((option, optionIndex) => {
+          html += `
+            <div class="product-variant-group-{{ section_id }}">
+              <label class="booking-form-label-{{ section_id }}">${option.name}</label>
+              <select 
+                class="product-variant-select-{{ section_id }}"
+                data-option-name="${option.name}"
+                data-variant-select
+              >
+                <option value="">Select ${option.name}</option>
+          `;
+          
+          const uniqueValues = [...new Set(product.variants.map(v => v.options[optionIndex]))];
+          uniqueValues.forEach(value => {
+            const isSelected = selectedOptions[option.name] === value;
+            html += `
+              <option 
+                value="${value}"
+                ${isSelected ? 'selected' : ''}
+              >
+                ${value}
+              </option>
+            `;
+          });
+          
+          html += `
+              </select>
+            </div>
+          `;
+        });
+
+        productVariantsContainer.innerHTML = html;
+
+        const variantSelects = productVariantsContainer.querySelectorAll('[data-variant-select]');
+        variantSelects.forEach(select => {
+          // Ensure select is clickable
+          select.style.pointerEvents = 'auto';
+          select.style.cursor = 'pointer';
+          select.style.zIndex = '1000';
+          
+          select.addEventListener('change', function() {
+            const optionName = this.getAttribute('data-option-name');
+            const optionValue = this.value;
+            
+            if (optionValue) {
+              selectedOptions[optionName] = optionValue;
+            } else {
+              delete selectedOptions[optionName];
+            }
+            
+            updateVariantSelection();
+          });
+        });
+      }
+
+      function formatDateForValue(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      function renderCalendar() {
+        if (!calendarGridEl || !calendarMonthEl) return;
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const year = calendarCurrentMonth.getFullYear();
+        const month = calendarCurrentMonth.getMonth();
+
+        const monthName = calendarCurrentMonth.toLocaleString(undefined, {
+          month: 'long',
+          year: 'numeric'
+        });
+        calendarMonthEl.textContent = monthName;
+
+        calendarGridEl.innerHTML = '';
+
+        const firstDay = new Date(year, month, 1);
+        const firstWeekday = (firstDay.getDay() + 6) % 7; // Monday = 0
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let i = 0; i < firstWeekday; i++) {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'booking-calendar-day-{{ section_id }} muted';
+          calendarGridEl.appendChild(placeholder);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dateObj = new Date(year, month, day);
+          dateObj.setHours(0, 0, 0, 0);
+          const isoValue = formatDateForValue(dateObj);
+
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.textContent = day;
+          button.className = 'booking-calendar-day-{{ section_id }}';
+
+          if (dateObj.getTime() === today.getTime()) {
+            button.classList.add('today');
+          }
+
+          if (dateObj < today) {
+            button.classList.add('muted');
+            button.disabled = true;
+          }
+
+          if (productDateInput && productDateInput.value === isoValue) {
+            button.classList.add('selected');
+          }
+
+          button.addEventListener('click', function() {
+            const allDays = calendarGridEl.querySelectorAll('.booking-calendar-day-{{ section_id }}');
+            allDays.forEach(d => d.classList.remove('selected'));
+            button.classList.add('selected');
+
+            selectedDate = dateObj;
+            if (productDateInput) {
+              productDateInput.value = isoValue;
+            }
+          });
+
+          calendarGridEl.appendChild(button);
+        }
+      }
+
+      function renderTimeSlots() {
+        if (!timeSlotsContainer) return;
+
+        const timeSlots = [
+          '02:30 - 03:00',
+          '03:00 - 03:30',
+          '03:30 - 04:00',
+          '04:00 - 04:30',
+          '04:30 - 05:00',
+          '05:00 - 05:30',
+          '05:30 - 06:00',
+          '06:00 - 06:30',
+          '06:30 - 07:00',
+          '07:00 - 07:30',
+          '07:30 - 08:00',
+          '08:00 - 08:30'
+        ];
+
+        timeSlotsContainer.innerHTML = '';
+
+        timeSlots.forEach(slot => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'booking-time-slot-{{ section_id }}';
+          button.innerHTML = `
+            <span class="booking-time-slot-time-{{ section_id }}">${slot}</span>
+            <span class="booking-time-slot-availability-{{ section_id }}">1 LEFT</span>
+          `;
+
+          button.addEventListener('click', function() {
+            const allButtons = timeSlotsContainer.querySelectorAll('.booking-time-slot-{{ section_id }}');
+            allButtons.forEach(b => b.classList.remove('selected'));
+            button.classList.add('selected');
+
+            selectedTimeSlot = slot;
+            if (productTimeInput) {
+              productTimeInput.value = slot;
+            }
+          });
+
+          timeSlotsContainer.appendChild(button);
+        });
+      }
+
+      // Load product into modal
+      async function loadProduct(handle, productId) {
+        if (productLoading) productLoading.style.display = 'block';
+        if (productInfo) productInfo.style.display = 'none';
+        
+        try {
+          const product = await fetchProduct(handle);
+          if (!product) {
+            alert('Product not found');
+            closeProductModal();
+            return;
+          }
+
+          if (!product.variants || !Array.isArray(product.variants) || product.variants.length === 0) {
+            alert('Product has no variants available');
+            closeProductModal();
+            return;
+          }
+
+          currentProduct = product;
+          selectedOptions = {};
+          selectedVariant = null;
+
+          if (productNameEl) productNameEl.textContent = product.title;
+          if (productPriceEl) {
+            const price = (product.variants[0].price / 100).toFixed(2);
+            productPriceEl.textContent = `$${price}`;
+          }
+          if (productImageContainer) {
+            productImageContainer.innerHTML = `
+              <img 
+                src="${product.featured_image || product.images[0] || ''}" 
+                alt="${product.title}"
+                loading="lazy"
+              >
+            `;
+          }
+          if (productQuantityInput) productQuantityInput.value = 1;
+
+          if (productDateInput) productDateInput.value = '';
+          if (productTimeInput) productTimeInput.value = '';
+          selectedDate = null;
+          selectedTimeSlot = null;
+
+          if (calendarGridEl) {
+            const allDays = calendarGridEl.querySelectorAll('.booking-calendar-day-{{ section_id }}');
+            allDays.forEach(d => d.classList.remove('selected'));
+          }
+
+          if (timeSlotsContainer) {
+            const allButtons = timeSlotsContainer.querySelectorAll('.booking-time-slot-{{ section_id }}');
+            allButtons.forEach(b => b.classList.remove('selected'));
+          }
+
+          renderVariants(product);
+
+          if (productLoading) productLoading.style.display = 'none';
+          if (productInfo) productInfo.style.display = 'grid';
+
+          if (product.variants.length > 0 && product.options && product.options.length > 0) {
+            const firstAvailableVariant = product.variants.find(v => v.available) || product.variants[0];
+            if (firstAvailableVariant && firstAvailableVariant.options) {
+              product.options.forEach((option, index) => {
+                if (firstAvailableVariant.options[index]) {
+                  selectedOptions[option.name] = firstAvailableVariant.options[index];
+                }
+              });
+              updateVariantSelection();
+              
+              const variantSelects = productVariantsContainer.querySelectorAll('[data-variant-select]');
+              variantSelects.forEach(select => {
+                const optionName = select.getAttribute('data-option-name');
+                const optionIndex = product.options.findIndex(o => o.name === optionName);
+                
+                if (optionIndex >= 0 && firstAvailableVariant.options[optionIndex]) {
+                  select.value = firstAvailableVariant.options[optionIndex];
+                }
+              });
+            }
+          }
+        } catch (error) {
+          console.error('Error loading product:', error);
+          alert('Error loading product. Please try again.');
+          closeProductModal();
+        }
+      }
+
+      // Open modal
+      function openProductModal(trigger) {
+        if (!trigger) return;
+        
+        const productHandle = trigger.getAttribute('data-product-handle');
+        const productId = trigger.getAttribute('data-product-id');
+        
+        if (!productHandle) {
+          alert('Product not configured');
+          return;
+        }
+
+        if (productOverlay && productModal) {
+          productOverlay.classList.add('active');
+          productModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          
+          // Ensure all modal contents are clickable
+          setTimeout(() => {
+            const modalSelects = productModal.querySelectorAll('select');
+            modalSelects.forEach(s => {
+              s.style.pointerEvents = 'auto';
+              s.style.cursor = 'pointer';
+            });
+          }, 100);
+        }
+
+        loadProduct(productHandle, productId);
+      }
+
+      // Close modal
+      function closeProductModal() {
+        if (productOverlay && productModal) {
+          productOverlay.classList.remove('active');
+          productModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        currentProduct = null;
+        selectedVariant = null;
+        selectedOptions = {};
+      }
+
+      // Add to cart
+      async function addToCart() {
+        if (!selectedVariant || !currentProduct) {
+          alert('Please select all options');
+          return;
+        }
+
+        if (productDateInput && !productDateInput.value) {
+          alert('Please select a date');
+          return;
+        }
+
+        if (productTimeInput && !productTimeInput.value) {
+          alert('Please select a time');
+          return;
+        }
+
+        const quantity = productQuantityInput ? parseInt(productQuantityInput.value) : 1;
+        
+        if (productAddToCartBtn) {
+          productAddToCartBtn.disabled = true;
+          productAddToCartBtn.textContent = 'Adding...';
+        }
+
+        try {
+          const properties = {};
+          if (productDateInput && productDateInput.value) {
+            properties['Booking date'] = productDateInput.value;
+          }
+          if (productTimeInput && productTimeInput.value) {
+            properties['Booking time'] = productTimeInput.value;
+          }
+
+          const payload = {
+            id: selectedVariant.id,
+            quantity: quantity
+          };
+
+          if (Object.keys(properties).length > 0) {
+            payload.properties = properties;
+          }
+
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.description || 'Failed to add to cart');
+          }
+
+          window.location.href = '/cart';
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+          alert('Failed to add product to cart. Please try again.');
+          if (productAddToCartBtn) {
+            productAddToCartBtn.disabled = false;
+            productAddToCartBtn.textContent = 'Add to Cart';
+          }
+        }
+      }
+
+      // Initialize calendar, time slots, and timezone
+      if (timezoneLabelEl) {
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          timezoneLabelEl.textContent = tz ? `${tz}` : 'Local time';
+        } catch (e) {
+          timezoneLabelEl.textContent = 'Local time';
+        }
+      }
+
+      if (calendarPrevBtn) {
+        calendarPrevBtn.addEventListener('click', function() {
+          calendarCurrentMonth.setMonth(calendarCurrentMonth.getMonth() - 1);
+          renderCalendar();
+        });
+      }
+
+      if (calendarNextBtn) {
+        calendarNextBtn.addEventListener('click', function() {
+          calendarCurrentMonth.setMonth(calendarCurrentMonth.getMonth() + 1);
+          renderCalendar();
+        });
+      }
+
+      renderCalendar();
+      renderTimeSlots();
+
+      // Event listeners - using event delegation
+      container.addEventListener('click', function(e) {
+        const trigger = e.target.closest('[data-product-trigger]');
+        if (trigger && !trigger.disabled) {
+          e.preventDefault();
+          openProductModal(trigger);
+        }
+      });
+
+      productCloseButtons.forEach(button => {
+        button.addEventListener('click', closeProductModal);
+      });
+
+      if (productOverlay) {
+        productOverlay.addEventListener('click', function(e) {
+          if (e.target === productOverlay) {
+            closeProductModal();
+          }
+        });
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && productModal && productModal.classList.contains('active')) {
+          closeProductModal();
+        }
+      });
+
+      if (productAddToCartBtn) {
+        productAddToCartBtn.addEventListener('click', addToCart);
+      }
+
+      const quantityDecrease = container.querySelector('[data-quantity-decrease]');
+      const quantityIncrease = container.querySelector('[data-quantity-increase]');
+      
+      if (quantityDecrease && productQuantityInput) {
+        quantityDecrease.addEventListener('click', function() {
+          const current = parseInt(productQuantityInput.value);
+          if (current > 1) {
+            productQuantityInput.value = current - 1;
+          }
+        });
+      }
+
+      if (quantityIncrease && productQuantityInput) {
+        quantityIncrease.addEventListener('click', function() {
+          const current = parseInt(productQuantityInput.value);
+          productQuantityInput.value = current + 1;
+        });
+      }
+
+      if (productModal) {
+        productModal.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      }
+
+      // "View full details" links - allow default navigation
+      // No special handling needed, just let them work naturally
+
+      // Simple and reliable - ensure everything is clickable
+      const ensureClickable = () => {
+        // Buttons
+        const buttons = container.querySelectorAll('[data-product-trigger], .values-card-button-{{ section_id }}, .values-more-button-{{ section_id }}');
+        buttons.forEach(btn => {
+          btn.style.pointerEvents = 'auto';
+          btn.style.cursor = 'pointer';
+        });
+
+        // Links
+        const links = container.querySelectorAll('.values-card-link-{{ section_id }}');
+        links.forEach(link => {
+          link.style.pointerEvents = 'auto';
+          link.style.cursor = 'pointer';
+        });
+
+        // Selects - critical for dropdowns to work
+        const selects = container.querySelectorAll('select');
+        selects.forEach(select => {
+          select.style.pointerEvents = 'auto';
+          select.style.cursor = 'pointer';
+          select.style.zIndex = '1000';
+        });
+
+        // All inputs and form elements
+        const inputs = container.querySelectorAll('input, button, a, select');
+        inputs.forEach(input => {
+          input.style.pointerEvents = 'auto';
+        });
+      };
+
+      // Run initially
+      setTimeout(ensureClickable, 100);
+
+      // Re-run when new elements are added
+      const observer = new MutationObserver(() => {
+        setTimeout(ensureClickable, 50);
+      });
+      observer.observe(container, { childList: true, subtree: true });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Our values",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "label_text",
+      "label": "Label text",
+      "default": "OUR SERVICES"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading",
+      "default": "What makes us."
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#B4975A"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#151515"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_size_tablet",
+      "min": 28,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (tablet)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (desktop)",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Service 1"
+    },
+    {
+      "type": "product",
+      "id": "card_product_1",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_1",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 2"
+    },
+    {
+      "type": "product",
+      "id": "card_product_2",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_2",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 3"
+    },
+    {
+      "type": "product",
+      "id": "card_product_3",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_3",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 4"
+    },
+    {
+      "type": "product",
+      "id": "card_product_4",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_4",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 5"
+    },
+    {
+      "type": "product",
+      "id": "card_product_5",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_5",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 6"
+    },
+    {
+      "type": "product",
+      "id": "card_product_6",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_6",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 7"
+    },
+    {
+      "type": "product",
+      "id": "card_product_7",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_7",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 8"
+    },
+    {
+      "type": "product",
+      "id": "card_product_8",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_8",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 9"
+    },
+    {
+      "type": "product",
+      "id": "card_product_9",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_9",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 10"
+    },
+    {
+      "type": "product",
+      "id": "card_product_10",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_10",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 11"
+    },
+    {
+      "type": "product",
+      "id": "card_product_11",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_11",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Service 12"
+    },
+    {
+      "type": "product",
+      "id": "card_product_12",
+      "label": "Select product/service"
+    },
+    {
+      "type": "text",
+      "id": "card_duration_12",
+      "label": "Duration (optional)",
+      "default": "30 min"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#717171"
+    },
+    {
+      "type": "color",
+      "id": "card_price_color",
+      "label": "Card price color",
+      "default": "#151515"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Book Now"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#d4b896"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#c4a886"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Link style"
+    },
+    {
+      "type": "text",
+      "id": "details_text",
+      "label": "Details link text",
+      "default": "View full details"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#715939"
+    },
+    {
+      "type": "header",
+      "content": "Load More button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more_button",
+      "label": "Show 'More' button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "more_button_text",
+      "label": "'More' button text",
+      "default": "More"
+    },
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our values"
+    }
+  ]
+}
+{% endschema %}

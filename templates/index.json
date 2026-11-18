@@ -1,0 +1,893 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "17683932524cfdaf0a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8ecf1f1_Pm4wmn": {
+          "type": "experience_section_2",
+          "settings": {
+            "image": "shopify://shop_images/cosmetologist-looking-woman-looking-herself-mirror-consultation_1_b65c0239-9c25-4570-b9e9-eed27b17dfc3.png",
+            "accent_text": "Experience",
+            "main_heading": "the Celluderm Difference",
+            "paragraph_1": "Place your trust in our expert team of registered nurses and dermal therapists, \nand we will help you to become your most radiant, beautiful self.",
+            "paragraph_2": "Every treatment is tailored to your unique needs, ensuring you feel confident and radiant in your own skin. Experience the difference that expertise and dedication can make.",
+            "cta_label": "",
+            "cta_link": "",
+            "background_color": "#ffffff",
+            "accent_color": "#b4975a",
+            "heading_color": "#222222",
+            "text_color": "#6a6a6a",
+            "container_width": 1000,
+            "padding_mobile": 40,
+            "padding_desktop": 60,
+            "gap_mobile": 25,
+            "gap_desktop": 60,
+            "content_gap_mobile": 20,
+            "content_gap_desktop": 20,
+            "image_border_radius": 10,
+            "accent_size_mobile": 28,
+            "accent_size_desktop": 34,
+            "heading_size_mobile": 26,
+            "heading_size_desktop": 32,
+            "text_size_mobile": 14,
+            "text_size_desktop": 15,
+            "cta_size_mobile": 16,
+            "cta_size_desktop": 16,
+            "line_height": 1.6,
+            "text_max_width": 400
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8ecf1f1_Pm4wmn"
+      ],
+      "name": "Experience section",
+      "settings": {}
+    },
+    "1768392392dcf9e407": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_3135394_eqdcgA": {
+          "type": "beauty_hero_3",
+          "settings": {
+            "tab_1": "LASER",
+            "tab_2": "SKIN",
+            "tab_3": "AESTHETICS",
+            "tab_4": "BODY",
+            "tab_5": "SKINCARE",
+            "category_label": "LASER HAIR REMOVAL",
+            "heading": "Smooth moves, made\neasy.",
+            "description": "<p>No razors. No regrowth. No drama. Just advanced technology, a highlytrained team, and skin that stays Silky smooth long after your last session.</p>",
+            "button_label": "SHOP NOW",
+            "button_link": "shopify://collections/all",
+            "tab2_category": "SKIN TREATMENTS",
+            "tab2_heading": "Your skin, your rules.",
+            "tab2_description": "<p>From first concerns to long-term skin goals, our treatments are tailored to you. We’re here to understand your skin and help you feel confident in it. Every step of the way.</p>",
+            "tab2_button_label": "SHOP NOW",
+            "tab2_button_link": "shopify://collections/all",
+            "tab2_image": "shopify://shop_images/Web-Assets-SILK_SKIN-2-1-scaled.webp",
+            "tab3_category": "COSMETIC AESTHETICS",
+            "tab3_heading": "Consultations, personalised care.",
+            "tab3_description": "<p>Cosmetic Nurses supporting your individual aesthetic goals. Every consultation focuses on informed choices, comfort, and results that reflect your preferences.</p>",
+            "tab3_button_label": "SHOP NOW",
+            "tab3_button_link": "",
+            "tab3_image": "shopify://shop_images/Web-Assets-SILK_LASER_AESTHET-1.webp",
+            "tab4_category": "BODY SCULPTING",
+            "tab4_heading": "Shape, your way.",
+            "tab4_description": "<p>Feel more confident in your skin with our non-invasive body treatments. No pressure, no extremes, just smart solutions that fit your lifestyle.</p>",
+            "tab4_button_label": "SHOP NOW",
+            "tab4_button_link": "shopify://collections/all",
+            "tab4_image": "shopify://shop_images/Web-Assets-SILK_BODY-2-scaled.webp",
+            "tab5_category": "SKINCARE",
+            "tab5_heading": "Clinical skincare, that gets you.",
+            "tab5_description": "<p>We’re obsessed with products that actually work. From everyday essentials to targeted serums, our skincare ranges are formulated by experts and loved by real skin.</p>",
+            "tab5_button_label": "SHOP NOW",
+            "tab5_button_link": "shopify://collections/all",
+            "tab5_image": "shopify://shop_images/Web-Assets-SILK_SKINCARE-2-scaled.webp",
+            "image": "shopify://shop_images/Web-Assets-SILK_LASER-2_webp.png",
+            "background_color": "#e8e0ce",
+            "primary_color": "#724c29",
+            "text_color": "#666461",
+            "heading_size": 44
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_3135394_eqdcgA"
+      ],
+      "name": "Laser hair removal",
+      "settings": {}
+    },
+    "1768375502ab1c5abe": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_af5d04d_i9bQ3X": {
+          "type": "promotion_image_4",
+          "settings": {
+            "image": "shopify://shop_images/SILK-Summer-Sale-Back-and-Shoulders-1439-x-360_006_webp.png",
+            "aspect_ratio": "16/9",
+            "max_width": 1500,
+            "border_radius": 0,
+            "background_color": "#ffffff",
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "padding_top_mobile": 30,
+            "padding_bottom_mobile": 30
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_af5d04d_i9bQ3X"
+      ],
+      "name": "Promotion Image",
+      "settings": {}
+    },
+    "176838712955820168": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_654d6b9_URMtmf": {
+          "type": "our_services_5",
+          "settings": {
+            "label": "OUR SERVICES",
+            "heading": "Global Expertise, Personal Touch",
+            "heading_size": 36,
+            "see_all_text": "",
+            "see_all_link": "shopify://collections",
+            "button_text": "Book Now",
+            "button_link": "",
+            "button_border_radius": 30,
+            "service_1_image": "shopify://shop_images/beauty-portrait-ginger-woman-with-long-hair-posing-sideways-with-closed-eyes_1_835cd13d-d7e7-4c88-8d89-1f30462a63a9.png",
+            "service_1_title": "Scar Reduction Consultation",
+            "service_1_description": "Rejuvenate your skin with Cloud Aesthetics’s expert treatments, including Skin Needling, Chemical Peels, Exosomes, NCTF, Profhilo, and Rejuran.",
+            "service_1_product": "scar-reduction-consultation-1",
+            "service_2_image": "shopify://shop_images/problem-zone-kind-brunette-female-keeping-smile-her-face-while-making-notes-communication_1_842dec6e-e25c-4a11-95e6-dd2dcd286b3c.png",
+            "service_2_title": "The Consultation",
+            "service_2_description": "We’ll discuss your goals and concerns to determine the most suitable treatment for you.",
+            "service_2_product": "the-consultation",
+            "service_3_image": "shopify://shop_images/view-from-rejuvenation-beautiful-woman-enjoying-cosmetology-procedures-beauty-salon-dermatology-hands-blue-glows-healthcare-therapy-botox_1_387699e7-fd1d-4d42-bc88-9a02294b078d.png",
+            "service_3_title": "Medical Skin rejuvenation treatments",
+            "service_3_description": "We’ll discuss your goals and concerns to determine the most suitable treatment for you.",
+            "service_3_product": "medical-skin-rejuvenation-treatments-1",
+            "service_4_image": "shopify://shop_images/fitness-woman-with-measurement-tape_1.png",
+            "service_4_title": "Fat Reduction",
+            "service_4_description": "Consultation to reduce, eliminate or prevent wrinkles.",
+            "service_4_product": "fat-reduction",
+            "service_5_image": "shopify://shop_images/woman-is-undergoing-facial-lift-treatment-with-gloves-placed-her-head-gloves-are-used_1_41e0febd-da74-4e79-a1b0-7aaff897be76.png",
+            "service_5_title": "Facial Enhancement",
+            "service_5_description": "Consultation to reduce, eliminate or prevent wrinkles.",
+            "service_5_product": "facial-enhancement",
+            "service_6_image": "shopify://shop_images/qualified-worker-work-with-hair_1.png",
+            "service_6_title": "Platelet Rich Plasma",
+            "service_6_description": "Consultation to reduce, eliminate or prevent wrinkles.",
+            "service_6_product": "platelet-rich-plasma",
+            "service_7_image": "shopify://shop_images/cosmetologist-makes-rejuvenating-anti-wrinkle-injections-face-beautiful-woman-female-aesthetic-cosmetology-beauty-salon_1.png",
+            "service_7_title": "IV Infusion Therapy",
+            "service_7_description": "Consultation to reduce, eliminate or prevent wrinkles.",
+            "service_7_product": "iv-infusion-therapy",
+            "service_8_image": "shopify://shop_images/beauty-portrait-woman-white-towel-head-with-sponge-body-view-pink-heart-skincare-cleansing-eco-organic-cosmetic-spa-relax-concept_1.png",
+            "service_8_title": "Wrinkle Management",
+            "service_8_description": "Consultation to reduce, eliminate or prevent wrinkles.",
+            "service_8_product": "wrinkle-reduction",
+            "service_9_image": "shopify://shop_images/client-lies-salon-cosmetology-table-with-white-mask-her-face_1.png",
+            "service_9_title": "LED Light Therapy Facial",
+            "service_9_description": "Consultation to reduce, eliminate or prevent wrinkles.",
+            "service_9_product": "led-light-therapy-facial",
+            "service_10_image": "shopify://shop_images/young-woman-with-red-flower-grey-background-gynecology-concept_1.png",
+            "service_10_title": "Intimate Area Rejuvenation",
+            "service_10_description": "Consultation to reduce, eliminate or prevent wrinkles.",
+            "service_10_product": "intimate-area-rejuvenation",
+            "service_11_image": "shopify://shop_images/image-woman-doctor-medical-personel-grimacing-from-discomfort-having-headache-migraine-feeling-de_1.png",
+            "service_11_title": "Migraines/ Headache Treatment",
+            "service_11_description": "Consultation to reduce, eliminate or prevent wrinkles.",
+            "service_11_product": "migraines-headache-treatment",
+            "background_color": "#ffffff",
+            "label_color": "#717171",
+            "heading_color": "#151515",
+            "button_background": "#b4975a",
+            "button_text_color": "#ffffff",
+            "button_hover_background": "#2d2d2d",
+            "button_hover_text_color": "#ffffff",
+            "card_border_radius": 14,
+            "card_title_size": 16,
+            "card_description_size": 12,
+            "card_text_color": "#ffffff",
+            "glass_background": "#ffffff26",
+            "glass_border_color": "#ffffff33",
+            "glass_blur": 10,
+            "glass_border_radius": 10,
+            "glass_padding": 14
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_654d6b9_URMtmf"
+      ],
+      "name": "our services",
+      "settings": {}
+    },
+    "17683769540ef708e2": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_53fb051_a6Md3U": {
+          "type": "explore_by_concern_6",
+          "settings": {
+            "section_heading": "Explore by Concern",
+            "heading_size": 40,
+            "heading_color": "#151515",
+            "heading_font": "poppins_n4",
+            "explore_all_text": "Explore all concerns",
+            "explore_all_link": "",
+            "explore_all_size": 14,
+            "explore_all_color": "#151515",
+            "explore_all_hover_color": "#724c29",
+            "background_color": "#ffffff",
+            "card_gap": 25,
+            "card_background": "#ffffff",
+            "card_border_radius": 12,
+            "card_padding": 25,
+            "card_label": "Skin Concerns",
+            "label_size": 11,
+            "label_color": "#b4975a",
+            "title_size": 22,
+            "title_color": "#25211d",
+            "title_font": "poppins_n4",
+            "description_size": 15,
+            "description_color": "#666461",
+            "body_font": "poppins_n4",
+            "link_text": "Learn More",
+            "link_size": 14,
+            "link_color": "#151515",
+            "link_hover_color": "#715939",
+            "card_1_collection": "perimenopause-menopause",
+            "card_2_collection": "pigmented",
+            "card_3_collection": "acne",
+            "card_4_collection": "congested"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_53fb051_a6Md3U"
+      ],
+      "name": "Explore by concern",
+      "settings": {}
+    },
+    "1768377549c608e038": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a4fabea_bKeeFX": {
+          "type": "our_values_7",
+          "settings": {
+            "label_text": "OUR VALUES",
+            "heading_text": "What makes us.",
+            "label_color": "#717171",
+            "heading_color": "#000000",
+            "heading_size_mobile": 24,
+            "heading_size_tablet": 28,
+            "heading_size_desktop": 32,
+            "card_product_1": "scar-reduction-consultation-1",
+            "card_duration_1": "30 min",
+            "card_product_2": "the-consultation",
+            "card_duration_2": "30 min",
+            "card_product_3": "facial-enhancement",
+            "card_duration_3": "30 min",
+            "card_product_4": "wrinkle-reduction",
+            "card_duration_4": "30 min",
+            "card_product_5": "iv-infusion-therapy",
+            "card_duration_5": "30 min",
+            "card_product_6": "platelet-rich-plasma",
+            "card_duration_6": "30 min",
+            "card_product_7": "medical-microneedling",
+            "card_duration_7": "30 min",
+            "card_product_8": "led-light-therapy-facial",
+            "card_duration_8": "30 min",
+            "card_product_9": "body-enhancement",
+            "card_duration_9": "30 min",
+            "card_product_10": "",
+            "card_duration_10": "30 min",
+            "card_product_11": "",
+            "card_duration_11": "30 min",
+            "card_product_12": "",
+            "card_duration_12": "30 min",
+            "card_background": "#ffffff",
+            "card_border_color": "#e7e7e7",
+            "card_border_radius": 12,
+            "card_title_color": "#151515",
+            "card_text_color": "#717171",
+            "card_price_color": "#151515",
+            "button_text": "Book Now",
+            "button_background": "#b4975a",
+            "button_text_color": "#ffffff",
+            "button_hover_background": "#c4a886",
+            "button_hover_text_color": "#ffffff",
+            "button_border_radius": 8,
+            "details_text": "View full details",
+            "link_color": "#151515",
+            "link_hover_color": "#715939",
+            "show_more_button": true,
+            "more_button_text": "More",
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a4fabea_bKeeFX"
+      ],
+      "name": "Our values",
+      "settings": {}
+    },
+    "1768381453adf14ea2": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5f5b8b4_WqFAcB": {
+          "type": "product_grid_8",
+          "settings": {
+            "heading": "Shop our most trusted formulas",
+            "heading_font": "poppins_n4",
+            "heading_size_mobile": 22,
+            "heading_size_desktop": 24,
+            "heading_color": "#000000",
+            "columns_desktop": 4,
+            "grid_gap_mobile": 20,
+            "grid_gap_tablet": 25,
+            "grid_gap_desktop": 30,
+            "background_color": "#ffffff",
+            "image_border_radius": 12,
+            "product_title_font": "poppins_n4",
+            "product_title_size_mobile": 14,
+            "product_title_size_tablet": 15,
+            "product_title_size_desktop": 16,
+            "product_title_color": "#151515",
+            "price_font": "poppins_n4",
+            "price_size_mobile": 13,
+            "price_size_tablet": 14,
+            "price_size_desktop": 14,
+            "price_color": "#717171",
+            "button_background": "#151515",
+            "button_text_color": "#ffffff",
+            "button_hover_background": "#2c2c2c",
+            "button_hover_text_color": "#ffffff",
+            "product_1": "prf-under-eyes",
+            "product_2": "prp-under-eyes",
+            "product_3": "scar-reduction-consultation",
+            "product_4": "hayfever-treatment"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5f5b8b4_WqFAcB"
+      ],
+      "name": "Shop our Section",
+      "settings": {}
+    },
+    "176845059486617319": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_ef09118_9xD997": {
+          "type": "about_us_9",
+          "settings": {
+            "background_color": "#ffffff",
+            "section_padding_mobile": 60,
+            "section_padding_desktop": 100,
+            "content_max_width": 900,
+            "content_spacing_mobile": 30,
+            "content_spacing_desktop": 40,
+            "heading": "<p>Where Every Skincare Moment Counts.</p>",
+            "heading_font": "serif",
+            "heading_color": "#000000",
+            "heading_size_mobile": 32,
+            "heading_size_desktop": 56,
+            "description": "<p>At Beauty, we believe that skincare isn't just a routine; it's a journey of self-care and self-discovery. Our Beauty curated selection of premium skincare products is designed to elevate your beauty regimen, offering you a sanctuary of indulgence and transformation.</p>",
+            "body_font": "system_ui_n4",
+            "description_color": "#717171",
+            "description_size_mobile": 15,
+            "description_size_desktop": 17,
+            "description_max_width": 700,
+            "button_text": "ABOUT US",
+            "button_link": "shopify://pages/about-us",
+            "button_font": "system_ui_n4",
+            "button_background": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_background": "#2d2d2d",
+            "button_hover_text_color": "#ffffff",
+            "button_font_size_mobile": 12,
+            "button_font_size_desktop": 13,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 40,
+            "button_border_radius": 50,
+            "button_letter_spacing": 2,
+            "button_text_transform": "uppercase"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_ef09118_9xD997"
+      ],
+      "name": "Where Every Section",
+      "settings": {}
+    },
+    "177096434679c9d0e4": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_04ce4d1_BqF9tR": {
+          "type": "brands",
+          "settings": {
+            "logo_1": "shopify://shop_images/Airyday-Cover-removebg-preview_b7b294ae-cca3-43af-a2f0-221e65ed4a21.png",
+            "logo_3": "shopify://shop_images/TheOrdinary-removebg-preview.png",
+            "logo_4": "shopify://shop_images/la-roche-posay-vector-logo.png",
+            "scroll_speed": 25,
+            "logo_spacing": 60,
+            "background_color": "#ffffff",
+            "padding_top": 20,
+            "padding_bottom": 20
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_04ce4d1_BqF9tR"
+      ],
+      "settings": {}
+    },
+    "176838252895e333d0": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_09b7083_ayetkb": {
+          "type": "look_good_section_10",
+          "settings": {
+            "background_image": "shopify://shop_images/pretty-smiling-woman-look-away-home_1.png",
+            "image_position": "center center",
+            "section_height_mobile": 500,
+            "section_height_desktop": 700,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "card_background": "#ffffff26",
+            "card_blur": 12,
+            "card_border_radius": 16,
+            "card_max_width": 600,
+            "card_padding_mobile": 30,
+            "card_padding_desktop": 50,
+            "card_shadow_opacity": 20,
+            "heading": "Look Good, Feel Great",
+            "heading_font": "poppins_n4",
+            "heading_size_mobile": 32,
+            "heading_size_desktop": 48,
+            "heading_weight": 700,
+            "heading_color": "#ffffff",
+            "heading_spacing": 20,
+            "text_paragraph_1": "<p>Step into a space where your beauty and confidence are our top priorities. During your consultation, we'll take the time to understand your unique goals, preferences, and concerns. Our expert team will create a personalized treatment plan designed to enhance your natural features and help you achieve the look you've always desired.</p>",
+            "text_paragraph_2": "<p>From subtle refinements to transformative changes, we're here to ensure you leave not only looking your best but feeling incredible inside and out. At Cloud Aesthetics, your journey to renewed confidence starts here.</p>",
+            "text_size_mobile": 14,
+            "text_size_desktop": 16,
+            "text_line_height": 1.6,
+            "text_color": "#ffffff",
+            "text_opacity": 90,
+            "text_spacing": 20,
+            "buttons_spacing": 30,
+            "button_primary_label": "Learn More",
+            "button_primary_link": "shopify://pages/faq",
+            "button_primary_bg": "#ffffff",
+            "button_primary_color": "#151515",
+            "button_primary_bg_hover": "#f0f0f0",
+            "button_primary_color_hover": "#000000",
+            "button_secondary_label": "Book Now",
+            "button_secondary_link": "shopify://collections",
+            "show_arrow_icon": true,
+            "button_secondary_bg": "rgba(0,0,0,0)",
+            "button_secondary_color": "#ffffff",
+            "button_secondary_bg_hover": "#ffffff1a",
+            "button_secondary_color_hover": "#ffffff",
+            "button_font_size": 15,
+            "button_font_weight": 600,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 32,
+            "button_border_radius": 8,
+            "button_gap": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_09b7083_ayetkb"
+      ],
+      "name": "Look Good",
+      "settings": {}
+    },
+    "17684516703d038d65": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_0cdac6f_3dV4tA": {
+          "type": "shoppable_video_11",
+          "settings": {
+            "heading": "Shoppable video reels",
+            "section_padding_mobile": 40,
+            "section_padding_desktop": 60,
+            "background_color": "#ffffff",
+            "heading_size_mobile": 24,
+            "heading_size_desktop": 36,
+            "heading_color": "#151515",
+            "heading_spacing": 30,
+            "item_width_mobile": 180,
+            "item_width_desktop": 220,
+            "item_gap": 15,
+            "media_aspect_ratio": "9/16",
+            "media_border_radius": 12,
+            "item_title_size": 13,
+            "item_title_color": "#151515",
+            "item_price_size": 12,
+            "item_price_color": "#151515",
+            "product_info_spacing": 30,
+            "product_title_size_mobile": 18,
+            "product_title_size_desktop": 24,
+            "product_title_color": "#151515",
+            "product_price_size_mobile": 16,
+            "product_price_size_desktop": 20,
+            "product_price_color": "#151515",
+            "reel_1_enabled": true,
+            "reel_1_image": "shopify://shop_images/Rectangle_9.png",
+            "reel_1_video": "",
+            "reel_1_product": "3dsynerge-filler-creme-30ml-v",
+            "reel_2_enabled": true,
+            "reel_2_image": "shopify://shop_images/Web-Assets-Categories-SILK_Dehydrated-Skin_webp_9af1aa6d-8e3d-40a4-9671-a8af304f9259.png",
+            "reel_2_video": "",
+            "reel_2_product": "alpha-hydroxy-night-cream-50ml-v",
+            "reel_3_enabled": true,
+            "reel_3_image": "shopify://shop_images/Rectangle_7.png",
+            "reel_3_video": "",
+            "reel_3_product": "antioxidant-peptide-eye-gel-15ml-v",
+            "reel_4_enabled": true,
+            "reel_4_image": "shopify://shop_images/Rectangle_8.png",
+            "reel_4_video": "",
+            "reel_4_product": "antioxidant-defence-creme-plus-35ml-v",
+            "reel_5_enabled": true,
+            "reel_5_image": "shopify://shop_images/Rectangle_6.png",
+            "reel_5_video": "",
+            "reel_5_product": "antioxidant-defence-creme-35ml-v",
+            "reel_6_enabled": true,
+            "reel_6_image": "shopify://shop_images/Rectangle_10.png",
+            "reel_6_video": "",
+            "reel_6_product": "biostimulating-treatments",
+            "reel_7_enabled": true,
+            "reel_7_image": "shopify://shop_images/Rectangle_14.png",
+            "reel_7_video": "",
+            "reel_7_product": "botanical-infused-moisturising-toner-200ml-v",
+            "reel_8_enabled": true,
+            "reel_8_image": "shopify://shop_images/Web-Assets-Categories-SILK_Dehydrated-Skin_webp.png",
+            "reel_8_video": "",
+            "reel_8_product": "complete-anti-pollution-spritz-50ml-v",
+            "reel_9_enabled": true,
+            "reel_9_image": "shopify://shop_images/Web-Assets-SILK_LASER-2_webp_92267b2b-a1bd-47f5-8bc9-9fffabf9c171.png",
+            "reel_9_video": "",
+            "reel_9_product": "concentrated-alpha-hydroxy-toner-200ml-v",
+            "reel_10_enabled": true,
+            "reel_10_image": "shopify://shop_images/PDP-AirydayClearasDaySPF50_SunscreenForFace06.webp",
+            "reel_10_video": "",
+            "reel_10_product": "bronze-glow-spf50-dreamscreen-75ml"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_0cdac6f_3dV4tA"
+      ],
+      "disabled": true,
+      "name": "Shoppable video reels",
+      "settings": {}
+    },
+    "video_reels_kb4KdA": {
+      "type": "video-reels",
+      "blocks": {
+        "product_CAAJBg": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/4d305e188b5b4865a3ec837303069d9e.HD-1080p-2.5Mbps-25428248.mp4",
+            "featured_product": "purifying-anti-pollution-masque-75ml"
+          }
+        },
+        "product_wrYgbH": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/c90d76a595684ce789cbb1d8c56c23ac.HD-1080p-2.5Mbps-25428270.mp4",
+            "featured_product": "botanical-infused-moisturising-toner-200ml-v"
+          }
+        },
+        "product_Q3Dhwd": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/10eab6df9461465cb9bb7357a9d8ab19.HD-1080p-2.5Mbps-25428359.mp4",
+            "featured_product": "electro-sonic-df-mobile-device"
+          }
+        },
+        "product_nziX76": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/ca87e6ef6c494a4181a81ba36d9d2c7b.HD-1080p-2.5Mbps-25428822.mp4",
+            "featured_product": "vita-antioxidant-avst-moisturiser-2-50ml"
+          }
+        },
+        "product_cFgPyj": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/be85ff6dd7374d148021cc59efaba46d.HD-1080p-3.3Mbps-25428588.mp4",
+            "featured_product": "3dsynerge-filler-creme-30ml-v"
+          }
+        }
+      },
+      "block_order": [
+        "product_CAAJBg",
+        "product_wrYgbH",
+        "product_Q3Dhwd",
+        "product_nziX76",
+        "product_cFgPyj"
+      ],
+      "settings": {
+        "heading": "Your Skin, Your Way, SILKy Results",
+        "quick-add-enabled": false,
+        "hide-brand-name": false,
+        "video_button": false,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 40,
+        "margin-bottom": 40
+      }
+    },
+    "1770878263a708c977": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_09119ae_3cr8hE": {
+          "type": "whychooseus",
+          "settings": {
+            "heading": "Why choose Enhanced Aesthetix",
+            "heading_font": "assistant_n4",
+            "subtitle": "<p>Discover the benefits that set us apart</p>",
+            "text_alignment": "center",
+            "heading_size": 28,
+            "heading_size_desktop": 40,
+            "subtitle_size": 14,
+            "subtitle_size_desktop": 17,
+            "spacing_below_title": 12,
+            "spacing_below_heading": 40,
+            "columns_desktop": 3,
+            "columns_mobile": "1",
+            "grid_gap": 20,
+            "grid_gap_desktop": 40,
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "padding_top_desktop": 60,
+            "padding_bottom_desktop": 60,
+            "background_color": "#ffffff",
+            "heading_color": "#151515",
+            "subtitle_color": "#717171",
+            "item_alignment": "center",
+            "item_padding": 20,
+            "item_border_radius": 8,
+            "item_background_color": "#f9f9f9",
+            "item_title_color": "#151515",
+            "item_text_color": "#717171",
+            "icon_size": 60,
+            "icon_size_desktop": 80,
+            "icon_placeholder_color": "#e7e7e7",
+            "icon_border_color": "#b8860b",
+            "spacing_below_icon": 16,
+            "item_title_size": 18,
+            "item_title_size_desktop": 20,
+            "spacing_below_item_title": 8,
+            "item_text_size": 14,
+            "item_text_size_desktop": 16,
+            "item_1_enabled": true,
+            "item_1_icon": "shopify://shop_images/Gemini_Generated_Image_2skyqi2skyqi2sky.png",
+            "item_1_title": "Expert Team",
+            "item_1_text": "Our highly trained professionals deliver exceptional results",
+            "item_2_enabled": true,
+            "item_2_icon": "shopify://shop_images/Gemini_Generated_Image_qljp01qljp01qljp.png",
+            "item_2_title": "Premium Products",
+            "item_2_text": "We use only the highest quality products and equipment",
+            "item_3_enabled": true,
+            "item_3_icon": "shopify://shop_images/Gemini_Generated_Image_gw9woqgw9woqgw9w.png",
+            "item_3_title": "Personalized Care",
+            "item_3_text": "Customized treatments tailored to your unique needs",
+            "item_4_enabled": true,
+            "item_4_icon": "shopify://shop_images/Gemini_Generated_Image_lowo1ylowo1ylowo.png",
+            "item_4_title": "Proven Results",
+            "item_4_text": "Thousands of satisfied clients with visible transformations",
+            "item_5_enabled": true,
+            "item_5_icon": "shopify://shop_images/Gemini_Generated_Image_wmlk3pwmlk3pwmlk.png",
+            "item_5_title": "Safe & Hygienic",
+            "item_5_text": "Strict safety protocols and sterilization standards",
+            "item_6_enabled": true,
+            "item_6_icon": "shopify://shop_images/Gemini_Generated_Image_k5wec1k5wec1k5we.png",
+            "item_6_title": "Ongoing Support",
+            "item_6_text": "Comprehensive aftercare and follow-up consultations"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_09119ae_3cr8hE"
+      ],
+      "name": "Why Choose us",
+      "settings": {}
+    },
+    "1768379013c7444d84": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8585b97_PHYTxx": {
+          "type": "feature_blog_12",
+          "settings": {
+            "image": "shopify://shop_images/young-female-nurse-writing-clipboard_1.png",
+            "image_border_radius": 12,
+            "label": "FEATURED BLOG",
+            "label_font_size": 10,
+            "heading": "Skin Care All Year Round – Summer",
+            "heading_font": "serif",
+            "mobile_heading_size": 20,
+            "desktop_heading_size": 28,
+            "description": "<p>Taking good care of your skin during the summer is crucial, especially when the sun's rays are at their strongest.</p>",
+            "description_font_size": 14,
+            "primary_button_text": "BROWSE ARTICLES",
+            "primary_button_link": "shopify://blogs/news",
+            "primary_button_bg": "#ffffff",
+            "primary_button_color": "#151515",
+            "primary_button_hover_bg": "#f5f5f5",
+            "primary_button_hover_color": "#000000",
+            "button_font_size": 12,
+            "button_border_radius": 6,
+            "secondary_link_text": "BROWSE ARTICLES",
+            "secondary_link_url": "",
+            "secondary_link_font_size": 10,
+            "background_color": "#b4975a",
+            "text_color": "#ffffff",
+            "border_radius": 16,
+            "mobile_padding": 15,
+            "desktop_padding": 30,
+            "outer_padding": 20,
+            "max_width": 1400
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8585b97_PHYTxx"
+      ],
+      "name": "Featured Blog",
+      "settings": {}
+    },
+    "1768379784f0d196aa": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_19cd836_Cra8ee": {
+          "type": "insta_feed_13l",
+          "settings": {
+            "background_color": "#ffffff",
+            "section_padding_mobile": 40,
+            "section_padding_desktop": 60,
+            "subheading": "GET THE LATEST NEWS, TIPS AND STYLES",
+            "subheading_size_mobile": 11,
+            "subheading_size_desktop": 12,
+            "subheading_color": "#b4975a",
+            "heading": "Follow us on Instagram",
+            "heading_size_mobile": 28,
+            "heading_size_desktop": 36,
+            "heading_color": "#151515",
+            "button_text": "Follow Us",
+            "button_link": "",
+            "button_bg_color": "#b4975a",
+            "button_text_color": "#ffffff",
+            "button_hover_bg_color": "#9a7f48",
+            "button_hover_text_color": "#ffffff",
+            "button_border_radius": 4,
+            "card_border_radius": 12,
+            "grid_gap_desktop": 16,
+            "grid_gap_mobile": 12,
+            "image_1": "shopify://shop_images/Rectangle_10.png",
+            "show_play_icon_1": false,
+            "show_instagram_icon_1": false,
+            "image_2": "shopify://shop_images/Rectangle_11.png",
+            "show_play_icon_2": false,
+            "show_instagram_icon_2": false,
+            "image_3": "shopify://shop_images/Rectangle_12.png",
+            "show_play_icon_3": false,
+            "show_instagram_icon_3": false,
+            "image_4": "shopify://shop_images/Rectangle_13.png",
+            "show_play_icon_4": false,
+            "show_instagram_icon_4": false,
+            "image_5": "shopify://shop_images/Rectangle_14.png",
+            "show_play_icon_5": false,
+            "show_instagram_icon_5": true
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_19cd836_Cra8ee"
+      ],
+      "disabled": true,
+      "name": "Get the latest news",
+      "settings": {}
+    },
+    "1768380168ac998637": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_2062873_tHrxjG": {
+          "type": "book_appointments_14",
+          "settings": {
+            "section_background_color": "#b4975a",
+            "container_border_radius": 30,
+            "label_text": "GET IN TOUCH",
+            "label_color": "#b4975a",
+            "heading_text": "BOOK AN APPOINTMENT",
+            "heading_size": 24,
+            "heading_color": "#151515",
+            "description_text": "<p>If you would like to book an appointment, please fill out the form or give us a call. We look forward to hearing from you!</p>",
+            "description_size": 15,
+            "description_color": "#666666",
+            "phone_number": "+61 452 480 415",
+            "address_text": "268 Inkerman St, St Kilda East VIC 3183, Australia",
+            "email_address": "management@yourenhancedaesthetix.com",
+            "business_hours": "Monday – Friday: 8:00AM – 8:00PM",
+            "contact_text_size": 15,
+            "contact_text_color": "#333333",
+            "icon_color": "#b4975a",
+            "form_title": "Ask us a question",
+            "form_title_size": 24,
+            "form_title_color": "#ffffff",
+            "form_card_background": "#b4975a",
+            "form_card_border_radius": 20,
+            "input_border_radius": 8,
+            "name_placeholder": "Name",
+            "phone_placeholder": "Phone",
+            "email_placeholder": "Email",
+            "message_placeholder": "Message",
+            "button_text": "SUBMIT",
+            "button_font_size": 14,
+            "button_background": "#b4975a",
+            "button_hover_background": "#a6894d",
+            "button_text_color": "#ffffff",
+            "button_border_radius": 8,
+            "success_message": "Thank you! We'll be in touch soon."
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_2062873_tHrxjG"
+      ],
+      "name": "Get in touch",
+      "settings": {}
+    }
+  },
+  "order": [
+    "17683932524cfdaf0a",
+    "1768392392dcf9e407",
+    "1768375502ab1c5abe",
+    "176838712955820168",
+    "17683769540ef708e2",
+    "1768377549c608e038",
+    "1768381453adf14ea2",
+    "176845059486617319",
+    "177096434679c9d0e4",
+    "176838252895e333d0",
+    "17684516703d038d65",
+    "video_reels_kb4KdA",
+    "1770878263a708c977",
+    "1768379013c7444d84",
+    "1768379784f0d196aa",
+    "1768380168ac998637"
+  ]
+}

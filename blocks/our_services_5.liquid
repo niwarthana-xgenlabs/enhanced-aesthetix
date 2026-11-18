@@ -1,0 +1,2024 @@
+{% assign services_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .services-grid-{{ services_id }} {
+    display: block;
+    width: 100%;
+    padding: 60px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .services-grid__container-{{ services_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .services-grid__header-{{ services_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    gap: 20px;
+  }
+
+  .services-grid__header-content-{{ services_id }} {
+    flex: 1;
+  }
+
+  .services-grid__label-{{ services_id }} {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ block.settings.label_color }};
+    margin: 0 0 12px 0;
+    font-weight: 500;
+  }
+
+  .services-grid__heading-{{ services_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .services-grid__button-{{ services_id }} {
+    padding: 14px 32px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .services-grid__button-{{ services_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  .services-grid__header-actions-{{ services_id }} {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+
+  .services-grid__heading-row-{{ services_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-top: 28px;
+  }
+
+  .services-grid__heading-row-{{ services_id }} .services-grid__heading-{{ services_id }} {
+    margin: 0;
+  }
+
+  .services-grid__see-all-wrap-{{ services_id }} {
+    flex-shrink: 0;
+  }
+
+  .services-grid__see-all-{{ services_id }} {
+    padding: 14px 32px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .services-grid__see-all-{{ services_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  .services-grid__grid-{{ services_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .services-grid__column-{{ services_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .services-grid__card-{{ services_id }} {
+    position: relative;
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .services-grid__card-{{ services_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .services-grid__card-{{ services_id }}.has-product {
+    cursor: pointer;
+  }
+  
+  .services-grid__card-{{ services_id }}:not(.has-product) {
+    cursor: default;
+  }
+
+  .services-grid__card--large-{{ services_id }} {
+    min-height: 400px;
+  }
+
+  .services-grid__card--small-{{ services_id }} {
+    min-height: 190px;
+  }
+
+  .services-grid__card-image-{{ services_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .services-grid__card-placeholder-{{ services_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e7e7e7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .services-grid__card-placeholder-{{ services_id }} svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.3;
+  }
+
+  .services-grid__card-content-{{ services_id }} {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    z-index: 2;
+    background: {{ block.settings.glass_background }};
+    backdrop-filter: blur({{ block.settings.glass_blur }}px);
+    -webkit-backdrop-filter: blur({{ block.settings.glass_blur }}px);
+    border-radius: {{ block.settings.glass_border_radius }}px;
+    padding: {{ block.settings.glass_padding }}px;
+    border: 1px solid {{ block.settings.glass_border_color }};
+    max-width: calc(100% - 48px);
+    width: fit-content;
+  }
+
+  .services-grid__card-title-{{ services_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.card_text_color }};
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .services-grid__card-description-{{ services_id }} {
+    font-size: {{ block.settings.card_description_size }}px;
+    color: {{ block.settings.card_text_color }};
+    margin: 6px 0 0 0;
+    opacity: 0.9;
+    line-height: 1.4;
+  }
+
+  @media screen and (max-width: 989px) {
+    .services-grid-{{ services_id }} {
+      padding: 40px 20px;
+    }
+
+    .services-grid__header-{{ services_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+
+    .services-grid__heading-{{ services_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .services-grid__grid-{{ services_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .services-grid__card--large-{{ services_id }} {
+      min-height: 350px;
+    }
+
+    .services-grid__card--small-{{ services_id }} {
+      min-height: 250px;
+    }
+
+    .services-grid__card-content-{{ services_id }} {
+      bottom: 20px;
+      left: 20px;
+      max-width: calc(100% - 40px);
+      padding: calc({{ block.settings.glass_padding }}px * 0.85);
+    }
+
+    .services-grid__card-title-{{ services_id }} {
+      font-size: calc({{ block.settings.card_title_size }}px * 0.9);
+    }
+
+    .services-grid__card-description-{{ services_id }} {
+      font-size: calc({{ block.settings.card_description_size }}px * 0.9);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .services-grid-{{ services_id }} {
+      padding: 30px 16px;
+    }
+
+    .services-grid__heading-{{ services_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.7);
+    }
+
+    .services-grid__card--large-{{ services_id }},
+    .services-grid__card--small-{{ services_id }} {
+      min-height: 280px;
+    }
+
+    .services-grid__card-content-{{ services_id }} {
+      bottom: 16px;
+      left: 16px;
+      max-width: calc(100% - 32px);
+      padding: calc({{ block.settings.glass_padding }}px * 0.75);
+    }
+
+    .services-grid__card-title-{{ services_id }} {
+      font-size: calc({{ block.settings.card_title_size }}px * 0.85);
+    }
+
+    .services-grid__card-description-{{ services_id }} {
+      font-size: calc({{ block.settings.card_description_size }}px * 0.85);
+    }
+  }
+{% endstyle %}
+
+<div class="services-grid-{{ services_id }}" {{ block.shopify_attributes }}>
+  <div class="services-grid__container-{{ services_id }}">
+    <div class="services-grid__header-{{ services_id }}">
+      <div class="services-grid__header-content-{{ services_id }}">
+        {% if block.settings.label != blank %}
+          <p class="services-grid__label-{{ services_id }}">{{ block.settings.label }}</p>
+        {% endif %}
+        <div class="services-grid__heading-row-{{ services_id }}">
+          {% if block.settings.heading != blank %}
+            <h2 class="services-grid__heading-{{ services_id }}">{{ block.settings.heading }}</h2>
+          {% endif %}
+          {% if block.settings.see_all_text != blank and block.settings.see_all_link != blank %}
+            <div class="services-grid__see-all-wrap-{{ services_id }}">
+              <a href="{{ block.settings.see_all_link }}" class="services-grid__see-all-{{ services_id }}">{{ block.settings.see_all_text }}</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="services-grid__header-actions-{{ services_id }}">
+        {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+          <a href="{{ block.settings.button_link }}" class="services-grid__button-{{ services_id }}">
+            {{ block.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="services-grid__grid-{{ services_id }}">
+      <div class="services-grid__column-{{ services_id }}">
+        {% for i in (1..3) %}
+          {% liquid
+            assign service_title_key = 'service_' | append: i | append: '_title'
+            assign service_description_key = 'service_' | append: i | append: '_description'
+            assign service_image_key = 'service_' | append: i | append: '_image'
+            assign service_product_key = 'service_' | append: i | append: '_product'
+            
+            assign service_title = block.settings[service_title_key]
+            assign service_description = block.settings[service_description_key]
+            assign service_image = block.settings[service_image_key]
+            assign service_product = block.settings[service_product_key]
+          %}
+          
+          <div class="services-grid__card-{{ services_id }} services-grid__card--large-{{ services_id }} {% if service_product %}has-product{% endif %}"
+               {% if service_product %}
+               data-product-handle="{{ service_product.handle }}"
+               data-service-id="{{ services_id }}"
+               {% endif %}>
+            {% if service_image %}
+              <img
+                src="{{ service_image | image_url: width: 800 }}"
+                alt="{{ service_image.alt | escape }}"
+                class="services-grid__card-image-{{ services_id }}"
+                loading="lazy"
+                width="{{ service_image.width }}"
+                height="{{ service_image.height }}"
+              >
+            {% else %}
+              <div class="services-grid__card-placeholder-{{ services_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+            {% if service_title != blank or service_description != blank %}
+              <div class="services-grid__card-content-{{ services_id }}">
+                {% if service_title != blank %}
+                  <h3 class="services-grid__card-title-{{ services_id }}">{{ service_title }}</h3>
+                {% endif %}
+                {% if service_description != blank %}
+                  <p class="services-grid__card-description-{{ services_id }}">{{ service_description }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <div class="services-grid__card-{{ services_id }} services-grid__card--small-{{ services_id }} {% if block.settings.service_4_product %}has-product{% endif %}"
+             {% if block.settings.service_4_product %}
+             data-product-handle="{{ block.settings.service_4_product.handle }}"
+             data-service-id="{{ services_id }}"
+             {% endif %}>
+          {% if block.settings.service_4_image %}
+            <img
+              src="{{ block.settings.service_4_image | image_url: width: 600 }}"
+              alt="{{ block.settings.service_4_image.alt | escape }}"
+              class="services-grid__card-image-{{ services_id }}"
+              loading="lazy"
+              width="{{ block.settings.service_4_image.width }}"
+              height="{{ block.settings.service_4_image.height }}"
+            >
+          {% else %}
+            <div class="services-grid__card-placeholder-{{ services_id }}">
+              {{ 'image' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+          {% if block.settings.service_4_title != blank or block.settings.service_4_description != blank %}
+            <div class="services-grid__card-content-{{ services_id }}">
+              {% if block.settings.service_4_title != blank %}
+                <h3 class="services-grid__card-title-{{ services_id }}">{{ block.settings.service_4_title }}</h3>
+              {% endif %}
+              {% if block.settings.service_4_description != blank %}
+                <p class="services-grid__card-description-{{ services_id }}">{{ block.settings.service_4_description }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="services-grid__column-{{ services_id }}">
+        {% for i in (5..11) %}
+          {% liquid
+            assign service_title_key = 'service_' | append: i | append: '_title'
+            assign service_description_key = 'service_' | append: i | append: '_description'
+            assign service_image_key = 'service_' | append: i | append: '_image'
+            assign service_product_key = 'service_' | append: i | append: '_product'
+            
+            assign service_title = block.settings[service_title_key]
+            assign service_description = block.settings[service_description_key]
+            assign service_image = block.settings[service_image_key]
+            assign service_product = block.settings[service_product_key]
+          %}
+          
+          <div class="services-grid__card-{{ services_id }} services-grid__card--small-{{ services_id }} {% if service_product %}has-product{% endif %}"
+               {% if service_product %}
+               data-product-handle="{{ service_product.handle }}"
+               data-service-id="{{ services_id }}"
+               {% endif %}>
+            {% if service_image %}
+              <img
+                src="{{ service_image | image_url: width: 600 }}"
+                alt="{{ service_image.alt | escape }}"
+                class="services-grid__card-image-{{ services_id }}"
+                loading="lazy"
+                width="{{ service_image.width }}"
+                height="{{ service_image.height }}"
+              >
+            {% else %}
+              <div class="services-grid__card-placeholder-{{ services_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+            {% if service_title != blank or service_description != blank %}
+              <div class="services-grid__card-content-{{ services_id }}">
+                {% if service_title != blank %}
+                  <h3 class="services-grid__card-title-{{ services_id }}">{{ service_title }}</h3>
+                {% endif %}
+                {% if service_description != blank %}
+                  <p class="services-grid__card-description-{{ services_id }}">{{ service_description }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Product Selection Modal -->
+  <div class="booking-modal-overlay-{{ services_id }}" data-service-overlay></div>
+  <div class="booking-modal-{{ services_id }}" data-service-modal>
+    <div class="booking-modal-header-{{ services_id }}">
+      <h3 class="booking-modal-title-{{ services_id }}" data-service-title>Select Options</h3>
+      <button class="booking-modal-close-{{ services_id }}" data-service-close aria-label="Close modal">×</button>
+    </div>
+    <div class="booking-modal-body-{{ services_id }}">
+      <div class="product-modal-content-{{ services_id }}" data-service-content>
+        <div class="product-modal-loading-{{ services_id }}" data-service-loading>
+          <p>Loading product...</p>
+        </div>
+        <div class="product-modal-info-{{ services_id }}" data-service-info style="display: none;">
+          <div class="booking-calendar-wrapper-{{ services_id }}">
+            <div class="booking-calendar-{{ services_id }}">
+              <div class="booking-calendar-header-{{ services_id }}">
+                <button type="button" class="booking-calendar-nav-btn-{{ services_id }}" data-calendar-prev>
+                  ‹
+                </button>
+                <div class="booking-calendar-month-{{ services_id }}" data-calendar-month></div>
+                <button type="button" class="booking-calendar-nav-btn-{{ services_id }}" data-calendar-next>
+                  ›
+                </button>
+              </div>
+              <div class="booking-calendar-weekdays-{{ services_id }}">
+                <span>MO</span>
+                <span>TU</span>
+                <span>WE</span>
+                <span>TH</span>
+                <span>FR</span>
+                <span>SA</span>
+                <span>SU</span>
+              </div>
+              <div class="booking-calendar-grid-{{ services_id }}" data-calendar-grid></div>
+            </div>
+          </div>
+          <div class="product-modal-details-{{ services_id }}">
+            <h4 class="product-modal-name-{{ services_id }}" data-service-name></h4>
+            <div class="product-modal-price-{{ services_id }}" data-service-price></div>
+            <form class="product-form-{{ services_id }}" data-service-form>
+              <div class="product-variants-{{ services_id }}" data-service-variants></div>
+
+              <div class="booking-scheduler-{{ services_id }}">
+                <div class="booking-scheduler-left-{{ services_id }}">
+                  <!-- calendar already on the left; keep this for structure / responsiveness -->
+                </div>
+                <div class="booking-scheduler-right-{{ services_id }}">
+                  <div class="booking-timezone-{{ services_id }}">
+                    <span class="booking-timezone-label-{{ services_id }}">Choose your preferred time</span>
+                    <span class="booking-timezone-name-{{ services_id }}" data-timezone-label></span>
+                  </div>
+                  <div class="booking-times-grid-{{ services_id }}" data-time-slots></div>
+                </div>
+              </div>
+
+              <input type="hidden" name="booking_date" data-service-date>
+              <input type="hidden" name="booking_time" data-service-time>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="booking-modal-footer-{{ services_id }}">
+      <button 
+        type="button" 
+        class="booking-modal-button-{{ services_id }} booking-modal-button-cancel-{{ services_id }}" 
+        data-service-close
+      >
+        Cancel
+      </button>
+      <button 
+        type="button" 
+        class="booking-modal-button-{{ services_id }} booking-modal-button-submit-{{ services_id }}" 
+        data-service-add-to-cart
+        disabled
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+<style>
+  /* Booking Modal Styles */
+  .booking-modal-overlay-{{ services_id }}:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+  }
+
+  .booking-modal-overlay-{{ services_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .booking-modal-overlay-{{ services_id }}.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .booking-modal-{{ services_id }}:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+  }
+
+  .booking-modal-{{ services_id }} {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 1100px;
+    max-height: 90vh;
+    background-color: #ffffff;
+    border-radius: 16px;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    pointer-events: none;
+  }
+  
+  .booking-modal-{{ services_id }}.active {
+    display: flex;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .booking-modal-header-{{ services_id }} {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .booking-modal-title-{{ services_id }} {
+    font-size: 24px;
+    font-weight: 700;
+    color: #151515;
+    margin: 0;
+  }
+
+  .booking-modal-close-{{ services_id }} {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #717171;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .booking-modal-close-{{ services_id }}:hover {
+    background-color: #f5f5f5;
+    color: #151515;
+  }
+
+  .booking-modal-body-{{ services_id }} {
+    padding: 20px 24px;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .product-modal-content-{{ services_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .product-modal-loading-{{ services_id }} {
+    text-align: center;
+    padding: 40px;
+    color: #717171;
+  }
+
+  .product-modal-info-{{ services_id }} {
+    display: grid;
+    grid-template-columns: 1.1fr 1.1fr;
+    gap: 20px;
+    pointer-events: auto;
+  }
+
+  .product-modal-image-{{ services_id }} {
+    width: 100%;
+    max-height: 400px;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+  }
+
+  .product-modal-image-{{ services_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .booking-calendar-wrapper-{{ services_id }} {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 24px;
+  }
+
+  .booking-calendar-{{ services_id }} {
+    border: 1px solid #f0f0f0;
+    border-radius: 24px;
+    padding: 24px 32px 28px;
+    background-color: #fafafa;
+    width: 100%;
+    max-width: 420px;
+    min-height: 360px;
+  }
+
+  .booking-calendar-header-{{ services_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #151515;
+  }
+
+  .booking-calendar-nav-btn-{{ services_id }} {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    transition: all 0.2s ease;
+  }
+
+  .booking-calendar-nav-btn-{{ services_id }}:hover {
+    border-color: #B4975A;
+    background-color: #f9f5ec;
+  }
+
+  .booking-calendar-month-{{ services_id }} {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .booking-calendar-weekdays-{{ services_id }} {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #b0b0b0;
+  }
+
+  .booking-calendar-grid-{{ services_id }} {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    row-gap: 4px;
+    column-gap: 4px;
+  }
+
+  .booking-calendar-day-{{ services_id }} {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #151515;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .booking-calendar-day-{{ services_id }}.muted {
+    color: #d0d0d0;
+    cursor: default;
+    pointer-events: none;
+    border-color: transparent;
+  }
+
+  .booking-calendar-day-{{ services_id }}.today:not(.selected) {
+    border-color: #B4975A;
+  }
+
+  .booking-calendar-day-{{ services_id }}:hover:not(.selected) {
+    background-color: #f5f5f5;
+  }
+
+  .booking-calendar-day-{{ services_id }}.selected {
+    background-color: #151515;
+    color: #ffffff;
+    border-color: #151515;
+  }
+
+  .product-modal-details-{{ services_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: auto;
+  }
+
+  .product-modal-name-{{ services_id }} {
+    font-size: 20px;
+    font-weight: 700;
+    color: #151515;
+    margin: 0;
+  }
+
+  .product-modal-price-{{ services_id }} {
+    font-size: 18px;
+    font-weight: 600;
+    color: #B4975A;
+  }
+
+  .booking-scheduler-{{ services_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .booking-scheduler-right-{{ services_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .booking-timezone-{{ services_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .booking-timezone-label-{{ services_id }} {
+    font-size: 14px;
+    font-weight: 600;
+    color: #151515;
+  }
+
+  .booking-timezone-name-{{ services_id }} {
+    font-size: 12px;
+    color: #717171;
+  }
+
+  .booking-times-grid-{{ services_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .booking-time-slot-{{ services_id }} {
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 8px 10px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .booking-time-slot-{{ services_id }}:hover {
+    border-color: #B4975A;
+    background-color: #B4975A;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  .booking-time-slot-{{ services_id }}.selected {
+    border-color: #B4975A;
+    background-color: #B4975A;
+  }
+
+  .booking-time-slot-time-{{ services_id }} {
+    font-size: 13px;
+    font-weight: 500;
+    color: #151515;
+  }
+
+  .booking-time-slot-availability-{{ services_id }} {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #B4975A;
+  }
+
+  .booking-time-slot-{{ services_id }}:hover .booking-time-slot-time-{{ services_id }},
+  .booking-time-slot-{{ services_id }}:hover .booking-time-slot-availability-{{ services_id }},
+  .booking-time-slot-{{ services_id }}.selected .booking-time-slot-time-{{ services_id }},
+  .booking-time-slot-{{ services_id }}.selected .booking-time-slot-availability-{{ services_id }} {
+    color: #ffffff;
+  }
+
+  .product-variants-{{ services_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .product-variant-group-{{ services_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .booking-form-label-{{ services_id }} {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #151515;
+    margin-bottom: 8px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .product-variant-select-{{ services_id }},
+  .booking-form-input-{{ services_id }} {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+    background-color: #ffffff;
+    cursor: pointer !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23151515' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+  }
+  
+  select.product-variant-select-{{ services_id }} {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    z-index: 1000 !important;
+    position: relative;
+  }
+
+  .product-variant-select-{{ services_id }}:focus,
+  .booking-form-input-{{ services_id }}:focus {
+    outline: none;
+    border-color: #B4975A;
+  }
+
+  .quantity-btn-{{ services_id }} {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quantity-btn-{{ services_id }}:hover {
+    border-color: #B4975A;
+    background-color: #f9f9f9;
+  }
+
+  @media screen and (min-width: 750px) {
+    .product-modal-info-{{ services_id }} {
+      grid-template-columns: 1.1fr 1.1fr;
+    }
+  }
+
+  .booking-modal-footer-{{ services_id }} {
+    padding: 16px 24px 20px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+
+  .booking-modal-button-{{ services_id }} {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .booking-modal-button-cancel-{{ services_id }} {
+    background-color: #f5f5f5;
+    color: #151515;
+  }
+
+  .booking-modal-button-cancel-{{ services_id }}:hover {
+    background-color: #e0e0e0;
+  }
+
+  .booking-modal-button-submit-{{ services_id }} {
+    background-color: #B4975A;
+    color: #ffffff;
+  }
+
+  .booking-modal-button-submit-{{ services_id }}:hover {
+    background-color: #a48749;
+  }
+
+  .booking-modal-button-submit-{{ services_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 750px) {
+    .booking-modal-{{ services_id }} {
+      width: 95%;
+      max-height: 92vh;
+    }
+
+    .booking-modal-title-{{ services_id }} {
+      font-size: 20px;
+    }
+
+    .booking-modal-header-{{ services_id }},
+    .booking-modal-body-{{ services_id }},
+    .booking-modal-footer-{{ services_id }} {
+      padding: 20px;
+    }
+
+    .booking-calendar-{{ services_id }} {
+      margin-bottom: 12px;
+    }
+
+    .booking-times-grid-{{ services_id }} {
+      max-height: 220px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeServicesModal);
+    } else {
+      initializeServicesModal();
+    }
+
+    function initializeServicesModal() {
+      const sectionId = '{{ services_id }}';
+      const serviceCards = document.querySelectorAll('.services-grid__card-{{ services_id }}.has-product');
+      const serviceOverlay = document.querySelector('[data-service-overlay]');
+      const serviceModal = document.querySelector('[data-service-modal]');
+      const serviceCloseButtons = document.querySelectorAll('[data-service-close]');
+      const serviceAddToCartBtn = document.querySelector('[data-service-add-to-cart]');
+      const serviceLoading = document.querySelector('[data-service-loading]');
+      const serviceInfo = document.querySelector('[data-service-info]');
+      const serviceVariantsContainer = document.querySelector('[data-service-variants]');
+      const serviceNameEl = document.querySelector('[data-service-name]');
+      const servicePriceEl = document.querySelector('[data-service-price]');
+      const serviceDateInput = document.querySelector('[data-service-date]');
+      const serviceTimeInput = document.querySelector('[data-service-time]');
+      const calendarMonthEl = document.querySelector('[data-calendar-month]');
+      const calendarGridEl = document.querySelector('[data-calendar-grid]');
+      const calendarPrevBtn = document.querySelector('[data-calendar-prev]');
+      const calendarNextBtn = document.querySelector('[data-calendar-next]');
+      const timeSlotsContainer = document.querySelector('[data-time-slots]');
+      const timezoneLabelEl = document.querySelector('[data-timezone-label]');
+      
+      let currentProduct = null;
+      let selectedVariant = null;
+      let selectedOptions = {};
+      let calendarCurrentMonth = new Date();
+      calendarCurrentMonth.setDate(1);
+      let selectedDate = null;
+      let selectedTimeSlot = null;
+
+      // Fetch product data
+      async function fetchProduct(handle) {
+        try {
+          const response = await fetch(`/products/${handle}.js`);
+          if (!response.ok) throw new Error('Product not found');
+          return await response.json();
+        } catch (error) {
+          console.error('Error fetching product:', error);
+          return null;
+        }
+      }
+
+      // Find variant by selected options
+      function findVariant(product, options) {
+        return product.variants.find(variant => {
+          return product.options.every((option, index) => {
+            return variant.options[index] === options[option.name];
+          });
+        });
+      }
+
+      // Update variant selection
+      function updateVariantSelection() {
+        if (!currentProduct) return;
+        
+        selectedVariant = findVariant(currentProduct, selectedOptions);
+        
+        if (selectedVariant) {
+          if (servicePriceEl) {
+            const price = (selectedVariant.price / 100).toFixed(2);
+            servicePriceEl.textContent = `$${price}`;
+          }
+          
+          if (serviceAddToCartBtn) {
+            serviceAddToCartBtn.disabled = !selectedVariant.available;
+          }
+        } else {
+          if (serviceAddToCartBtn) {
+            serviceAddToCartBtn.disabled = true;
+          }
+        }
+      }
+
+      // Render product variants
+      function renderVariants(product) {
+        if (!serviceVariantsContainer || !product.options || product.options.length === 0) {
+          serviceVariantsContainer.innerHTML = '';
+          return;
+        }
+
+        let html = '';
+        product.options.forEach((option, optionIndex) => {
+          const optionLabel = option.name === 'Title' ? 'Variant' : option.name;
+          html += `
+            <div class="product-variant-group-{{ services_id }}">
+              <label class="booking-form-label-{{ services_id }}">${optionLabel}</label>
+              <select 
+                class="product-variant-select-{{ services_id }}"
+                data-option-name="${option.name}"
+                data-variant-select
+              >
+                <option value="">Select ${optionLabel}</option>
+          `;
+          
+          const uniqueValues = [...new Set(product.variants.map(v => v.options[optionIndex]))];
+          uniqueValues.forEach(value => {
+            const isSelected = selectedOptions[option.name] === value;
+            html += `
+              <option 
+                value="${value}"
+                ${isSelected ? 'selected' : ''}
+              >
+                ${value}
+              </option>
+            `;
+          });
+          
+          html += `
+              </select>
+            </div>
+          `;
+        });
+
+        serviceVariantsContainer.innerHTML = html;
+
+        const variantSelects = serviceVariantsContainer.querySelectorAll('[data-variant-select]');
+        variantSelects.forEach(select => {
+          select.style.pointerEvents = 'auto';
+          select.style.cursor = 'pointer';
+          select.style.zIndex = '1000';
+          
+          select.addEventListener('change', function() {
+            const optionName = this.getAttribute('data-option-name');
+            const optionValue = this.value;
+            
+            if (optionValue) {
+              selectedOptions[optionName] = optionValue;
+            } else {
+              delete selectedOptions[optionName];
+            }
+            
+            updateVariantSelection();
+          });
+        });
+      }
+
+      function formatDateForValue(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      function renderCalendar() {
+        if (!calendarGridEl || !calendarMonthEl) return;
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const year = calendarCurrentMonth.getFullYear();
+        const month = calendarCurrentMonth.getMonth();
+
+        const monthName = calendarCurrentMonth.toLocaleString(undefined, {
+          month: 'long',
+          year: 'numeric'
+        });
+        calendarMonthEl.textContent = monthName;
+
+        calendarGridEl.innerHTML = '';
+
+        const firstDay = new Date(year, month, 1);
+        const firstWeekday = (firstDay.getDay() + 6) % 7; // make Monday = 0
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let i = 0; i < firstWeekday; i++) {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'booking-calendar-day-{{ services_id }} muted';
+          calendarGridEl.appendChild(placeholder);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dateObj = new Date(year, month, day);
+          dateObj.setHours(0, 0, 0, 0);
+          const isoValue = formatDateForValue(dateObj);
+
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.textContent = day;
+          button.className = 'booking-calendar-day-{{ services_id }}';
+
+          if (dateObj.getTime() === today.getTime()) {
+            button.classList.add('today');
+          }
+
+          if (dateObj < today) {
+            button.classList.add('muted');
+            button.disabled = true;
+          }
+
+          if (serviceDateInput && serviceDateInput.value === isoValue) {
+            button.classList.add('selected');
+          }
+
+          button.addEventListener('click', function() {
+            const allDays = calendarGridEl.querySelectorAll('.booking-calendar-day-{{ services_id }}');
+            allDays.forEach(d => d.classList.remove('selected'));
+            button.classList.add('selected');
+
+            selectedDate = dateObj;
+            if (serviceDateInput) {
+              serviceDateInput.value = isoValue;
+            }
+          });
+
+          calendarGridEl.appendChild(button);
+        }
+      }
+
+      function renderTimeSlots() {
+        if (!timeSlotsContainer) return;
+
+        const timeSlots = [
+          '02:30 - 03:00',
+          '03:00 - 03:30',
+          '03:30 - 04:00',
+          '04:00 - 04:30',
+          '04:30 - 05:00',
+          '05:00 - 05:30',
+          '05:30 - 06:00',
+          '06:00 - 06:30',
+          '06:30 - 07:00',
+          '07:00 - 07:30',
+          '07:30 - 08:00',
+          '08:00 - 08:30'
+        ];
+
+        timeSlotsContainer.innerHTML = '';
+
+        timeSlots.forEach(slot => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'booking-time-slot-{{ services_id }}';
+          button.innerHTML = `
+            <span class="booking-time-slot-time-{{ services_id }}">${slot}</span>
+            <span class="booking-time-slot-availability-{{ services_id }}">1 LEFT</span>
+          `;
+
+          button.addEventListener('click', function() {
+            const allButtons = timeSlotsContainer.querySelectorAll('.booking-time-slot-{{ services_id }}');
+            allButtons.forEach(b => b.classList.remove('selected'));
+            button.classList.add('selected');
+
+            selectedTimeSlot = slot;
+            if (serviceTimeInput) {
+              serviceTimeInput.value = slot;
+            }
+          });
+
+          timeSlotsContainer.appendChild(button);
+        });
+      }
+
+      // Load product into modal
+      async function loadProduct(handle) {
+        if (serviceLoading) serviceLoading.style.display = 'block';
+        if (serviceInfo) serviceInfo.style.display = 'none';
+        
+        try {
+          const product = await fetchProduct(handle);
+          if (!product) {
+            alert('Product not found');
+            closeServiceModal();
+            return;
+          }
+
+          if (!product.variants || !Array.isArray(product.variants) || product.variants.length === 0) {
+            alert('Product has no variants available');
+            closeServiceModal();
+            return;
+          }
+
+          currentProduct = product;
+          selectedOptions = {};
+          selectedVariant = null;
+
+          if (serviceNameEl) serviceNameEl.textContent = product.title;
+          if (servicePriceEl) {
+            const price = (product.variants[0].price / 100).toFixed(2);
+            servicePriceEl.textContent = `$${price}`;
+          }
+
+          renderVariants(product);
+
+          if (serviceLoading) serviceLoading.style.display = 'none';
+          if (serviceInfo) serviceInfo.style.display = 'grid';
+
+          if (product.variants.length > 0 && product.options && product.options.length > 0) {
+            const firstAvailableVariant = product.variants.find(v => v.available) || product.variants[0];
+            if (firstAvailableVariant && firstAvailableVariant.options) {
+              product.options.forEach((option, index) => {
+                if (firstAvailableVariant.options[index]) {
+                  selectedOptions[option.name] = firstAvailableVariant.options[index];
+                }
+              });
+              updateVariantSelection();
+              
+              const variantSelects = serviceVariantsContainer.querySelectorAll('[data-variant-select]');
+              variantSelects.forEach(select => {
+                const optionName = select.getAttribute('data-option-name');
+                const optionIndex = product.options.findIndex(o => o.name === optionName);
+                
+                if (optionIndex >= 0 && firstAvailableVariant.options[optionIndex]) {
+                  select.value = firstAvailableVariant.options[optionIndex];
+                }
+              });
+            }
+          }
+
+          if (serviceDateInput) {
+            serviceDateInput.value = '';
+          }
+          if (serviceTimeInput) {
+            serviceTimeInput.value = '';
+          }
+
+          selectedDate = null;
+          selectedTimeSlot = null;
+
+          if (calendarGridEl) {
+            const allDays = calendarGridEl.querySelectorAll('.booking-calendar-day-{{ services_id }}');
+            allDays.forEach(d => d.classList.remove('selected'));
+          }
+          if (timeSlotsContainer) {
+            const allButtons = timeSlotsContainer.querySelectorAll('.booking-time-slot-{{ services_id }}');
+            allButtons.forEach(b => b.classList.remove('selected'));
+          }
+        } catch (error) {
+          console.error('Error loading product:', error);
+          alert('Error loading product. Please try again.');
+          closeServiceModal();
+        }
+      }
+
+      // Open modal
+      function openServiceModal(handle) {
+        if (!handle) {
+          alert('Product not configured');
+          return;
+        }
+
+        if (serviceOverlay && serviceModal) {
+          serviceOverlay.classList.add('active');
+          serviceModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+
+        loadProduct(handle);
+      }
+
+      // Close modal
+      function closeServiceModal() {
+        if (serviceOverlay && serviceModal) {
+          serviceOverlay.classList.remove('active');
+          serviceModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        currentProduct = null;
+        selectedVariant = null;
+        selectedOptions = {};
+      }
+
+      // Add to cart
+      async function addToCart() {
+        if (!selectedVariant || !currentProduct) {
+          alert('Please select all options');
+          return;
+        }
+
+        if (serviceDateInput && !serviceDateInput.value) {
+          alert('Please select a date');
+          return;
+        }
+
+        if (serviceTimeInput && !serviceTimeInput.value) {
+          alert('Please select a time');
+          return;
+        }
+
+        const quantity = 1;
+        
+        if (serviceAddToCartBtn) {
+          serviceAddToCartBtn.disabled = true;
+          serviceAddToCartBtn.textContent = 'Adding...';
+        }
+
+        try {
+          const properties = {};
+          if (serviceDateInput && serviceDateInput.value) {
+            properties['Booking date'] = serviceDateInput.value;
+          }
+          if (serviceTimeInput && serviceTimeInput.value) {
+            properties['Booking time'] = serviceTimeInput.value;
+          }
+
+          const payload = {
+            id: selectedVariant.id,
+            quantity: quantity
+          };
+
+          if (Object.keys(properties).length > 0) {
+            payload.properties = properties;
+          }
+
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.description || 'Failed to add to cart');
+          }
+
+          window.location.href = '/cart';
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+          alert('Failed to add product to cart. Please try again.');
+          if (serviceAddToCartBtn) {
+            serviceAddToCartBtn.disabled = false;
+            serviceAddToCartBtn.textContent = 'Add to Cart';
+          }
+        }
+      }
+
+      // Initialize calendar, time slots, and timezone
+      if (timezoneLabelEl) {
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          timezoneLabelEl.textContent = tz ? `${tz}` : 'Local time';
+        } catch (e) {
+          timezoneLabelEl.textContent = 'Local time';
+        }
+      }
+
+      if (calendarPrevBtn) {
+        calendarPrevBtn.addEventListener('click', function() {
+          calendarCurrentMonth.setMonth(calendarCurrentMonth.getMonth() - 1);
+          renderCalendar();
+        });
+      }
+
+      if (calendarNextBtn) {
+        calendarNextBtn.addEventListener('click', function() {
+          calendarCurrentMonth.setMonth(calendarCurrentMonth.getMonth() + 1);
+          renderCalendar();
+        });
+      }
+
+      renderCalendar();
+      renderTimeSlots();
+
+      // Event listeners for service cards
+      serviceCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          e.preventDefault();
+          const productHandle = this.getAttribute('data-product-handle');
+          if (productHandle) {
+            openServiceModal(productHandle);
+          }
+        });
+      });
+
+      // Close button listeners
+      serviceCloseButtons.forEach(button => {
+        button.addEventListener('click', closeServiceModal);
+      });
+
+      // Overlay click to close
+      if (serviceOverlay) {
+        serviceOverlay.addEventListener('click', function(e) {
+          if (e.target === serviceOverlay) {
+            closeServiceModal();
+          }
+        });
+      }
+
+      // ESC key to close
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && serviceModal && serviceModal.classList.contains('active')) {
+          closeServiceModal();
+        }
+      });
+
+      // Add to cart button
+      if (serviceAddToCartBtn) {
+        serviceAddToCartBtn.addEventListener('click', addToCart);
+      }
+
+      // Prevent modal from closing when clicking inside
+      if (serviceModal) {
+        serviceModal.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      }
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Services grid",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "OUR SERVICES"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Global Expertise, Personal Touch"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 42
+    },
+    {
+      "type": "text",
+      "id": "see_all_text",
+      "label": "See all link text",
+      "default": "See All Services"
+    },
+    {
+      "type": "url",
+      "id": "see_all_link",
+      "label": "See all link URL"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Book Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Service 1 (Left - Big)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_1_title",
+      "label": "Title",
+      "default": "Facial Treatments"
+    },
+    {
+      "type": "textarea",
+      "id": "service_1_description",
+      "label": "Description",
+      "default": "Rejuvenate your skin"
+    },
+    {
+      "type": "product",
+      "id": "service_1_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 2 (Left - Big)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_2_title",
+      "label": "Title",
+      "default": "Body Contouring"
+    },
+    {
+      "type": "textarea",
+      "id": "service_2_description",
+      "label": "Description",
+      "default": "Advanced body sculpting"
+    },
+    {
+      "type": "product",
+      "id": "service_2_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 3 (Left - Big)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_3_title",
+      "label": "Title",
+      "default": "Anti-Aging"
+    },
+    {
+      "type": "textarea",
+      "id": "service_3_description",
+      "label": "Description",
+      "default": "Turn back time"
+    },
+    {
+      "type": "product",
+      "id": "service_3_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 4 (Left - Small)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_4_title",
+      "label": "Title",
+      "default": "Wellness"
+    },
+    {
+      "type": "textarea",
+      "id": "service_4_description",
+      "label": "Description",
+      "default": "Holistic wellness"
+    },
+    {
+      "type": "product",
+      "id": "service_4_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 5 (Right - Small)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_5_title",
+      "label": "Title",
+      "default": "Massage Therapy"
+    },
+    {
+      "type": "textarea",
+      "id": "service_5_description",
+      "label": "Description",
+      "default": "Relax and rejuvenate"
+    },
+    {
+      "type": "product",
+      "id": "service_5_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 6 (Right - Small)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_6_title",
+      "label": "Title",
+      "default": "Hair Removal"
+    },
+    {
+      "type": "textarea",
+      "id": "service_6_description",
+      "label": "Description",
+      "default": "Smooth skin treatments"
+    },
+    {
+      "type": "product",
+      "id": "service_6_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 7 (Right - Small)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_7_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_7_title",
+      "label": "Title",
+      "default": "Microneedling"
+    },
+    {
+      "type": "textarea",
+      "id": "service_7_description",
+      "label": "Description",
+      "default": "Enhance skin texture"
+    },
+    {
+      "type": "product",
+      "id": "service_7_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 8 (Right - Small)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_8_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_8_title",
+      "label": "Title",
+      "default": "Chemical Peels"
+    },
+    {
+      "type": "textarea",
+      "id": "service_8_description",
+      "label": "Description",
+      "default": "Reveal fresh skin"
+    },
+    {
+      "type": "product",
+      "id": "service_8_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 9 (Right - Small)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_9_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_9_title",
+      "label": "Title",
+      "default": "Skincare"
+    },
+    {
+      "type": "textarea",
+      "id": "service_9_description",
+      "label": "Description",
+      "default": "Professional skincare"
+    },
+    {
+      "type": "product",
+      "id": "service_9_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 10 (Right - Small)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_10_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_10_title",
+      "label": "Title",
+      "default": "Laser Therapy"
+    },
+    {
+      "type": "textarea",
+      "id": "service_10_description",
+      "label": "Description",
+      "default": "Advanced laser"
+    },
+    {
+      "type": "product",
+      "id": "service_10_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Service 11 (Right - Small)"
+    },
+    {
+      "type": "image_picker",
+      "id": "service_11_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_11_title",
+      "label": "Title",
+      "default": "Skin Analysis"
+    },
+    {
+      "type": "textarea",
+      "id": "service_11_description",
+      "label": "Description",
+      "default": "Skin assessment"
+    },
+    {
+      "type": "product",
+      "id": "service_11_product",
+      "label": "Link to product"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#717171"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Card title size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_description_size",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Card description size",
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Glass effect"
+    },
+    {
+      "type": "color",
+      "id": "glass_background",
+      "label": "Glass background",
+      "default": "rgba(255, 255, 255, 0.15)"
+    },
+    {
+      "type": "color",
+      "id": "glass_border_color",
+      "label": "Glass border color",
+      "default": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "type": "range",
+      "id": "glass_blur",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Glass blur",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "glass_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Glass border radius",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "glass_padding",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Glass padding",
+      "default": 14
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services grid"
+    }
+  ]
+}
+{% endschema %}
