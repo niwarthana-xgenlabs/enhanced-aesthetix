@@ -38,6 +38,14 @@
     align-items: center;
   }
 
+  .concern-collection-hero--no-image {
+    grid-template-columns: 1fr;
+    max-width: 760px;
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 48px;
+  }
+
   .concern-collection-hero-text-label {
     font-size: 13px;
     letter-spacing: 1.8px;
@@ -166,19 +174,29 @@
 
     <section id="ProductGridContainer" class="collection__body">
       <header role="banner" class="collection__header">
-        <div class="concern-collection-hero">
+        {%- liquid
+          assign is_all_products = false
+          if collection.handle == 'all' or collection.handle == blank
+            assign is_all_products = true
+          endif
+        -%}
+        <div class="concern-collection-hero{% unless collection.image %} concern-collection-hero--no-image{% endunless %}">
           <div>
             <p class="concern-collection-hero-text-label">
-              Skin Concerns
+              {% if is_all_products %}Our range{% else %}Skin Concerns{% endif %}
             </p>
 
             <h1 class="concern-collection-hero-title">
-              {{ collection.title }}
+              {% if is_all_products %}All products{% else %}{{ collection.title }}{% endif %}
             </h1>
 
             <div class="concern-collection-hero-description">
               {% if collection.description != blank %}
                 {{ collection.description }}
+              {% elsif is_all_products %}
+                <p>
+                  Explore our full range of clinical skincare, sun protection and treatments.
+                </p>
               {% else %}
                 <p>
                   Discover treatments, products, and routines tailored to this specific skin concern.
@@ -187,8 +205,8 @@
             </div>
           </div>
 
-          <div class="concern-collection-hero-image-wrapper">
-            {% if collection.image %}
+          {% if collection.image %}
+            <div class="concern-collection-hero-image-wrapper">
               <img
                 src="{{ collection.image | image_url: width: 900 }}"
                 alt="{{ collection.title | escape }}"
@@ -197,15 +215,15 @@
                 width="{{ collection.image.width }}"
                 height="{{ collection.image.height }}"
               >
-            {% else %}
-              {{ 'collection-1' | placeholder_svg_tag: 'concern-collection-hero-image' }}
-            {% endif %}
-          </div>
+            </div>
+          {% endif %}
         </div>
 
-        <h2 class="concern-collection-treatments-heading">
-          How to treat {{ collection.title }}
-        </h2>
+        {% unless is_all_products %}
+          <h2 class="concern-collection-treatments-heading">
+            How to treat {{ collection.title }}
+          </h2>
+        {% endunless %}
       </header>
 
       <div class="collection__counter mobile">

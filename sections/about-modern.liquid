@@ -1,0 +1,568 @@
+{%- assign sid = section.id | replace: '_', '' | replace: '-', '' | downcase -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+{% style %}
+  .about-{{ sid }} {
+    --ab-cream: #f8f4ef;
+    --ab-ink: #1c1915;
+    --ab-muted: #5f574e;
+    --ab-gold: #c9a46a;
+    --ab-gold-text: #8a6a3a;
+    --ab-line: rgba(28, 25, 21, 0.12);
+    --ab-serif: 'Cormorant Garamond', Georgia, serif;
+    color: var(--ab-ink);
+    background: #ffffff;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .about-{{ sid }} * { box-sizing: border-box; }
+
+  .about-{{ sid }} .ab-container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .about-{{ sid }} .ab-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ab-gold-text);
+    margin: 0 0 16px;
+  }
+
+  .about-{{ sid }} .ab-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .about-{{ sid }} .ab-title {
+    font-family: var(--ab-serif);
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 0 0 20px;
+    font-size: clamp(34px, 5vw, 56px);
+    color: inherit;
+  }
+
+  .about-{{ sid }} .ab-title em { font-style: italic; color: var(--ab-gold-text); }
+
+  .about-{{ sid }} .ab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 0 30px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .about-{{ sid }} .ab-btn:hover { transform: translateY(-2px); }
+
+  .about-{{ sid }} .ab-btn--gold { background: var(--ab-gold); color: #1c1915; }
+  .about-{{ sid }} .ab-btn--gold:hover { background: #d8b67f; color: #1c1915; }
+
+  .about-{{ sid }} .ab-btn--ghost { border-color: rgba(255, 255, 255, 0.6); color: #ffffff; }
+  .about-{{ sid }} .ab-btn--ghost:hover { background: #ffffff; color: var(--ab-ink); }
+
+  .about-{{ sid }} .ab-btn--dark { background: var(--ab-ink); color: #ffffff; }
+  .about-{{ sid }} .ab-btn--dark:hover { background: #3a342d; color: #ffffff; }
+
+  /* ---------- Hero ---------- */
+  .about-{{ sid }} .ab-hero {
+    position: relative;
+    min-height: {{ section.settings.hero_height_mobile }}vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--ab-ink);
+    color: #ffffff;
+  }
+
+  .about-{{ sid }} .ab-hero__media,
+  .about-{{ sid }} .ab-hero__media img,
+  .about-{{ sid }} .ab-hero__media video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.hero_focal }};
+  }
+
+  .about-{{ sid }} .ab-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 17, 14, 0.45) 0%, rgba(20, 17, 14, 0.15) 35%, rgba(20, 17, 14, 0.8) 100%);
+  }
+
+  .about-{{ sid }} .ab-hero__content {
+    position: relative;
+    z-index: 1;
+    padding-top: 160px;
+    padding-bottom: 56px;
+    max-width: 720px;
+  }
+
+  .about-{{ sid }} .ab-hero .ab-eyebrow { color: var(--ab-gold); }
+  .about-{{ sid }} .ab-hero .ab-title { font-size: clamp(42px, 7vw, 84px); }
+  .about-{{ sid }} .ab-hero .ab-title em { color: var(--ab-gold); }
+
+  .about-{{ sid }} .ab-hero__text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 32px;
+    max-width: 560px;
+  }
+
+  .about-{{ sid }} .ab-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* ---------- Story ---------- */
+  .about-{{ sid }} .ab-story { padding: 72px 0; }
+
+  .about-{{ sid }} .ab-story__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .about-{{ sid }} .ab-story__media { position: relative; }
+
+  .about-{{ sid }} .ab-story__media img {
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+    display: block;
+  }
+
+  .about-{{ sid }} .ab-story__placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 24px;
+    display: block;
+    background: var(--ab-cream);
+  }
+
+  .about-{{ sid }} .ab-story__media::before {
+    content: '';
+    position: absolute;
+    inset: 20px -20px -20px 20px;
+    border: 1px solid var(--ab-gold);
+    border-radius: 24px;
+    z-index: -1;
+  }
+
+  .about-{{ sid }} .ab-story__body { font-size: 16px; line-height: 1.8; color: var(--ab-muted); }
+  .about-{{ sid }} .ab-story__body p { margin: 0 0 16px; }
+
+  .about-{{ sid }} .ab-quote {
+    margin: 28px 0 0;
+    padding: 4px 0 4px 24px;
+    border-left: 2px solid var(--ab-gold);
+    font-family: var(--ab-serif);
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--ab-ink);
+  }
+
+  /* ---------- Values ---------- */
+  .about-{{ sid }} .ab-values { padding: 72px 0; background: var(--ab-cream); }
+
+  .about-{{ sid }} .ab-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .about-{{ sid }} .ab-head .ab-eyebrow::after { content: ''; width: 32px; height: 1px; background: currentColor; }
+  .about-{{ sid }} .ab-head p { color: var(--ab-muted); line-height: 1.7; margin: 0; }
+
+  .about-{{ sid }} .ab-cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
+
+  .about-{{ sid }} .ab-card {
+    background: #ffffff;
+    border: 1px solid var(--ab-line);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+
+  .about-{{ sid }} .ab-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(28, 25, 21, 0.08);
+    border-color: var(--ab-gold);
+  }
+
+  .about-{{ sid }} .ab-card__num {
+    font-family: var(--ab-serif);
+    font-size: 40px;
+    line-height: 1;
+    color: var(--ab-gold);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .about-{{ sid }} .ab-card h3 {
+    font-family: var(--ab-serif);
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0 0 10px;
+    color: var(--ab-ink);
+  }
+
+  .about-{{ sid }} .ab-card p { margin: 0; color: var(--ab-muted); line-height: 1.7; font-size: 15px; }
+
+  /* ---------- Journey ---------- */
+  .about-{{ sid }} .ab-journey { padding: 72px 0; }
+
+  .about-{{ sid }} .ab-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    counter-reset: abstep;
+  }
+
+  .about-{{ sid }} .ab-step { position: relative; padding-top: 28px; border-top: 1px solid var(--ab-line); }
+
+  .about-{{ sid }} .ab-step::before {
+    counter-increment: abstep;
+    content: '0' counter(abstep);
+    position: absolute;
+    top: -12px;
+    left: 0;
+    padding-right: 12px;
+    background: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--ab-gold-text);
+  }
+
+  .about-{{ sid }} .ab-step h3 { font-family: var(--ab-serif); font-size: 24px; font-weight: 500; margin: 0 0 8px; color: var(--ab-ink); }
+  .about-{{ sid }} .ab-step p { margin: 0; color: var(--ab-muted); line-height: 1.7; font-size: 15px; }
+
+  /* ---------- CTA ---------- */
+  .about-{{ sid }} .ab-cta { padding: 0 0 80px; }
+
+  .about-{{ sid }} .ab-cta__box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    background: var(--ab-ink);
+    color: #ffffff;
+    text-align: center;
+    padding: 64px 24px;
+  }
+
+  .about-{{ sid }} .ab-cta__box::before {
+    content: '';
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 164, 106, 0.35);
+    top: -210px;
+    right: -120px;
+  }
+
+  .about-{{ sid }} .ab-cta__box::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 164, 106, 0.25);
+    bottom: -170px;
+    left: -80px;
+  }
+
+  .about-{{ sid }} .ab-cta__box > * { position: relative; z-index: 1; }
+  .about-{{ sid }} .ab-cta .ab-eyebrow { color: var(--ab-gold); }
+  .about-{{ sid }} .ab-cta .ab-title em { color: var(--ab-gold); }
+  .about-{{ sid }} .ab-cta p { color: rgba(255, 255, 255, 0.75); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
+  .about-{{ sid }} .ab-cta .ab-actions { justify-content: center; }
+
+  /* ---------- Reveal animation ---------- */
+  .about-{{ sid }} [data-ab-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .about-{{ sid }} [data-ab-reveal].is-visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-{{ sid }} [data-ab-reveal] { opacity: 1; transform: none; transition: none; }
+    .about-{{ sid }} .ab-btn:hover,
+    .about-{{ sid }} .ab-card:hover { transform: none; }
+  }
+
+  @media screen and (min-width: 750px) {
+    .about-{{ sid }} .ab-container { padding: 0 40px; }
+    .about-{{ sid }} .ab-hero { min-height: {{ section.settings.hero_height_desktop }}vh; }
+    .about-{{ sid }} .ab-hero__content { padding-top: 200px; padding-bottom: 88px; }
+    .about-{{ sid }} .ab-cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .about-{{ sid }} .ab-steps { grid-template-columns: repeat(2, 1fr); }
+    .about-{{ sid }} .ab-cta__box { padding: 88px 48px; }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .about-{{ sid }} .ab-story,
+    .about-{{ sid }} .ab-values,
+    .about-{{ sid }} .ab-journey { padding: 112px 0; }
+    .about-{{ sid }} .ab-story__grid { grid-template-columns: 5fr 6fr; gap: 88px; }
+    .about-{{ sid }} .ab-cards { grid-template-columns: repeat(4, 1fr); }
+    .about-{{ sid }} .ab-steps { grid-template-columns: repeat(4, 1fr); }
+    .about-{{ sid }} .ab-cta { padding-bottom: 112px; }
+  }
+{% endstyle %}
+
+<div class="about-{{ sid }}" {{ section.shopify_attributes }}>
+
+  {%- comment -%} Hero {%- endcomment -%}
+  <section class="ab-hero">
+    <div class="ab-hero__media">
+      {%- if section.settings.hero_video != blank -%}
+        {%- if section.settings.hero_image != blank -%}
+          {%- assign hero_poster = section.settings.hero_image | image_url: width: 1600 -%}
+        {%- else -%}
+          {%- assign hero_poster = section.settings.hero_video.preview_image | image_url: width: 1600 -%}
+        {%- endif -%}
+        {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', poster: hero_poster }}
+      {%- elsif section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 2000, 2400', alt: section.settings.hero_image.alt }}
+      {%- endif -%}
+    </div>
+    <div class="ab-container">
+      <div class="ab-hero__content" data-ab-reveal>
+        {%- if section.settings.hero_eyebrow != blank -%}<p class="ab-eyebrow">{{ section.settings.hero_eyebrow }}</p>{%- endif -%}
+        <h1 class="ab-title">{{ section.settings.hero_heading }}</h1>
+        {%- if section.settings.hero_text != blank -%}<p class="ab-hero__text">{{ section.settings.hero_text }}</p>{%- endif -%}
+        <div class="ab-actions">
+          {%- if section.settings.hero_btn1_label != blank -%}
+            <a class="ab-btn ab-btn--gold" href="{{ section.settings.hero_btn1_link | default: '/#book-appointment-section' }}">{{ section.settings.hero_btn1_label }}</a>
+          {%- endif -%}
+          {%- if section.settings.hero_btn2_label != blank -%}
+            <a class="ab-btn ab-btn--ghost" href="{{ section.settings.hero_btn2_link | default: '/collections' }}">{{ section.settings.hero_btn2_label }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Story {%- endcomment -%}
+  <section class="ab-story">
+    <div class="ab-container ab-story__grid">
+      <div class="ab-story__media" data-ab-reveal>
+        {%- if section.settings.story_image != blank -%}
+          {{ section.settings.story_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 1024px) 45vw, 100vw', widths: '600, 900, 1200', alt: section.settings.story_image.alt }}
+        {%- else -%}
+          <div class="ab-story__placeholder"></div>
+        {%- endif -%}
+      </div>
+      <div data-ab-reveal>
+        {%- if section.settings.story_eyebrow != blank -%}<p class="ab-eyebrow">{{ section.settings.story_eyebrow }}</p>{%- endif -%}
+        <h2 class="ab-title">{{ section.settings.story_heading }}</h2>
+        <div class="ab-story__body">{{ section.settings.story_text }}</div>
+        {%- if section.settings.story_quote != blank -%}
+          <blockquote class="ab-quote">{{ section.settings.story_quote }}</blockquote>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Values {%- endcomment -%}
+  {%- assign values = section.blocks | where: 'type', 'value' -%}
+  {%- if values.size > 0 -%}
+    <section class="ab-values">
+      <div class="ab-container">
+        <div class="ab-head" data-ab-reveal>
+          {%- if section.settings.values_eyebrow != blank -%}<p class="ab-eyebrow">{{ section.settings.values_eyebrow }}</p>{%- endif -%}
+          <h2 class="ab-title">{{ section.settings.values_heading }}</h2>
+          {%- if section.settings.values_text != blank -%}<p>{{ section.settings.values_text }}</p>{%- endif -%}
+        </div>
+        <div class="ab-cards">
+          {%- for block in values -%}
+            <div class="ab-card" data-ab-reveal style="transition-delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
+              <span class="ab-card__num">{{ forloop.index | prepend: '0' }}</span>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Journey {%- endcomment -%}
+  {%- assign steps = section.blocks | where: 'type', 'step' -%}
+  {%- if steps.size > 0 -%}
+    <section class="ab-journey">
+      <div class="ab-container">
+        <div class="ab-head" data-ab-reveal>
+          {%- if section.settings.journey_eyebrow != blank -%}<p class="ab-eyebrow">{{ section.settings.journey_eyebrow }}</p>{%- endif -%}
+          <h2 class="ab-title">{{ section.settings.journey_heading }}</h2>
+        </div>
+        <ol class="ab-steps">
+          {%- for block in steps -%}
+            <li class="ab-step" data-ab-reveal style="transition-delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} CTA {%- endcomment -%}
+  {%- if section.settings.cta_heading != blank -%}
+    <section class="ab-cta">
+      <div class="ab-container">
+        <div class="ab-cta__box" data-ab-reveal>
+          {%- if section.settings.cta_eyebrow != blank -%}<p class="ab-eyebrow">{{ section.settings.cta_eyebrow }}</p>{%- endif -%}
+          <h2 class="ab-title">{{ section.settings.cta_heading }}</h2>
+          {%- if section.settings.cta_text != blank -%}<p>{{ section.settings.cta_text }}</p>{%- endif -%}
+          <div class="ab-actions">
+            {%- if section.settings.cta_btn1_label != blank -%}
+              <a class="ab-btn ab-btn--gold" href="{{ section.settings.cta_btn1_link | default: '/#book-appointment-section' }}">{{ section.settings.cta_btn1_label }}</a>
+            {%- endif -%}
+            {%- if section.settings.cta_btn2_label != blank -%}
+              <a class="ab-btn ab-btn--ghost" href="{{ section.settings.cta_btn2_link | default: '/pages/contact' }}">{{ section.settings.cta_btn2_label }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+<script>
+  (function () {
+    var root = document.querySelector('.about-{{ sid }}');
+    if (!root) return;
+    var items = root.querySelectorAll('[data-ab-reveal]');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "About (modern)",
+  "tag": "section",
+  "class": "about-modern-section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "video", "id": "hero_video", "label": "Hero video", "info": "Plays muted on loop. If empty, the hero image is used." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Shown while the video loads, or on its own when no video is set." },
+    {
+      "type": "select", "id": "hero_focal", "label": "Image focus", "default": "center",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    { "type": "range", "id": "hero_height_desktop", "label": "Hero height (desktop)", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 85 },
+    { "type": "range", "id": "hero_height_mobile", "label": "Hero height (mobile)", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 75 },
+    { "type": "text", "id": "hero_eyebrow", "label": "Small heading", "default": "About Enhanced Aesthetix" },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "info": "Wrap a word in <em></em> to highlight it in gold.", "default": "Confidence, <em>beautifully</em> enhanced" },
+    { "type": "textarea", "id": "hero_text", "label": "Text", "default": "Advanced aesthetic, skin and laser treatments delivered with care, expertise and natural-looking results." },
+    { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Book a consultation" },
+    { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link", "info": "Leave empty to open the booking form on the home page." },
+    { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Explore treatments" },
+    { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
+
+    { "type": "header", "content": "Our story" },
+    { "type": "image_picker", "id": "story_image", "label": "Image" },
+    { "type": "text", "id": "story_eyebrow", "label": "Small heading", "default": "Our story" },
+    { "type": "text", "id": "story_heading", "label": "Heading", "default": "Care that's <em>personal</em>, results that last" },
+    { "type": "richtext", "id": "story_text", "label": "Text", "default": "<p>Founded with a passion for confidence and self-care, our clinic delivers advanced aesthetic, skin and laser treatments using modern technology and proven techniques.</p>" },
+    { "type": "text", "id": "story_quote", "label": "Quote", "default": "Trusted care, outstanding service, and results that truly make a difference." },
+
+    { "type": "header", "content": "Values" },
+    { "type": "text", "id": "values_eyebrow", "label": "Small heading", "default": "Why choose us" },
+    { "type": "text", "id": "values_heading", "label": "Heading", "default": "What we <em>stand for</em>" },
+    { "type": "textarea", "id": "values_text", "label": "Text" },
+
+    { "type": "header", "content": "Your journey" },
+    { "type": "text", "id": "journey_eyebrow", "label": "Small heading", "default": "Your journey" },
+    { "type": "text", "id": "journey_heading", "label": "Heading", "default": "From first visit to <em>lasting glow</em>" },
+
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_eyebrow", "label": "Small heading", "default": "Begin today" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Ready to feel like <em>your best self?</em>" },
+    { "type": "textarea", "id": "cta_text", "label": "Text", "default": "Book a consultation and let our team create a treatment plan that's made for you." },
+    { "type": "text", "id": "cta_btn1_label", "label": "Button 1 label", "default": "Book a consultation" },
+    { "type": "url", "id": "cta_btn1_link", "label": "Button 1 link", "info": "Leave empty to open the booking form on the home page." },
+    { "type": "text", "id": "cta_btn2_label", "label": "Button 2 label", "default": "Contact us" },
+    { "type": "url", "id": "cta_btn2_link", "label": "Button 2 link" }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Value" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Journey step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Step" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About (modern)",
+      "blocks": [
+        { "type": "value", "settings": { "title": "Safe & clinical", "text": "Every treatment is delivered by trained professionals using proven techniques and modern technology." } },
+        { "type": "value", "settings": { "title": "Personalised", "text": "No two clients are the same. Your plan is tailored to your skin, goals and lifestyle." } },
+        { "type": "value", "settings": { "title": "Premium products", "text": "We pair our treatments with high-quality skincare to support and extend your results." } },
+        { "type": "value", "settings": { "title": "Natural results", "text": "Subtle, long-lasting enhancements that look and feel like you, only refreshed." } },
+        { "type": "step", "settings": { "title": "Consultation", "text": "We listen to your concerns, assess your skin and talk through your goals." } },
+        { "type": "step", "settings": { "title": "Your plan", "text": "We design a personalised treatment plan with clear expectations and timelines." } },
+        { "type": "step", "settings": { "title": "Treatment", "text": "Relax while our experienced team delivers your treatment safely and comfortably." } },
+        { "type": "step", "settings": { "title": "Aftercare", "text": "We guide your at-home routine and follow up to keep your results glowing." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

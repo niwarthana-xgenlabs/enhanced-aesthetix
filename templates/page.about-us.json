@@ -88,7 +88,8 @@
         "mobile_text_horizontal_position": "center",
         "margin-top": 0,
         "margin-bottom": 0
-      }
+      },
+      "disabled": true
     },
     "1778038b-a0c4-48d6-9085-3312ff830b43": {
       "type": "rich-text",
@@ -186,7 +187,8 @@
         "mobile_text_horizontal_position": "center",
         "margin-top": 0,
         "margin-bottom": 0
-      }
+      },
+      "disabled": true
     },
     "d4180441-144f-448c-a157-500e0a202d36": {
       "type": "image-with-text",
@@ -415,9 +417,108 @@
         "margin-top": 0,
         "margin-bottom": 40
       }
+    },
+    "about_modern": {
+      "type": "about-modern",
+      "blocks": {
+        "value_1": {
+          "type": "value",
+          "settings": {
+            "title": "Safe & clinical",
+            "text": "Every treatment is delivered by trained professionals using proven techniques and modern technology."
+          }
+        },
+        "value_2": {
+          "type": "value",
+          "settings": {
+            "title": "Personalised",
+            "text": "No two clients are the same. Your plan is tailored to your skin, goals and lifestyle."
+          }
+        },
+        "value_3": {
+          "type": "value",
+          "settings": {
+            "title": "Premium products",
+            "text": "We pair our treatments with high-quality skincare to support and extend your results."
+          }
+        },
+        "value_4": {
+          "type": "value",
+          "settings": {
+            "title": "Natural results",
+            "text": "Subtle, long-lasting enhancements that look and feel like you, only refreshed."
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "title": "Consultation",
+            "text": "We listen to your concerns, assess your skin and talk through your goals."
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "title": "Your plan",
+            "text": "We design a personalised treatment plan with clear expectations and timelines."
+          }
+        },
+        "step_7": {
+          "type": "step",
+          "settings": {
+            "title": "Treatment",
+            "text": "Relax while our experienced team delivers your treatment safely and comfortably."
+          }
+        },
+        "step_8": {
+          "type": "step",
+          "settings": {
+            "title": "Aftercare",
+            "text": "We guide your at-home routine and follow up to keep your results glowing."
+          }
+        }
+      },
+      "block_order": [
+        "value_1",
+        "value_2",
+        "value_3",
+        "value_4",
+        "step_5",
+        "step_6",
+        "step_7",
+        "step_8"
+      ],
+      "settings": {
+        "hero_video": "shopify://files/videos/YTDown.com_YouTube_Skin-Care-Product-example-commercial_Media_otej7WLdPh0_002_720p.mp4",
+        "hero_image": "",
+        "hero_focal": "center",
+        "hero_height_desktop": 85,
+        "hero_height_mobile": 75,
+        "hero_eyebrow": "About Enhanced Aesthetix",
+        "hero_heading": "Confidence, <em>beautifully</em> enhanced",
+        "hero_text": "Advanced aesthetic, skin and laser treatments delivered with care, expertise and natural-looking results.",
+        "hero_btn1_label": "Book a consultation",
+        "hero_btn2_label": "Explore treatments",
+        "story_image": "shopify://shop_images/about-story-hydrafacial.jpg",
+        "story_eyebrow": "Our story",
+        "story_heading": "Care that is <em>personal</em>, results that last",
+        "story_text": "<p>Founded with a passion for confidence and self-care, our clinic is dedicated to delivering advanced aesthetic, skin, and laser treatments using modern technology and proven techniques. Our experienced team focuses on providing safe, personalised solutions that help clients look and feel their best.</p><p>We take pride in offering high-quality cosmetic and skincare services tailored to individual needs, combining professional expertise with premium products for long-lasting, natural-looking results.</p><p>With a growing presence and a strong commitment to excellence, our goal is simple — to provide trusted care, outstanding service, and results that truly make a difference.</p>",
+        "story_quote": "Trusted care, outstanding service, and results that truly make a difference.",
+        "values_eyebrow": "Why choose us",
+        "values_heading": "What we <em>stand for</em>",
+        "values_text": "",
+        "journey_eyebrow": "Your journey",
+        "journey_heading": "From first visit to <em>lasting glow</em>",
+        "cta_eyebrow": "Begin today",
+        "cta_heading": "Ready to feel like <em>your best self?</em>",
+        "cta_text": "Book a consultation and let our team create a treatment plan that is made for you.",
+        "cta_btn1_label": "Book a consultation",
+        "cta_btn2_label": "Contact us"
+      }
     }
   },
   "order": [
+    "about_modern",
     "main",
     "b0118af0-7eaf-42de-8ebe-2bacbdcdac45",
     "1778038b-a0c4-48d6-9085-3312ff830b43",

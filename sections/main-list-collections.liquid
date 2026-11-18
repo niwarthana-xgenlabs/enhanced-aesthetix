@@ -37,6 +37,28 @@
     height: 40px;
   }
 
+  /* Uniform card size: every collection image fills the same 3:4 frame */
+  [data-section-id="{{ section.id }}"] .main-collection-list__item a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  [data-section-id="{{ section.id }}"] .main-collection-list__image,
+  [data-section-id="{{ section.id }}"] .main-collection-list__placeholder {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+    background-color: #f4f1ee;
+    border-radius: var(--border-radius);
+  }
+
+  [data-section-id="{{ section.id }}"] .main-collection-list__text-spacing {
+    text-align: center;
+  }
+
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }},
     section[data-section-id="{{ section.id }}"],
@@ -108,6 +130,7 @@
                 <div>{{- collection.title -}}</div>
               </div>
             {%- else -%}
+              <div class="main-collection-list__placeholder" aria-hidden="true"></div>
               <div class="main-collection-list__text-spacing">
                 {{- collection.title -}}
               </div>
