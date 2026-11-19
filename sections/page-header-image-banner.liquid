@@ -377,7 +377,7 @@
         </a>
       {% endif %}
       {% if section.settings.nav_link_3_text != blank %}
-        <a href="#book-appointment-section" class="luxury-header-nav-link-{{ header_id }}" onclick="event.preventDefault(); document.getElementById('book-appointment-section').scrollIntoView({ behavior: 'smooth', block: 'start' });">
+        <a href="{{ section.settings.nav_link_3_url }}" class="luxury-header-nav-link-{{ header_id }}">
           {{ section.settings.nav_link_3_text }}
         </a>
       {% endif %}
@@ -442,6 +442,18 @@
     }
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
+
+    // Nav links like "/#book-appointment-section": smooth-scroll when the target is on this page
+    header.querySelectorAll('.luxury-header-nav-link-' + headerId).forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var url = new URL(link.href, window.location.href);
+        if (!url.hash || url.pathname !== window.location.pathname) return;
+        var target = document.getElementById(url.hash.slice(1));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
 
     var trigger = document.querySelector('[data-header-search-trigger="' + headerId + '"]');
     var form = document.querySelector('[data-header-search-form="' + headerId + '"]');

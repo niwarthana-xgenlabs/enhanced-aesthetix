@@ -55,7 +55,7 @@
         "nav_link_4_text": "About us",
         "nav_link_4_url": "shopify://pages/about-us",
         "nav_link_5_text": "CONTACT US",
-        "nav_link_5_url": "",
+        "nav_link_5_url": "/#book-appointment-section",
         "nav_font_size": 15,
         "nav_font_weight": 500,
         "nav_letter_spacing": 0.5,
