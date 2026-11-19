@@ -38,7 +38,7 @@
       "type": "page-header-image-banner",
       "name": "Image banner for transparent header",
       "settings": {
-        "logo": "shopify://shop_images/enhanced_gold_logo_transparent.png",
+        "logo": "shopify://shop_images/enhanced-aesthetix-logo.png",
         "logo_height_mobile": 40,
         "logo_height_desktop": 95,
         "header_padding_mobile": 20,
@@ -103,7 +103,7 @@
         "ai_gen_block_d91e963_nYJkTw": {
           "type": "hero_section_1",
           "settings": {
-            "background_image": "shopify://shop_images/hero-towel-face-roller.jpg",
+            "background_image": "shopify://shop_images/hero-3-nude-glow-portrait.jpg",
             "caption_text": "WHERE SKIN TREATMENTS BEGINS",
             "caption_color": "#ffffff",
             "caption_size_mobile": 10,
