@@ -346,9 +346,11 @@
   <div class="luxury-header-left-section-{{ header_id }}">
     <div class="luxury-header-logo-{{ header_id }}">
       {% if section.settings.logo %}
+        {% assign logo_h2x = section.settings.logo_height_desktop | times: 2 %}
         <a href="/">
           <img
             src="{{ section.settings.logo | image_url: height: section.settings.logo_height_desktop }}"
+            srcset="{{ section.settings.logo | image_url: height: section.settings.logo_height_desktop }} 1x, {{ section.settings.logo | image_url: height: logo_h2x }} 2x"
             alt="{{ shop.name }}"
             loading="eager"
             width="auto"

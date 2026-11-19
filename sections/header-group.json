@@ -39,8 +39,8 @@
       "name": "Image banner for transparent header",
       "settings": {
         "logo": "shopify://shop_images/enhanced-aesthetix-logo.png",
-        "logo_height_mobile": 40,
-        "logo_height_desktop": 95,
+        "logo_height_mobile": 60,
+        "logo_height_desktop": 120,
         "header_padding_mobile": 20,
         "header_padding_desktop": 30,
         "header_bg_color_scrolled": "#00000040",
